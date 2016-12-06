@@ -16,6 +16,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".shared", ".shared", "{DE14
 		.shared\SharedAssemblyInfo.cs = .shared\SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.DataProcess", "Logic.DataProcess\Logic.DataProcess.csproj", "{7CE5B522-9EB9-4407-BF75-098F8F0FA94D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI_TestConsole", "UI_TestConsole\UI_TestConsole.csproj", "{918B85F9-8FA9-4EEE-A2B2-E40DB744019F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +34,14 @@ Global
 		{25DE8D22-221F-486E-A688-C800271CD138}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25DE8D22-221F-486E-A688-C800271CD138}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25DE8D22-221F-486E-A688-C800271CD138}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CE5B522-9EB9-4407-BF75-098F8F0FA94D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CE5B522-9EB9-4407-BF75-098F8F0FA94D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CE5B522-9EB9-4407-BF75-098F8F0FA94D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CE5B522-9EB9-4407-BF75-098F8F0FA94D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{918B85F9-8FA9-4EEE-A2B2-E40DB744019F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{918B85F9-8FA9-4EEE-A2B2-E40DB744019F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{918B85F9-8FA9-4EEE-A2B2-E40DB744019F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{918B85F9-8FA9-4EEE-A2B2-E40DB744019F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,5 +49,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E3399FB1-6445-4CFD-9D7E-E63A28758F29} = {EE51243A-A2F7-466C-A15D-94843D708755}
 		{25DE8D22-221F-486E-A688-C800271CD138} = {97B8503E-0EB0-4959-A4E6-21ECD15199C2}
+		{7CE5B522-9EB9-4407-BF75-098F8F0FA94D} = {97B8503E-0EB0-4959-A4E6-21ECD15199C2}
+		{918B85F9-8FA9-4EEE-A2B2-E40DB744019F} = {EE51243A-A2F7-466C-A15D-94843D708755}
 	EndGlobalSection
 EndGlobal
