@@ -9,6 +9,9 @@ namespace Logic.DataProcess.Models.Cells
 {
     public class Property : Cell
     {
+        public Action<User> Test { get; set; }
+
+
         public int PropertyOnly { get; private set; }
 
         public int OneHouse { get; private set; }
@@ -32,7 +35,7 @@ namespace Logic.DataProcess.Models.Cells
         //MONOPOLY 
 
         public Property(string _name, int _ID, int _propertyOnly, int _oneHouse, int _twoHouses, int _threeHouses, 
-                        int _fourHouses, int _hotel, int _houseCost, int _hotelCost, int _mortgage) 
+                        int _fourHouses, int _hotel, int _houseCost, int _hotelCost, int _mortgage , Action<User> _test) 
                         : base(_name, _ID)
         {
             PropertyOnly = _propertyOnly;
@@ -43,7 +46,9 @@ namespace Logic.DataProcess.Models.Cells
             Hotel = _hotel;
             HouseCost = _houseCost;
             HotelCost = _houseCost;
-            Mortgage = _mortgage;           
+            Mortgage = _mortgage;
+
+            Test = _test;         
         }
     }
 }

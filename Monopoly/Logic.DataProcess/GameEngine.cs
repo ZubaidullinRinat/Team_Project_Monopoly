@@ -34,6 +34,8 @@ namespace Logic.DataProcess
         }
         #endregion
 
+        public event Func<User, bool?> Buy;
+
         public List<Cell> Cells { get; private set; }
 
         public GameEngine()
@@ -87,11 +89,23 @@ namespace Logic.DataProcess
                     return;
                 }
 
-                var Location = Cells.Find(c => c.ID == user.Position);               
+                var Cell = Cells.Find(c => c.ID == user.Position);               
 
-                Console.WriteLine("Вы находитесь на {0}", Cells.Find(c => c.ID == user.Position).Name);
+                Console.WriteLine("Вы находитесь на {0}", Cell.Name);
 
-                Console.WriteLine(Location.GetType().Name);
+
+                Console.WriteLine(Cell.GetType().Name);
+
+                if(Cell is Property)
+                {
+                    var Location = Cell as Property;
+                    if(Location.Owner == null)
+                    {
+                        Console.WriteLine(Buy?.Invoke(user));
+                    }
+                }
+
+
             }
             while (dices[0] == dices[1]);
         }

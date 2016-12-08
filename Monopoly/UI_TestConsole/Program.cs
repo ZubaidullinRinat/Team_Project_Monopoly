@@ -33,7 +33,8 @@ namespace UI_TestConsole
         {
             //Новый репозиторий
             r = Repository.getInstance();
-
+            r.BuyRepo += BuyHandler;
+            //r.BuyRepo += BuyHandler;
             //Этот кусок будет вызывать новую viewModel для определения количества пользователей
             r.Session.Users = new List<User>
             {
@@ -60,6 +61,12 @@ namespace UI_TestConsole
             {
                 Console.WriteLine("В тюрьме");
             }
+        }
+
+        bool BuyHandler(User user)
+        {
+            Console.WriteLine("Будете покупать?");
+            return Boolean.Parse(Console.ReadLine());
         }
     }  
         
