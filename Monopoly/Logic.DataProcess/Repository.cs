@@ -31,5 +31,9 @@ namespace Logic.DataProcess
             Engine = GameEngine.getInstance();
             Session = Session.getInstance();
         }
+        public void NewMove(User user)
+        {
+            Engine.NewMove(user);
+        }
     }
 }
