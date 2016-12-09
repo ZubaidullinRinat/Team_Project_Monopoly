@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI_Main"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="350" Width="525"
+        Title="{Binding Title}" Height="1000" Width="1800"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
-        
+        <Canvas Height="160" Margin="36,46,0,0" Width="169">
+            <Rectangle Name="rect1"  Height="33" Stroke="Black" StrokeThickness="1" Width="169" Fill="Salmon"/>
+            <Rectangle Name="rect2" Fill="SeaShell" HorizontalAlignment="Stretch" Height="127" Stroke="Black" StrokeThickness="0.5" VerticalAlignment="Stretch" Width="169" Canvas.Top="33"/>
+            <Label x:Name="uniqLabel" FontFamily="Calibri" FontWeight="Bold" FontSize="18" Content="Чья то улица" HorizontalContentAlignment="Center" Canvas.Left="10" Height="33" Width="149" Canvas.Top="63"/>
+        </Canvas>
     </Grid>
 </Window>
