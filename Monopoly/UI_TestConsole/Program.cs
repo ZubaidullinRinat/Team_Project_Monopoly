@@ -57,7 +57,7 @@ namespace UI_TestConsole
 
         void isInPriosnHandler(bool state)
         {
-            if (state)
+            if (state) //rinat
             {
                 Console.WriteLine("В тюрьме");
             }
