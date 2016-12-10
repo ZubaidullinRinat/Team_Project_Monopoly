@@ -5,13 +5,106 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI_Main"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="1000" Width="1800"
+        Title="{Binding Title}" Height="850" Width="1800"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid>
-        <Canvas Height="160" Margin="36,46,0,0" Width="169">
-            <Rectangle Name="rect1"  Height="33" Stroke="Black" StrokeThickness="1" Width="169" Fill="Salmon"/>
-            <Rectangle Name="rect2" Fill="SeaShell" HorizontalAlignment="Stretch" Height="127" Stroke="Black" StrokeThickness="0.5" VerticalAlignment="Stretch" Width="169" Canvas.Top="33"/>
-            <Label x:Name="uniqLabel" FontFamily="Calibri" FontWeight="Bold" FontSize="18" Content="Чья то улица" HorizontalContentAlignment="Center" Canvas.Left="10" Height="33" Width="149" Canvas.Top="63"/>
+        <Canvas Margin="1269,643,374.6,27">
+            <Rectangle x:Name="startRect" Height="150" Stroke="Black" StrokeThickness="0.5" Width="150">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="Images/start.jpg"/>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Canvas>
+        <Canvas Margin="1164,643,529.6,27">
+            
+            <Rectangle x:Name="head_brown_1"  Height="33" Stroke="Black" StrokeThickness="1" Width="100" Fill="Peru"  />
+                <Rectangle x:Name="content_1" Fill="DarkSeaGreen" Height="116" Stroke="Black" StrokeThickness="1" 
+                       VerticalAlignment="Center" Width="100" Canvas.Top="33" Opacity="0.45"/>
+            <Label x:Name="cell_1" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Content="Чья то улица" HorizontalContentAlignment="Center" Height="64" Width="80" Canvas.Top="52" Canvas.Left="10"/>
+        </Canvas>
+        <Canvas Margin="1059,643,634.6,27">
+            <Rectangle x:Name="content_2" Fill="DarkSeaGreen" Height="149" Stroke="Black" StrokeThickness="1" 
+                VerticalAlignment="Center" Width="100" Opacity="0.45"/>
+            <Rectangle x:Name="content2_1" Height="79" Width="79" Canvas.Left="11" Canvas.Top="51">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="Images/cardpick1.jpg"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Label x:Name="cell_2" FontFamily="Calibri" FontWeight="Bold" FontSize="18" Content="Card Pick" HorizontalContentAlignment="Center" Height="41" Width="80" Canvas.Top="5" Canvas.Left="10"/>
+        </Canvas>
+        <Canvas Margin="954,643,739.6,27">
+            <Rectangle x:Name="head_brown_3"  Height="33" Stroke="Black" StrokeThickness="1" Width="100" Fill="Peru"  />
+            <Rectangle x:Name="content_3" Fill="DarkSeaGreen" Height="116" Stroke="Black" StrokeThickness="1" 
+                VerticalAlignment="Center" Width="100" Canvas.Top="33" Opacity="0.45"/>
+            <Label x:Name="cell_3" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Content="Чья то улица" HorizontalContentAlignment="Center" Height="41" Width="80" Canvas.Top="62" Canvas.Left="10"/>
+        </Canvas>
+        <Canvas Margin="849,643,844.6,27">
+            <Rectangle x:Name="content_4" Fill="DarkSeaGreen" Height="150" Stroke="Black" StrokeThickness="1" 
+                VerticalAlignment="Center" Width="100" Opacity="0.45"/>
+            <Rectangle x:Name="content4_1" Height="79" Width="79" Canvas.Left="11" Canvas.Top="51">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="Images/tax.jpg"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Label x:Name="cell_4" FontFamily="Calibri" FontWeight="Bold" FontSize="18" Content="Tax" HorizontalContentAlignment="Center" Height="41" Width="80" Canvas.Top="5" Canvas.Left="10"/>
+        </Canvas>
+        <Canvas Margin="744,643,949.6,27">
+            <Rectangle x:Name="content_5" Fill="DarkSeaGreen" Height="150" Stroke="Black" StrokeThickness="1" 
+                VerticalAlignment="Center" Width="100" Opacity="0.45"/>
+            <Rectangle x:Name="content5_1" Height="79" Width="79" Canvas.Left="11" Canvas.Top="51">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="Images/railway.jpg"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Label x:Name="cell_5" FontFamily="Calibri" FontWeight="Bold" FontSize="18" Content="Railway1" HorizontalContentAlignment="Center" Height="41" Width="80" Canvas.Top="5" Canvas.Left="10"/>
+        </Canvas>
+        <Canvas Margin="639,643,1054.6,27">
+            <Rectangle x:Name="head_blue_6"  Height="33" Stroke="Black" StrokeThickness="1" Width="100" Fill="PaleTurquoise"  />
+            <Rectangle x:Name="content_6" Fill="DarkSeaGreen" Height="117" Stroke="Black" StrokeThickness="1" 
+                VerticalAlignment="Center" Width="100" Canvas.Top="33" Opacity="0.45"/>
+            <Label x:Name="cell_6" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Content="Чья то улица" HorizontalContentAlignment="Center" Height="41" Width="80" Canvas.Top="62" Canvas.Left="10"/>
+        </Canvas>
+        <Canvas Margin="534,643,1159.6,27">
+            <Rectangle x:Name="content_7" Fill="DarkSeaGreen" Height="149" Stroke="Black" StrokeThickness="1" 
+                VerticalAlignment="Center" Width="100" Opacity="0.45"/>
+            <Rectangle x:Name="content7_2" Height="108" Width="79" Canvas.Left="11" Canvas.Top="32">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="Images/chance.jpg"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Label x:Name="cell_7" FontFamily="Calibri" FontWeight="Bold" FontSize="18" Content="Chance" HorizontalContentAlignment="Center" Height="41" Width="80" Canvas.Top="5" Canvas.Left="10"/>
+        </Canvas>
+        <Canvas Margin="429,643,1264.6,27">
+            <Rectangle x:Name="head_blue_8"  Height="33" Stroke="Black" StrokeThickness="1" Width="100" Fill="PaleTurquoise"  />
+            <Rectangle x:Name="content_8" Fill="DarkSeaGreen" Height="116" Stroke="Black" StrokeThickness="1" 
+                VerticalAlignment="Center" Width="100" Canvas.Top="33" Opacity="0.45"/>
+            <Label x:Name="cell_8" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Content="Чья то улица" HorizontalContentAlignment="Center" Height="41" Width="80" Canvas.Top="62" Canvas.Left="10"/>
+        </Canvas>
+        <Canvas Margin="324,643,1369.6,27">
+            <Rectangle x:Name="head_blue_9"  Height="33" Stroke="Black" StrokeThickness="1" Width="100" Fill="PaleTurquoise"  />
+            <Rectangle x:Name="content_9" Fill="DarkSeaGreen" Height="116" Stroke="Black" StrokeThickness="1" 
+                VerticalAlignment="Center" Width="100" Canvas.Top="33" Opacity="0.45"/>
+            <Label x:Name="cell_9" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Content="Чья то улица" HorizontalContentAlignment="Center" Height="41" Width="80" Canvas.Top="62" Canvas.Left="10"/>
+        </Canvas>
+        <Canvas Margin="168,643,1474.6,27">
+            <Rectangle x:Name="content_10" Height="150" Stroke="Black" StrokeThickness="1" Width="150" Fill="DarkSeaGreen" Opacity="0.45"/>
+            <Rectangle x:Name="content_10_2" HorizontalAlignment="Left" Height="110" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="109" Canvas.Left="41">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="Images/jail.jpg"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Label x:Name="cell_10_lower" FontFamily="Calibri" FontWeight="Bold" FontSize="18" Content="Visiting" HorizontalContentAlignment="Center" Height="35" Width="109" Canvas.Top="115" Canvas.Left="41"/>
+            <Label x:Name="cell_10_upper" FontFamily="Calibri" FontWeight="Bold" FontSize="18" Content="Just" HorizontalContentAlignment="Center" Height="35" Width="128" Canvas.Top="51" Canvas.Left="-44" RenderTransformOrigin="0.5,0.5">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
         </Canvas>
     </Grid>
 </Window>
