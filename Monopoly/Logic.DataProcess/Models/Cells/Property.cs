@@ -11,6 +11,7 @@ namespace Logic.DataProcess.Models.Cells
     {
         public Action<User> Test { get; set; }
 
+        public int Price { get; set; }
 
         public int PropertyOnly { get; private set; }
 
@@ -26,18 +27,21 @@ namespace Logic.DataProcess.Models.Cells
         public int Mortgage { get; private set; }
         public bool IsMortaged { get; private set; }
 
-        public User Owner { get; private set; }
+        public User Owner { get; set; }
 
         public int Houses { get; private set; }
         public bool IsHotel { get; private set; }
 
+        public bool InMonopoly { get; set; }
+
         //TODO 
         //MONOPOLY 
 
-        public Property(string _name, int _ID, int _propertyOnly, int _oneHouse, int _twoHouses, int _threeHouses, 
+        public Property(string _name, int _ID, int _price, int _propertyOnly, int _oneHouse, int _twoHouses, int _threeHouses, 
                         int _fourHouses, int _hotel, int _houseCost, int _hotelCost, int _mortgage , Action<User> _test) 
                         : base(_name, _ID)
         {
+            Price = _price;
             PropertyOnly = _propertyOnly;
             OneHouse = _oneHouse;
             TwoHouses = _twoHouses;

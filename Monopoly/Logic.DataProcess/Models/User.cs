@@ -10,8 +10,22 @@ namespace UI_TestConsole.Models
     {
         public event Action<User> positionChanged;
         public event Action<bool> isOnPrisonChanged;
+        public event Action<User> moneyChanged;
 
         public string Name { get; private set; }
+
+        private int money;
+
+        public int Money
+        {
+            get { return money; }
+            set
+            {
+                money = value;
+                moneyChanged?.Invoke(this);
+                
+            }
+        }
 
         private bool isInPrison;
 
@@ -40,6 +54,7 @@ namespace UI_TestConsole.Models
 
         public User(string _name)
         {
+            Money = 1500;
             Name = _name;
             position = 0;
             IsInPrison = false;
