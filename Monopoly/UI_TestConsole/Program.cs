@@ -20,9 +20,10 @@ namespace UI_TestConsole
 
         public User UserSeeder(string _name)
         {
-            var result = new User(_name);
+            var result = new User(_name);            
             result.positionChanged += postionHadler;
             result.isOnPrisonChanged += isInPriosnHandler;
+            result.moneyChanged += MoneyChangedHandler;
             return result;
         }
 
@@ -53,6 +54,11 @@ namespace UI_TestConsole
         void postionHadler(User user)
         {
             Console.WriteLine("{0} Совершил ход. Новая позиция - {1}",user.Name, user.Position);
+        }
+
+        void MoneyChangedHandler(User user)
+        {
+            Console.WriteLine($"{user.Name} новое количество денег - {user.Money}");
         }
 
         void isInPriosnHandler(bool state)

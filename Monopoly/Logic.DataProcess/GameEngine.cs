@@ -101,7 +101,29 @@ namespace Logic.DataProcess
                     var Location = Cell as Property;
                     if(Location.Owner == null)
                     {
-                        Console.WriteLine(Buy?.Invoke(user));
+                        if (Buy?.Invoke(user) == true)
+                        {
+                            if(user.Money < Location.Price)
+                            {
+                                Console.WriteLine("Нет денег");
+                                return;
+                            }
+                            user.Money -= Location.Price;
+                            Location.Owner = user;                            
+                        }
+                        //Логика торгов
+                    }
+                    else
+                    {
+                        if (!Location.InMonopoly)
+                        {
+                            user.Money -= Location.PropertyOnly;
+                            Location.Owner.Money += Location.PropertyOnly;
+                        }
+                        else
+                        {
+                            //логика в монополии
+                        }
                     }
                 }
 
