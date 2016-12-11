@@ -125,6 +125,32 @@
       <Name>Logic.UI</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cardpick1.jpg" />
+    <Resource Include="Images\chance.jpg" />
+    <Resource Include="Images\jail.jpg" />
+    <Resource Include="Images\railway.jpg" />
+    <Resource Include="Images\start.jpg" />
+    <Resource Include="Images\tax.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\electro.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\free.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\body.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\water.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\gotojail.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tax_ring.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

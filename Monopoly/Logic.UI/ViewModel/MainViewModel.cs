@@ -30,8 +30,11 @@ namespace Logic.UI.ViewModel
             ////{
             ////    // Code runs "for real"
             ////}
-            Title = "Title test";
+            Title = "Monopoly Game";
         }
         public string Title { get; set; }
+
+        // объ€вить все лейблы и тектблоки из UI -------  FIX ME//
+        // пол€ OWNER дл€ ёзарей, кто купил эти улицы //
     }
 }
