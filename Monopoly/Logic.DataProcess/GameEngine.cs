@@ -35,9 +35,10 @@ namespace Logic.DataProcess
         #endregion
 
         public event Func<User, bool?> Buy;
+        public event Func<User, bool?> BuybackFromPrison;
 
         public List<Cell> Cells { get; private set; }
-
+        public Dictionary<User, int> UserInPrison { get; set; }
         public GameEngine()
         {
             SeedRandom();
@@ -70,14 +71,7 @@ namespace Logic.DataProcess
 
             //Для дублей
             do
-            {
-                //Проверка на 3 дубля
-                prisonCounter++;
-                if (prisonCounter == 3)
-                {
-                    user.IsInPrison = true;
-                    return;
-                }
+            {                                                           
                 Console.WriteLine("{0} бросает кубики", user.Name);
                 dices = DiceRoll();
                 Console.WriteLine("Первый кубик - {0}, второй - {1}", dices[0], dices[1]);
@@ -89,14 +83,49 @@ namespace Logic.DataProcess
                     return;
                 }
 
-                var Cell = Cells.Find(c => c.ID == user.Position);               
+                var Cell = Cells.Find(c => c.ID == user.Position);
 
+                
                 Console.WriteLine("Вы находитесь на {0}", Cell.Name);
 
 
                 Console.WriteLine(Cell.GetType().Name);
 
-                if(Cell is Property)
+                //Попадание на клетку тюрьмы
+                prisonCounter++;
+                if (Cell is Prison || prisonCounter == 3)
+                {
+                    if (!user.IsInPrison)
+                    {
+                        user.IsInPrison = true;
+                        user.IdleCount = 3;
+                    }
+                    else
+                    {
+                        if (BuybackFromPrison?.Invoke(user) == true)
+                        {
+                            if (user.Money < 50000)
+                            {
+                                Console.WriteLine("Нет денег");
+                                return;
+                            }
+                            user.Money -= 50000;
+                            user.IdleCount = 0;                            
+                        }
+                        else
+                        {
+                            if (user.IdleCount > 0)
+                            {
+                                user.IdleCount--;
+                            }
+                        }
+                        if (user.IdleCount == 0)
+                            user.IsInPrison = false;
+                    }
+                }
+
+                //Попадания на клетку недвижимости 
+                if (Cell is Property)
                 {
                     var Location = Cell as Property;
                     if(Location.Owner == null)

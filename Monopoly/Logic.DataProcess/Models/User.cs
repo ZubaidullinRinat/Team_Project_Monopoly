@@ -9,7 +9,7 @@ namespace UI_TestConsole.Models
     public class User
     {
         public event Action<User> positionChanged;
-        public event Action<bool> isOnPrisonChanged;
+        public event Action<User> isOnPrisonChanged;
         public event Action<User> moneyChanged;
 
         public string Name { get; private set; }
@@ -35,8 +35,16 @@ namespace UI_TestConsole.Models
             set
             {
                 isInPrison = value;
-                isOnPrisonChanged?.Invoke(value);
+                isOnPrisonChanged?.Invoke(this);
             }
+        }
+
+        private int _idleCount;
+
+        public int IdleCount
+        {
+            get { return _idleCount; }
+            set { _idleCount = value; }
         }
 
 

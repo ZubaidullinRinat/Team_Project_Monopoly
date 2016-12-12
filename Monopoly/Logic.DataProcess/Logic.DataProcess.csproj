@@ -43,6 +43,7 @@
     <Compile Include="GameEngine.cs" />
     <Compile Include="Models\Cells\CardPick.cs" />
     <Compile Include="Models\Cells\Cell.cs" />
+    <Compile Include="Models\Cells\Prison.cs" />
     <Compile Include="Models\Cells\Property.cs" />
     <Compile Include="Models\Cells\Railway.cs" />
     <Compile Include="Models\Cells\Tax.cs" />

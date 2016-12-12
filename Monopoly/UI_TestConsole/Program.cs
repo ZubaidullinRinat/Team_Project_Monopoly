@@ -35,6 +35,7 @@ namespace UI_TestConsole
             //Новый репозиторий
             r = Repository.getInstance();
             r.BuyRepo += BuyHandler;
+            //r.BuyRepo += BuyBackFromPrisonHandler;
             //r.BuyRepo += BuyHandler;
             //Этот кусок будет вызывать новую viewModel для определения количества пользователей
             r.Session.Users = new List<User>
@@ -61,14 +62,20 @@ namespace UI_TestConsole
             Console.WriteLine($"{user.Name} новое количество денег - {user.Money}");
         }
 
-        void isInPriosnHandler(bool state)
+        void isInPriosnHandler(User user)
         {
-            if (state) //rinat
-            {
-                Console.WriteLine("В тюрьме");
-            }
+            //if (state) //rinat
+            //{
+            //    Console.WriteLine("В тюрьме");
+            //}
+            Console.WriteLine($"{user.Name}, вы в тюрьме");
+            
         }
-
+        bool BuyBackFromPrisonHandler(User user)
+        {
+            Console.WriteLine($"{user.Name}, купите выход из тюрьмы за 50000?");
+            return Boolean.Parse(Console.ReadLine());
+        }
         bool BuyHandler(User user)
         {
             Console.WriteLine("Будете покупать?");

@@ -23,7 +23,7 @@ namespace Logic.DataProcess.Seeder
             cells.Add(new CardPick("ШАНС", 7, Models.Cells.Type.Chance));
             cells.Add(new Property("УЛ. ОГАРЕВА", 8, 100, 6, 30, 90, 270, 400, 550, 50, 50, 50, (user) => { Console.WriteLine("Action"); }));
             cells.Add(new Property("ПЕРВАЯ ПАРКОВАЯ УЛ.", 9, 110, 8, 40, 100, 300, 450, 600, 50, 50, 60, (user) => { Console.WriteLine("Action"); }));
-            cells.Add(new Cell("ТЮРЬМА", 10));
+            cells.Add(new Prison("ТЮРЬМА", 10));
 
             return cells;
         }
