@@ -9,7 +9,7 @@ namespace Logic.DataProcess.Models.Cells
     public class CardPick : Cell
     {
         public Type Type { get; private set; }
-
+        
         //TODO
         //Action
 
