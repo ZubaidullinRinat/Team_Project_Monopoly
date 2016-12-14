@@ -60,14 +60,16 @@ namespace Logic.DataProcess
             {
                 random.Next(1,7),
                 random.Next(1,7)
+                //1,1
             };
         }
 
-        public int GetRandomCardId()
+        private int getRandomCardId()
         {
             int cardId = random.Next(1, Chances.Count);        
             return cardId;
         }
+
         /// <summary>
         /// Ход игрока
         /// </summary>
@@ -77,15 +79,16 @@ namespace Logic.DataProcess
             int[] dices;
 
             int prisonCounter = 0;
-
+            
             //Для дублей
             do
             {
-                Console.WriteLine("{0} бросает кубики", user.Name);
+                Console.WriteLine("\n{0} бросает кубики", user.Name);
                 dices = DiceRoll();
-                Console.WriteLine("Первый кубик - {0}, второй - {1}", dices[0], dices[1]);
+                Console.WriteLine("Первый кубик - {0}, второй - {1}", dices[0], dices[1]);              
                 user.Position += dices[0] + dices[1];
-                
+                //Test
+               // user.Position = 7;
                 //Заглушка для полей, которых еще нет
                 if (user.Position > 10)
                 {
@@ -101,37 +104,52 @@ namespace Logic.DataProcess
 
                 Console.WriteLine(Cell.GetType().Name);
 
-                //Попадание на клетку тюрьмы
+                //Клетку тюрьмы
                 prisonCounter++;
-                if (Cell is Prison || prisonCounter == 3)
-                {
-                    if (!user.IsInPrison)
+                if (prisonCounter == 3)
+                {                    
+                    if (!user.IsInPrison && !user.JailReleasePermisson)
                     {
+                        var prison = Cell as Prison;
+                        user.Position = Cells.Find(c => c.ID == 10).ID;
                         user.IsInPrison = true;
-                        user.IdleCount = 3;
+                        user.IdleCount = 2;                        
                     }
                     else
                     {
-                        if (BuybackFromPrison?.Invoke(user) == true)
+                        if (user.IdleCount == 0 || user.JailReleasePermisson)
                         {
-                            if (user.Money < 50000)
+                            if (user.JailReleasePermisson)
                             {
-                                Console.WriteLine("Нет денег");
+                                Console.WriteLine("Вы воспользовались освобождением из тюрьмы");
+                                user.JailReleasePermisson = false;
                                 return;
                             }
-                            user.Money -= 50000;
-                            user.IdleCount = 0;
+                            user.IsInPrison = false;
                         }
                         else
                         {
-                            if (user.IdleCount > 0)
+                            if (BuybackFromPrison?.Invoke(user) == true)
                             {
-                                user.IdleCount--;
+                                if (user.Money < 500)
+                                {
+                                    Console.WriteLine("Нет денег");
+                                    return;
+                                }
+                                user.Money -= 500;
+                                user.IdleCount = 0;
+                            }
+                            else
+                            {
+                                if (user.IdleCount > 0)
+                                {
+                                    user.IdleCount--;
+                                }
                             }
                         }
-                        if (user.IdleCount == 0)
-                            user.IsInPrison = false;
+                                             
                     }
+                    return;
                 }
                 //Попадание на клетку шанса\общественной казны
                 if (Cell is CardPick)
@@ -141,35 +159,50 @@ namespace Logic.DataProcess
                     switch (CardPickCard.Type)
                     {
                         case Models.Cells.Type.CommunityChest:
-                            var chestCard = Chances.Find(c => c.Id == GetRandomCardId());
+                            var chestCard = Chances.Find(c => c.Id == random.Next(1, Chances.Count));
+                            if(chestCard!=null)
                             Console.WriteLine($"{user.Name} попал на клетку общественной казны '{chestCard.Name}'");                            
-                            return;
+                            break;
                         case Models.Cells.Type.Chance:
-                            var chanceCard = Chances.Find(c => c.Id == GetRandomCardId());
-                            //Console.WriteLine($"{user.Name} попал на клетку шанс '{chanceCard.Name}'");
+                            var chanceCard = Chances.Find(c => c.Id == random.Next(1, Chances.Count));                            
                             if (chanceCard is Motion)
                             {
                                 var motion = chanceCard as Motion;
                                 Console.WriteLine($"{motion.Name}");
                                 user.Position = motion.Position;
                                 var newPosition = Cells.Find(c => c.ID == user.Position);
-                                if (Cells.Find(c => c.ID == user.Position) != null)
-                                   
-                                Console.WriteLine($"{user.Name} перемещается на клетку {newPosition.Name}");
+                                if (Cells.Find(c => c.ID == user.Position) != null)                   
+                                    Console.WriteLine($"{user.Name} перемещается на клетку {newPosition.Name}");
+                                
                             }
                             if(chanceCard is Transaction)
                             {
                                 var transaction = chanceCard as Transaction;
+                                if(transaction!=null)
                                 Console.WriteLine($"{transaction.Name}");
+                                Console.WriteLine($"{user.Name} старое количество денег - {user.Money}");
                                 user.Money += transaction.Cost;
-                                Console.WriteLine($"{user.Name} новое количество денег - {user.Money}");
+                                
                             }
-                            
-                            return;
-                            
+                            if(chanceCard is PrisonCard)
+                            {
+                                var prison = Cell as Prison;
+                                if(prison!=null)
+                                user.Position = Cells.Find(c => c == prison).ID;
+                                user.IsInPrison = true;
+                                user.IdleCount = 2;
+                                return;
+                            }
+                            if(chanceCard is JailRelease)
+                            {
+                                user.JailReleasePermisson = true;
+                                Console.WriteLine($"{chanceCard.Name}");
+                            }                                                   
+                            break;
                         default:
                             break;
                     }
+                    
                 }
                 //Попадания на клетку недвижимости 
                 if (Cell is Property)

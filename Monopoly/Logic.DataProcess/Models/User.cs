@@ -47,6 +47,13 @@ namespace UI_TestConsole.Models
             set { _idleCount = value; }
         }
 
+        private bool _jailRelease;
+
+        public bool JailReleasePermisson
+        {
+            get { return _jailRelease; }
+            set { _jailRelease = value; }
+        }
 
         private int position;
 

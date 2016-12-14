@@ -13,7 +13,9 @@ namespace Logic.DataProcess.Models.Seeder
         {
             List<Card> cards = new List<Card>();
             cards.Add(new Motion("Идите на клетку Курская", 1, 12));
-            cards.Add(new Transaction("Заплатите налог", 2, -1200));
+            cards.Add(new Transaction("Получите взятку", 2, 1200));
+            cards.Add(new PrisonCard("Идите в тюрьму", 3));
+            cards.Add(new JailRelease("Вы получаете карту 'Освобождение из тюрьмы'", 4));
             return cards;
         }
     }

@@ -42,7 +42,9 @@
   <ItemGroup>
     <Compile Include="GameEngine.cs" />
     <Compile Include="Models\Cards\Card.cs" />
+    <Compile Include="Models\Cards\JailRelease.cs" />
     <Compile Include="Models\Cards\Motion.cs" />
+    <Compile Include="Models\Cards\PrisonCard.cs" />
     <Compile Include="Models\Cards\Transaction.cs" />
     <Compile Include="Models\Cells\CardPick.cs" />
     <Compile Include="Models\Cells\Cell.cs" />
