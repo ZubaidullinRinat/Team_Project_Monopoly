@@ -41,13 +41,14 @@ namespace Logic.DataProcess
 
         public List<Cell> Cells { get; private set; }
         public List<Card> Chances { get;  private set; }
-        
+        public List<Card> CommunityChest { get; private set; }
         public GameEngine()
         {
             SeedRandom();
             //Инициализация полей
             Cells = CellsSeeder.SeedCells();
             Chances = ChanceSeeder.SeedCards();
+            CommunityChest = CommunityChestSeeder.SeedCards();
         }
 
         /// <summary>
@@ -173,7 +174,7 @@ namespace Logic.DataProcess
                                 var newPosition = Cells.Find(c => c.ID == user.Position);
                                 if (Cells.Find(c => c.ID == user.Position) != null)                   
                                     Console.WriteLine($"{user.Name} перемещается на клетку {newPosition.Name}");
-                                
+                                return;
                             }
                             if(chanceCard is Transaction)
                             {

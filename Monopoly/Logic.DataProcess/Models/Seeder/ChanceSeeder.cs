@@ -12,10 +12,20 @@ namespace Logic.DataProcess.Models.Seeder
         public static List<Card> SeedCards()
         {
             List<Card> cards = new List<Card>();
-            cards.Add(new Motion("Идите на клетку Курская", 1, 12));
-            cards.Add(new Transaction("Получите взятку", 2, 1200));
-            cards.Add(new PrisonCard("Идите в тюрьму", 3));
-            cards.Add(new JailRelease("Вы получаете карту 'Освобождение из тюрьмы'", 4));
+            cards.Add(new Transaction("Получите ", 1, 100));
+            cards.Add(new Transaction("Получите ", 2, 150));
+            cards.Add(new Transaction("Получите ", 3, 50));
+            cards.Add(new Transaction("Заплатите ", 4, -15));
+            cards.Add(new Transaction("Заплатите ", 5, -20));
+            cards.Add(new Transaction("Заплатите ", 6, -150));
+            cards.Add(new Motion("Идите на клетку Курская", 7, 12));
+            cards.Add(new Motion("Идите на клетку Площадь Маяковского", 8, 12));
+            cards.Add(new Motion("Идите на клетку Полянку", 9, 12));
+            cards.Add(new Motion("Идите на клетку Арбат", 10, 12));
+            cards.Add(new PrisonCard("Идите в тюрьму", 12));
+            cards.Add(new JailRelease("Вы получаете карту 'Освобождение из тюрьмы'", 13));            
+            cards.Add(new Motion("Перейдите на поле вперед", 14, 1));
+            cards.Add(new MoveCard("Перейдите на 3 клетки назад", 15, -3));
             return cards;
         }
     }
