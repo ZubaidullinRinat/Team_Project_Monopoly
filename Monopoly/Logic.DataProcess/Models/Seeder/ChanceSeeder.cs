@@ -22,10 +22,10 @@ namespace Logic.DataProcess.Models.Seeder
             cards.Add(new Motion("Идите на клетку Площадь Маяковского", 8, 12));
             cards.Add(new Motion("Идите на клетку Полянку", 9, 12));
             cards.Add(new Motion("Идите на клетку Арбат", 10, 12));
-            cards.Add(new PrisonCard("Идите в тюрьму", 12));
-            cards.Add(new JailRelease("Вы получаете карту 'Освобождение из тюрьмы'", 13));            
-            cards.Add(new Motion("Перейдите на поле вперед", 14, 1));
-            cards.Add(new MoveCard("Перейдите на 3 клетки назад", 15, -3));
+            cards.Add(new PrisonCard("Идите в тюрьму", 11));
+            cards.Add(new JailRelease("Вы получаете карту 'Освобождение из тюрьмы'", 12));            
+            cards.Add(new Motion("Перейдите на поле вперед", 13, 1));
+            cards.Add(new MoveCard("Перейдите на 3 клетки назад", 14, -3));
             return cards;
         }
     }

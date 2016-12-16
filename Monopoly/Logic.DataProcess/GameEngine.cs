@@ -89,7 +89,7 @@ namespace Logic.DataProcess
                 Console.WriteLine("Первый кубик - {0}, второй - {1}", dices[0], dices[1]);              
                 user.Position += dices[0] + dices[1];
                 //Test
-               // user.Position = 7;
+                //user.Position = 7;
                 //Заглушка для полей, которых еще нет
                 if (user.Position > 10)
                 {
@@ -156,54 +156,66 @@ namespace Logic.DataProcess
                 if (Cell is CardPick)
                 {
                     var CardPickCard = Cell as CardPick;
-                    
+                    int r;
+                    Card chanceCard;
                     switch (CardPickCard.Type)
                     {
                         case Models.Cells.Type.CommunityChest:
-                            var chestCard = Chances.Find(c => c.Id == random.Next(1, Chances.Count));
-                            if(chestCard!=null)
-                            Console.WriteLine($"{user.Name} попал на клетку общественной казны '{chestCard.Name}'");                            
-                            break;
-                        case Models.Cells.Type.Chance:
-                            var chanceCard = Chances.Find(c => c.Id == random.Next(1, Chances.Count));                            
-                            if (chanceCard is Motion)
-                            {
-                                var motion = chanceCard as Motion;
-                                Console.WriteLine($"{motion.Name}");
-                                user.Position = motion.Position;
-                                var newPosition = Cells.Find(c => c.ID == user.Position);
-                                if (Cells.Find(c => c.ID == user.Position) != null)                   
-                                    Console.WriteLine($"{user.Name} перемещается на клетку {newPosition.Name}");
-                                return;
-                            }
-                            if(chanceCard is Transaction)
-                            {
-                                var transaction = chanceCard as Transaction;
-                                if(transaction!=null)
-                                Console.WriteLine($"{transaction.Name}");
-                                Console.WriteLine($"{user.Name} старое количество денег - {user.Money}");
-                                user.Money += transaction.Cost;
-                                
-                            }
-                            if(chanceCard is PrisonCard)
-                            {
-                                var prison = Cell as Prison;
-                                if(prison!=null)
-                                user.Position = Cells.Find(c => c == prison).ID;
-                                user.IsInPrison = true;
-                                user.IdleCount = 2;
-                                return;
-                            }
-                            if(chanceCard is JailRelease)
-                            {
-                                user.JailReleasePermisson = true;
-                                Console.WriteLine($"{chanceCard.Name}");
-                            }                                                   
+                            r = random.Next(1, CommunityChest.Count);
+                            chanceCard = Chances.Find(c => c.Id == random.Next(1, Chances.Count));
+                            if(chanceCard != null)
+                            Console.WriteLine($"{user.Name} попал на клетку общественной казны '{chanceCard.Name}'");                            
                             break;
                         default:
-                            break;
+                            r = random.Next(1, Chances.Count);
+                            chanceCard = Chances.Find(c => c.Id == r);
+                            if (chanceCard != null)
+                            Console.WriteLine($"{user.Name} попал на клетку общественной казны '{chanceCard.Name}'");
+                            break;                        
                     }
-                    
+                    if (chanceCard != null)
+                        Console.WriteLine($"{user.Name} попал на клетку шанс '{chanceCard.Name}'");
+                    if (chanceCard is Motion)
+                    {
+                        var motion = chanceCard as Motion;
+                        Console.WriteLine($"{motion.Name}");
+                        user.Position = motion.Position;
+                        var newPosition = Cells.Find(c => c.ID == user.Position);
+                        if (Cells.Find(c => c.ID == user.Position) != null)
+                            Console.WriteLine($"{user.Name} перемещается на клетку {newPosition.Name}");
+                        return;
+                    }
+                    if (chanceCard is Transaction)
+                    {
+                        var transaction = chanceCard as Transaction;
+                        if (transaction != null)
+                            Console.WriteLine($"{transaction.Name}");
+                        Console.WriteLine($"{user.Name} старое количество денег - {user.Money}");
+                        user.Money += transaction.Cost;
+
+                    }
+                    if (chanceCard is PrisonCard)
+                    {
+                        var prison = Cell as Prison;
+                        if (prison != null)
+                            user.Position = Cells.Find(c => c == prison).ID;
+                        user.IsInPrison = true;
+                        user.IdleCount = 2;
+                        return;
+                    }
+                    if (chanceCard is JailRelease)
+                    {
+                        user.JailReleasePermisson = true;
+                        Console.WriteLine($"{chanceCard.Name}");
+                    }
+                    if (chanceCard is MoveCard)
+                    {
+                        var first_postion = user.Position;
+                        var move = chanceCard as MoveCard;
+                        user.Position = first_postion + move.MoveOn;
+                        return;
+                    }
+
                 }
                 //Попадания на клетку недвижимости 
                 if (Cell is Property)
