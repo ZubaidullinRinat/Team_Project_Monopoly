@@ -8,117 +8,393 @@
         Title="{Binding Title}" Height="850" Width="1900"
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
+    <Window.Resources>
+        <Style x:Key="HighlightRectangle" TargetType="{x:Type Rectangle}">
+            <Style.Resources>
+                <Storyboard x:Key="RectAnim">
+                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Stroke).(SolidColorBrush.Color)" From="Black" To="Gold"/>
+                    <DoubleAnimation Storyboard.TargetProperty="(Rectangle.StrokeThickness)" To="5"/>
+                </Storyboard>
+            </Style.Resources>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                    <BeginStoryboard x:Name="RectAnim_begin" Storyboard="{StaticResource RectAnim}"/>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                    <RemoveStoryboard BeginStoryboardName="RectAnim_begin"/>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        <SolidColorBrush x:Key="TextBrush">Red</SolidColorBrush>
+
+        <Storyboard x:Key="TextRedAlertAnimation" Duration="0:0:3" >
+            <ColorAnimation Storyboard.TargetProperty="(Label.Foreground).(SolidColorBrush.Color)"
+                                    Storyboard.TargetName="gotojail_upper"
+                                    To="{Binding Source={StaticResource TextBrush}, Path=Color}"
+                                    AutoReverse="True"
+                                    Duration="0:0:1"/>
+        </Storyboard>
+    </Window.Resources>
     <Grid>
-        <Canvas HorizontalAlignment="Left" Height="100" Margin="154,695,0,0" VerticalAlignment="Top" Width="781">
-            <Rectangle x:Name="startRect" Height="100" StrokeThickness="0.5" Width="100" Canvas.Left="682">
+        <Canvas HorizontalAlignment="Left" Height="100" Margin="184,542,0,0" VerticalAlignment="Top" Width="781" RenderTransformOrigin="0.5,0.5">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Rectangle x:Name="startRect"  Style="{StaticResource HighlightRectangle}" Height="100" Stroke="Black"  StrokeThickness="0.5" Width="100" Canvas.Left="682" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/start.jpg"/>
                 </Rectangle.Fill>
-                <Rectangle.Stroke>
-                    <SolidColorBrush x:Name="BorderBrushStart" Color="Black" />
-                </Rectangle.Stroke>
-                <Rectangle.Triggers>
-                    <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                        <BeginStoryboard x:Name="StartRect">
-                            <Storyboard Duration="0:0:1">
-                                <ColorAnimation Storyboard.TargetName="BorderBrushStart" Storyboard.TargetProperty="Color" From="Black" To="Gold"/>
-                                <DoubleAnimation Storyboard.TargetProperty="StrokeThickness" To="3"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                        <StopStoryboard BeginStoryboardName="StartRect"/>
-                    </EventTrigger>
-                </Rectangle.Triggers>
             </Rectangle>
 
-            <Rectangle x:Name="head_brown_1" Stroke="Black" StrokeThickness="1" Fill="Peru" Width="65" Height="27" Panel.ZIndex="1"  Canvas.Left="617"  />
-            <Rectangle x:Name="content_1" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                       VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="617"/>
-            <TextBlock x:Name="cell_1" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Canvas.Left="620" Canvas.Top="29" Width="62"/>
+            <Rectangle x:Name="head_brown_1" Stroke="Black" StrokeThickness="1" Fill="Peru" Width="65" Height="27" Panel.ZIndex="1"  Canvas.Left="632" RenderTransformOrigin="0.5,0.5" Canvas.Top="7"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content_1" Style="{StaticResource HighlightRectangle}" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
+                       VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="632" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_1" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="27" Canvas.Left="634" Canvas.Top="30" Width="62" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="content_2" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="552"/>
-            <Rectangle x:Name="content2_1" Height="50" Width="50" Canvas.Left="560" Canvas.Top="39">
+            <Rectangle x:Name="content_2"  Style="{StaticResource HighlightRectangle}" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
+                VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="577" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content2_1" Height="50" Width="50" Canvas.Left="585" Canvas.Top="39" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/cardpick1.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock x:Name="cell_2" FontFamily="Calibri" FontWeight="Bold" Text="Card Pick" TextWrapping="Wrap" TextAlignment="Center" Height="28" Canvas.Left="553" Canvas.Top="6" Width="65"/>
+            <TextBlock x:Name="cell_2" FontFamily="Calibri" FontWeight="Bold" Text="Card Pick" TextWrapping="Wrap" TextAlignment="Center" Height="28" Canvas.Left="578" Canvas.Top="9" Width="65" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="head_brown_3"  Height="27" Stroke="Black" StrokeThickness="1" Width="65" Fill="Peru" Panel.ZIndex="1" Canvas.Left="487"  />
-            <Rectangle x:Name="content_3" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                Width="65" Opacity="0.45" Canvas.Left="487"/>
-            <TextBlock x:Name="cell_3" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Width="65" Height="48" Canvas.Left="487" Canvas.Top="26" />
+            <Rectangle x:Name="head_brown_3"  Height="27" Stroke="Black" StrokeThickness="1" Width="65" Fill="Peru" Panel.ZIndex="1" Canvas.Left="521" RenderTransformOrigin="0.5,0.5" Canvas.Top="6"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content_3" Style="{StaticResource HighlightRectangle}" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
+                Width="65" Opacity="0.45" Canvas.Left="521" RenderTransformOrigin="0.5,0.5" Canvas.Top="-2">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_3" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Width="65" Height="30" Canvas.Left="521" Canvas.Top="32" RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="content_4" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                VerticalAlignment="Center" Width="65" Opacity="0.45" Canvas.Left="422"/>
-            <Rectangle x:Name="content4_1" Height="50" Width="50" Canvas.Left="431" Canvas.Top="39">
+            <Rectangle x:Name="content_4" Style="{StaticResource HighlightRectangle}" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
+                VerticalAlignment="Center" Width="65" Opacity="0.45" Canvas.Left="422" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content4_1" Height="50" Width="50" Canvas.Left="431" Canvas.Top="39" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/tax.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <Label x:Name="cell_4" FontFamily="Calibri" FontWeight="Bold" FontSize="18" Content="Tax" HorizontalContentAlignment="Center" Canvas.Left="422" Height="37" Width="65"/>
+            <Label x:Name="cell_4" FontFamily="Calibri" FontWeight="Bold" FontSize="18" Content="Tax" HorizontalContentAlignment="Center" Canvas.Left="422" Height="37" Width="65" RenderTransformOrigin="0.5,0.5">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
 
-            <Rectangle x:Name="content_5" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                VerticalAlignment="Center" Width="65.5" Opacity="0.45" Canvas.Left="356.9"/>
-            <Rectangle x:Name="content5_1" Height="50" Canvas.Left="366" Canvas.Top="39" Width="52">
+            <Rectangle x:Name="content_5" Style="{StaticResource HighlightRectangle}" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
+                VerticalAlignment="Center" Width="65.5" Opacity="0.45" Canvas.Left="356.9" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content5_1" Height="50" Canvas.Left="366" Canvas.Top="39" Width="52" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/railway.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock x:Name="cell_5" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Railway1" TextAlignment="Center" TextWrapping="Wrap" Height="39" Width="65" Canvas.Left="358" Canvas.Top="6"/>
+            <TextBlock x:Name="cell_5" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Railway1" TextAlignment="Center" TextWrapping="Wrap" Height="25" Width="65" Canvas.Left="359" Canvas.Top="8" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
 
-            <Rectangle x:Name="head_blue_6"  Height="27" Stroke="Black" StrokeThickness="1" Width="65" Fill="PaleTurquoise" Panel.ZIndex="1" Canvas.Left="292"  />
-            <Rectangle x:Name="content_6" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                VerticalAlignment="Center" Width="65" Opacity="0.45" Canvas.Left="292"/>
-            <TextBlock x:Name="cell_6" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="47" Canvas.Left="292" Canvas.Top="28" Width="65"/>
+            <Rectangle x:Name="head_blue_6"  Height="27" Stroke="Black" StrokeThickness="1" Width="65" Fill="PaleTurquoise" Panel.ZIndex="1" Canvas.Left="292" RenderTransformOrigin="0.5,0.5" Canvas.Top="7"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content_6" Style="{StaticResource HighlightRectangle}" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
+                VerticalAlignment="Center" Width="65" Opacity="0.45" Canvas.Left="292" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_6" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="28" Canvas.Left="292" Canvas.Top="34" Width="65" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="content_7" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                 Width="65" Opacity="0.45" Canvas.Left="227"/>
-            <Rectangle x:Name="content7_2" Height="60" Width="50" Canvas.Left="236" Canvas.Top="28">
+            <Rectangle x:Name="content_7" Style="{StaticResource HighlightRectangle}" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
+                 Width="65" Opacity="0.45" Canvas.Left="227" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content7_2" Height="60" Width="50" Canvas.Left="236" Canvas.Top="28" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/chance.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <Label x:Name="cell_7" FontFamily="Calibri" FontWeight="Bold" FontSize="16" Content="Chance" HorizontalContentAlignment="Center" Canvas.Top="1" Canvas.Left="227" Height="30" Width="65"/>
+            <Label x:Name="cell_7" FontFamily="Calibri" FontWeight="Bold" FontSize="16" Content="Chance" HorizontalContentAlignment="Center" Canvas.Top="7" Canvas.Left="227" Height="30" Width="65" RenderTransformOrigin="0.5,0.5">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
 
 
-            <Rectangle x:Name="head_blue_8"  Height="27" Stroke="Black" StrokeThickness="1" Width="65" Fill="PaleTurquoise" Panel.ZIndex="1" Canvas.Left="162"  />
-            <Rectangle x:Name="content_8" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                Width="65" Opacity="0.45" Canvas.Left="162"/>
-            <TextBlock x:Name="cell_8" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="46" Canvas.Left="162" Canvas.Top="29" Width="60"/>
+            <Rectangle x:Name="head_blue_8"  Height="27" Stroke="Black" StrokeThickness="1" Width="65" Fill="PaleTurquoise" Panel.ZIndex="1" Canvas.Left="162" RenderTransformOrigin="0.5,0.5" Canvas.Top="7"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content_8" Style="{StaticResource HighlightRectangle}" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
+                Width="65" Opacity="0.45" Canvas.Left="162" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_8" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="27" Canvas.Left="163" Canvas.Top="30" Width="60" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="head_blue_9"  Height="27" Stroke="Black" StrokeThickness="1" Width="65" Fill="PaleTurquoise" Panel.ZIndex="1" Canvas.Left="97"  />
-            <Rectangle x:Name="content_9" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                 Width="65" Opacity="0.45" Canvas.Left="97"/>
-            <TextBlock x:Name="cell_9" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="47" Canvas.Left="97" Canvas.Top="28" Width="65"/>
+            <Rectangle x:Name="head_blue_9"  Height="27" Stroke="Black" StrokeThickness="1" Width="65" Fill="PaleTurquoise" Panel.ZIndex="1" Canvas.Left="96" RenderTransformOrigin="0.5,0.5" Canvas.Top="8"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content_9" Style="{StaticResource HighlightRectangle}" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
+                 Width="65" Opacity="0.45" Canvas.Left="97" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_9" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="28" Canvas.Left="96" Canvas.Top="30" Width="65" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="content_10" Height="100" Stroke="Black" StrokeThickness="1" Width="100" Fill="DarkSeaGreen" Opacity="0.45" Canvas.Left="-2"/>
-            <Rectangle x:Name="content_10_2" HorizontalAlignment="Left" Height="56" StrokeThickness="1" VerticalAlignment="Top" Width="59" Canvas.Left="38">
+            <Rectangle x:Name="content_10" Height="100" Stroke="Black" StrokeThickness="1" Width="100" Fill="DarkSeaGreen" Opacity="0.45" Canvas.Left="-2" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content_10_2" Style="{StaticResource HighlightRectangle}" HorizontalAlignment="Left" Height="56" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="59" Canvas.Left="34" RenderTransformOrigin="0.5,0.5" Canvas.Top="5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/jail.jpg"/>
                 </Rectangle.Fill>
-                <Rectangle.Stroke>
-                    <SolidColorBrush x:Name="BorderBrushJail" Color="Black" />
-                </Rectangle.Stroke>
-                <Rectangle.Triggers>
-                    <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                        <BeginStoryboard x:Name="Jail">
-                            <Storyboard Duration="0:0:1">
-                                <ColorAnimation Storyboard.TargetName="BorderBrushJail" Storyboard.TargetProperty="Color" From="Black" To="Red"/>
-                                <DoubleAnimation Storyboard.TargetProperty="StrokeThickness" To="3"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                        <StopStoryboard BeginStoryboardName="Jail"/>
-                    </EventTrigger>
-                </Rectangle.Triggers>
             </Rectangle>
-            <Label x:Name="cell_10_lower" FontFamily="Calibri" FontWeight="Bold" FontSize="16" Content="Visiting" HorizontalContentAlignment="Center" Height="35" Width="59" Canvas.Top="64" Canvas.Left="39"/>
-            <Label x:Name="cell_10_upper" FontFamily="Calibri" FontWeight="Bold" FontSize="16" Content="Just" HorizontalContentAlignment="Center" Width="66" Canvas.Top="20" Canvas.Left="-18" RenderTransformOrigin="0.5,0.5" Height="31">
+            <Label x:Name="cell_10_lower" FontFamily="Calibri" FontWeight="Bold" FontSize="16" Content="Visiting" HorizontalContentAlignment="Center" Height="35" Width="59" Canvas.Top="56" Canvas.Left="32" RenderTransformOrigin="0.5,0.5">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <Label x:Name="cell_10_upper" FontFamily="Calibri" FontWeight="Bold" FontSize="16" Content="Just" HorizontalContentAlignment="Center" Width="66" Canvas.Top="26" Canvas.Left="-10" RenderTransformOrigin="0.5,0.5" Height="31">
                 <Label.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -130,254 +406,1006 @@
             </Label>
         </Canvas>
 
-        <Canvas HorizontalAlignment="Left" Height="100" Margin="-142,300,0,0" VerticalAlignment="Top" Width="688" RenderTransformOrigin="0.5,0.5">
+        <Canvas HorizontalAlignment="Left" Height="100" Margin="-43,233,0,0" VerticalAlignment="Top" Width="688" RenderTransformOrigin="0.5,0.5">
             <Canvas.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
+                    <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
                     <SkewTransform/>
                     <RotateTransform Angle="90"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Canvas.RenderTransform>
-            <Rectangle x:Name="head_purple_11" Stroke="Black" StrokeThickness="1" Fill="Fuchsia" Height="27" Panel.ZIndex="1"  Canvas.Left="625" Opacity="0.7"  Width="63"  />
+            <Rectangle x:Name="head_purple_11" Stroke="Black" StrokeThickness="1" Fill="Fuchsia" Height="27" Panel.ZIndex="1"  Canvas.Left="625" Opacity="0.7"  Width="63" RenderTransformOrigin="0.5,0.5" Canvas.Top="7"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_11" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                       VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="623"/>
-            <TextBlock x:Name="cell_11" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Canvas.Left="625" Canvas.Top="27" Width="62"/>
+                       VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="623" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_11" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Canvas.Left="625" Canvas.Top="27" Width="62" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
             <Rectangle x:Name="content_12" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                VerticalAlignment="Center" Width="65" Opacity="0.45" Canvas.Left="558"/>
-            <Rectangle x:Name="content12_2" Height="50" Width="50" Canvas.Left="566" Canvas.Top="37">
+                VerticalAlignment="Center" Width="65" Opacity="0.45" Canvas.Left="570" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content12_2" Height="50" Width="50" Canvas.Left="578" Canvas.Top="37" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/electro.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock x:Name="cell_12" FontFamily="Calibri" FontWeight="Bold" FontSize="16" Text="Electro" TextAlignment="Center" TextWrapping="Wrap" Width="65" Height="32" Canvas.Left="560"/>
+            <TextBlock x:Name="cell_12" FontFamily="Calibri" FontWeight="Bold" FontSize="16" Text="Electro" TextAlignment="Center" TextWrapping="Wrap" Width="65" Height="32" Canvas.Left="571" RenderTransformOrigin="0.5,0.5" Canvas.Top="8">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="head_purple_13" Stroke="Black" StrokeThickness="1" Fill="Fuchsia" Height="27" Panel.ZIndex="1" Opacity="0.7"  Canvas.Left="491" Width="67"  />
+            <Rectangle x:Name="head_purple_13" Stroke="Black" StrokeThickness="1" Fill="Fuchsia" Height="27" Panel.ZIndex="1" Opacity="0.7"  Canvas.Left="491" Width="67" RenderTransformOrigin="0.5,0.5" Canvas.Top="6"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_13" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-            VerticalAlignment="Center" Opacity="0.45" Width="66.5" Canvas.Left="491"/>
-            <TextBlock x:Name="cell_13" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="491" Canvas.Top="27"/>
+            VerticalAlignment="Center" Opacity="0.45" Width="66.5" Canvas.Left="491" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_13" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="493" Canvas.Top="32" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="head_purple_14" Stroke="Black" StrokeThickness="1" Fill="Fuchsia" Height="27" Panel.ZIndex="1" Opacity="0.7"  Canvas.Left="426" Width="65"  />
+            <Rectangle x:Name="head_purple_14" Stroke="Black" StrokeThickness="1" Fill="Fuchsia" Height="27" Panel.ZIndex="1" Opacity="0.7"  Canvas.Left="426" Width="65" RenderTransformOrigin="0.5,0.5" Canvas.Top="7"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_14" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-            VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="426"/>
-            <TextBlock x:Name="cell_14" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="426" Canvas.Top="27"/>
+            VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="426" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_14" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="427" Canvas.Top="31" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
             <Rectangle x:Name="content_15" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                VerticalAlignment="Center" Width="65" Opacity="0.45" Canvas.Left="361"/>
-            <Rectangle x:Name="content15_2" Height="50" Canvas.Left="367" Canvas.Top="39" Width="54">
+                VerticalAlignment="Center" Width="65" Opacity="0.45" Canvas.Left="361" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content15_2" Height="50" Canvas.Left="367" Canvas.Top="39" Width="54" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/railway.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock x:Name="cell_15" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Railway2" TextAlignment="Center" TextWrapping="Wrap" Height="39" Width="65" Canvas.Left="361" Canvas.Top="4"/>
+            <TextBlock x:Name="cell_15" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Railway2" TextAlignment="Center" TextWrapping="Wrap" Height="22" Width="65" Canvas.Left="361" Canvas.Top="10" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="head_orange_16" Stroke="Black" StrokeThickness="1" Fill="DarkOrange" Height="27" Panel.ZIndex="1" Opacity="0.7"  Canvas.Left="298" Width="63"  />
+            <Rectangle x:Name="head_orange_16" Stroke="Black" StrokeThickness="1" Fill="DarkOrange" Height="27" Panel.ZIndex="1" Opacity="0.7"  Canvas.Left="298" Width="63" RenderTransformOrigin="0.5,0.5" Canvas.Top="6"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_16" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-            VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="296"/>
-            <TextBlock x:Name="cell_16" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="298" Canvas.Top="28"/>
+            VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="296" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_16" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="298" Canvas.Top="34" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
             <Rectangle x:Name="content_17" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-            VerticalAlignment="Center" Width="65" Opacity="0.45" Canvas.Left="231"/>
-            <Rectangle x:Name="content17_2" Height="50" Canvas.Left="237" Canvas.Top="39" Width="54">
+            VerticalAlignment="Center" Width="65" Opacity="0.45" Canvas.Left="231" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content17_2" Height="50" Canvas.Left="237" Canvas.Top="39" Width="54" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/cardpick1.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock x:Name="cell_17" FontFamily="Calibri" FontWeight="Bold" Text="Card Pick" TextWrapping="Wrap" TextAlignment="Center" Height="28" Canvas.Left="231" Canvas.Top="4" Width="62"/>
+            <TextBlock x:Name="cell_17" FontFamily="Calibri" FontWeight="Bold" Text="Card Pick" TextWrapping="Wrap" TextAlignment="Center" Height="28" Canvas.Left="232" Canvas.Top="9" Width="62" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="head_orange_18" Stroke="Black" StrokeThickness="1" Fill="DarkOrange" Height="27" Panel.ZIndex="1" Opacity="0.7"  Canvas.Left="165" Width="66"  />
+            <Rectangle x:Name="head_orange_18" Stroke="Black" StrokeThickness="1" Fill="DarkOrange" Height="27" Panel.ZIndex="1" Opacity="0.7"  Canvas.Left="164" Width="66" RenderTransformOrigin="0.5,0.5" Canvas.Top="7"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_18" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-            VerticalAlignment="Center" Opacity="0.45" Width="66" Canvas.Left="165"/>
-            <TextBlock x:Name="cell_18" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="165" Canvas.Top="27"/>
+            VerticalAlignment="Center" Opacity="0.45" Width="66" Canvas.Left="165" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_18" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="166" Canvas.Top="36" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="head_orange_19" Stroke="Black" StrokeThickness="1" Fill="DarkOrange" Height="27" Panel.ZIndex="1" Opacity="0.7"  Canvas.Left="100" Width="65"  />
+            <Rectangle x:Name="head_orange_19" Stroke="Black" StrokeThickness="1" Fill="DarkOrange" Height="27" Panel.ZIndex="1" Opacity="0.7"  Canvas.Left="100" Width="65" RenderTransformOrigin="0.5,0.5" Canvas.Top="6"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_19" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-            VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="100"/>
-            <TextBlock x:Name="cell_19" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="100" Canvas.Top="27"/>
+            VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="100" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_19" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="101" Canvas.Top="35" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="freeRect" Stroke="Black" Height="100" StrokeThickness="0.5" Width="100">
+            <Rectangle x:Name="freeRect" Style="{StaticResource HighlightRectangle}" Stroke="Black" Height="100" StrokeThickness="0.5" Width="100" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/free.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
         </Canvas>
-        <Canvas HorizontalAlignment="Left" Height="589" Margin="252,106,0,0" VerticalAlignment="Top" Width="584">
-            <Rectangle x:Name="bodyRect" Stroke="Black" Height="589" StrokeThickness="1" Width="584">
+        <Canvas HorizontalAlignment="Left" Height="578" Margin="279,36,0,0" VerticalAlignment="Top" Width="589" RenderTransformOrigin="0.5,0.5">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Rectangle x:Name="bodyRect" Stroke="Black" Height="721" StrokeThickness="1" Width="737" RenderTransformOrigin="0.5,0.5" Canvas.Left="-73" Canvas.Top="-72">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/body.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
         </Canvas>
-        <Canvas HorizontalAlignment="Left" Height="100" Margin="254,4,0,0" VerticalAlignment="Top" Width="681">
-            <Rectangle x:Name="head_red_21" Stroke="Black" StrokeThickness="1" Fill="Red" Opacity="0.75" Width="65" Height="27" Panel.ZIndex="1" Canvas.Left="-2" Canvas.Top="2"  />
+        <Canvas HorizontalAlignment="Left" Height="100" Margin="267,-3,0,0" VerticalAlignment="Top" Width="681" RenderTransformOrigin="0.5,0.5">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Rectangle x:Name="head_red_21" Stroke="Black" StrokeThickness="1" Fill="Red" Opacity="0.75" Width="65" Height="27" Panel.ZIndex="1" Canvas.Left="-1" Canvas.Top="8" RenderTransformOrigin="0.5,0.5"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_21" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                       VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="-2" Canvas.Top="2"/>
-            <TextBlock x:Name="cell_21" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="-1" Canvas.Top="29"/>
+                       VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="-2" Canvas.Top="2" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_21" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="-1" Canvas.Top="29" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
             <Rectangle x:Name="content_22" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                 Width="65" Opacity="0.45" Canvas.Left="63" Canvas.Top="2"/>
-            <Rectangle x:Name="content22_2" Height="60" Width="50" Canvas.Left="71" Canvas.Top="32">
+                 Width="65" Opacity="0.45" Canvas.Left="63" Canvas.Top="2" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content22_2" Height="60" Width="50" Canvas.Left="71" Canvas.Top="32" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/chance.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <Label x:Name="cell_22" FontFamily="Calibri" FontWeight="Bold" FontSize="16" Content="Chance" HorizontalContentAlignment="Center" Height="30" Width="65" Canvas.Left="63" Canvas.Top="3"/>
+            <Label x:Name="cell_22" FontFamily="Calibri" FontWeight="Bold" FontSize="16" Content="Chance" HorizontalContentAlignment="Center" Height="30" Width="65" Canvas.Left="63" Canvas.Top="9" RenderTransformOrigin="0.5,0.5">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
 
-            <Rectangle x:Name="head_red_23" Stroke="Black" StrokeThickness="1" Fill="Red" Opacity="0.75" Width="65" Height="27" Panel.ZIndex="1" Canvas.Left="127" Canvas.Top="3"  />
+            <Rectangle x:Name="head_red_23" Stroke="Black" StrokeThickness="1" Fill="Red" Opacity="0.75" Width="65" Height="27" Panel.ZIndex="1" Canvas.Left="127" Canvas.Top="9" RenderTransformOrigin="0.5,0.5"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_23" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-            VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="127" Canvas.Top="2"/>
-            <TextBlock x:Name="cell_23" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="127" Canvas.Top="29"/>
+            VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="127" Canvas.Top="2" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_23" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="127" Canvas.Top="29" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="head_red_24" Stroke="Black" StrokeThickness="1" Fill="Red" Opacity="0.75" Width="66" Height="27" Panel.ZIndex="1" Canvas.Left="191" Canvas.Top="3"  />
+            <Rectangle x:Name="head_red_24" Stroke="Black" StrokeThickness="1" Fill="Red" Opacity="0.75" Width="66" Height="27" Panel.ZIndex="1" Canvas.Left="193" Canvas.Top="9" RenderTransformOrigin="0.5,0.5"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_24" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-            VerticalAlignment="Center" Opacity="0.45" Canvas.Left="191" Canvas.Top="2" Width="66"/>
-            <TextBlock x:Name="cell_24" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Canvas.Left="192" Canvas.Top="29" Width="65"/>
+            VerticalAlignment="Center" Opacity="0.45" Canvas.Left="191" Canvas.Top="2" Width="66" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_24" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Canvas.Left="192" Canvas.Top="29" Width="65" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
             <Rectangle x:Name="content_25" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                VerticalAlignment="Center" Opacity="0.45" Canvas.Left="257" Canvas.Top="2" Width="67"/>
-            <Rectangle x:Name="content25_2" Height="50" Canvas.Left="266" Canvas.Top="29" Width="52">
+                VerticalAlignment="Center" Opacity="0.45" Canvas.Left="257" Canvas.Top="2" Width="67" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content25_2" Height="50" Canvas.Left="266" Canvas.Top="29" Width="52" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/railway.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock x:Name="cell_25" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Railway3" TextAlignment="Center" TextWrapping="Wrap" Height="39" Width="65" Canvas.Left="257" Canvas.Top="2"/>
+            <TextBlock x:Name="cell_25" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Railway3" TextAlignment="Center" TextWrapping="Wrap" Height="21" Width="65" Canvas.Left="257" Canvas.Top="11" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="head_yellow_26" Stroke="Black" StrokeThickness="1" Fill="Yellow" Opacity="0.75" Height="27" Panel.ZIndex="1" Canvas.Left="322" Canvas.Top="3" Width="66"  />
+            <Rectangle x:Name="head_yellow_26" Stroke="Black" StrokeThickness="1" Fill="Yellow" Opacity="0.75" Height="27" Panel.ZIndex="1" Canvas.Left="321" Canvas.Top="8" Width="66" RenderTransformOrigin="0.5,0.5"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_26" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-            VerticalAlignment="Center" Opacity="0.45" Canvas.Left="322" Canvas.Top="2" Width="66"/>
-            <TextBlock x:Name="cell_26" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Canvas.Left="324" Canvas.Top="29" Width="63"/>
+            VerticalAlignment="Center" Opacity="0.45" Canvas.Left="322" Canvas.Top="2" Width="66" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_26" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Canvas.Left="324" Canvas.Top="29" Width="63" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="head_yellow_27" Stroke="Black" StrokeThickness="1" Fill="Yellow" Opacity="0.75" Width="65" Height="27" Panel.ZIndex="1" Canvas.Left="388" Canvas.Top="3"  />
+            <Rectangle x:Name="head_yellow_27" Stroke="Black" StrokeThickness="1" Fill="Yellow" Opacity="0.75" Width="65" Height="27" Panel.ZIndex="1" Canvas.Left="388" Canvas.Top="8" RenderTransformOrigin="0.5,0.5"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_27" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-            VerticalAlignment="Center" Opacity="0.45" Canvas.Left="387" Canvas.Top="2" Width="66"/>
-            <TextBlock x:Name="cell_27" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Canvas.Left="388" Canvas.Top="29" Width="65"/>
+            VerticalAlignment="Center" Opacity="0.45" Canvas.Left="387" Canvas.Top="2" Width="66" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_27" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Canvas.Left="388" Canvas.Top="29" Width="65" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
             <Rectangle x:Name="content_28" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                VerticalAlignment="Center" Width="65" Opacity="0.45" Canvas.Left="453" Canvas.Top="2"/>
-            <Rectangle x:Name="content28_2" Height="50" Width="50" Canvas.Left="460" Canvas.Top="27">
+                VerticalAlignment="Center" Width="65" Opacity="0.45" Canvas.Left="453" Canvas.Top="2" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content28_2" Height="50" Width="50" Canvas.Left="460" Canvas.Top="27" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/water.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock x:Name="cell_28" FontFamily="Calibri" FontWeight="Bold" FontSize="16" Text="Water" TextAlignment="Center" TextWrapping="Wrap" Width="65" Height="27" Canvas.Left="453" Canvas.Top="3"/>
+            <TextBlock x:Name="cell_28" FontFamily="Calibri" FontWeight="Bold" FontSize="16" Text="Water" TextAlignment="Center" TextWrapping="Wrap" Width="65" Height="27" Canvas.Left="453" Canvas.Top="11" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="head_yellow_29" Stroke="Black" StrokeThickness="1" Fill="Yellow" Opacity="0.75" Width="65" Height="27" Panel.ZIndex="1" Canvas.Left="517" Canvas.Top="2"  />
+            <Rectangle x:Name="head_yellow_29" Stroke="Black" StrokeThickness="1" Fill="Yellow" Opacity="0.75" Width="65" Height="27" Panel.ZIndex="1" Canvas.Left="517" Canvas.Top="9" RenderTransformOrigin="0.5,0.5"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_29" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-            VerticalAlignment="Center" Opacity="0.45" Canvas.Left="517" Canvas.Top="2" Width="65"/>
-            <TextBlock x:Name="cell_29" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Canvas.Left="518" Canvas.Top="29" Width="63"/>
-            <Rectangle x:Name="gotojailRect" StrokeThickness="0.5" Height="100" Canvas.Left="582" Width="99" Canvas.Top="2">
+            VerticalAlignment="Center" Opacity="0.45" Canvas.Left="517" Canvas.Top="2" Width="65" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_29" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Canvas.Left="518" Canvas.Top="29" Width="63" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Rectangle x:Name="gotojailRect" Style="{StaticResource HighlightRectangle}" Stroke="Black" StrokeThickness="0.5" Height="100" Canvas.Left="582" Width="99" Canvas.Top="2" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/gotojail.jpg"/>
                 </Rectangle.Fill>
-                <Rectangle.Stroke>
-                    <SolidColorBrush x:Name="BorderBrushGoTo" Color="Black" />
-                </Rectangle.Stroke>
-                <Rectangle.Triggers>
-                    <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                        <BeginStoryboard x:Name="GoToJailRect">
-                            <Storyboard Duration="0:0:1">
-                                <ColorAnimation Storyboard.TargetName="BorderBrushGoTo" Storyboard.TargetProperty="Color" From="Black" To="Gold"/>
-                                <DoubleAnimation Storyboard.TargetProperty="StrokeThickness" To="3"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                        <StopStoryboard BeginStoryboardName="GoToJailRect"/>
-                    </EventTrigger>
-                </Rectangle.Triggers>
             </Rectangle>
             <Label x:Name="gotojail_lower" Content="Jail" FontFamily="Calibri" FontWeight="Bold" FontSize="16" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="37" Canvas.Left="643" Canvas.Top="62">
                 <Label.RenderTransform>
                     <TransformGroup>
-                        <ScaleTransform/>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
                         <SkewTransform/>
                         <RotateTransform Angle="-45"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </Label.RenderTransform>
             </Label>
-            <Label x:Name="gotojail_upper" Content="Go to" FontFamily="Calibri" FontWeight="Bold" FontSize="14" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="44" Canvas.Left="578" Canvas.Top="15">
+            <Label x:Name="gotojail_upper" Content="Go to" FontFamily="Calibri" FontWeight="Bold" FontSize="14" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="44" Canvas.Left="585" Canvas.Top="16">
                 <Label.RenderTransform>
                     <TransformGroup>
-                        <ScaleTransform/>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
                         <SkewTransform/>
                         <RotateTransform Angle="-45"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </Label.RenderTransform>
+                <Label.Triggers>
+                    <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <StaticResource ResourceKey="TextRedAlertAnimation"/>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Label.Triggers>
             </Label>
         </Canvas>
-        <Canvas HorizontalAlignment="Left" Height="99" Margin="594.1,353,0,0" VerticalAlignment="Top" Width="584" RenderTransformOrigin="0.5,0.5">
+        <Canvas HorizontalAlignment="Left" Height="99" Margin="554,278,0,0" VerticalAlignment="Top" Width="584" RenderTransformOrigin="0.5,0.5">
             <Canvas.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
+                    <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
                     <SkewTransform/>
                     <RotateTransform Angle="-90"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Canvas.RenderTransform>
 
-            <Rectangle x:Name="head_green_31" Stroke="Black" StrokeThickness="1" Fill="LimeGreen" Panel.ZIndex="1" Height="27" Canvas.Left="520" Canvas.Top="-1" Width="68"  />
+            <Rectangle x:Name="head_green_31" Stroke="Black" StrokeThickness="1" Fill="LimeGreen" Panel.ZIndex="1" Height="27" Canvas.Left="521" Canvas.Top="7" Width="68" RenderTransformOrigin="0.5,0.5"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_31" Fill="DarkSeaGreen" Stroke="Black" StrokeThickness="1" 
-                Opacity="0.45" Height="100" Canvas.Left="520" Canvas.Top="-1" Width="68"/>
-            <TextBlock x:Name="cell_31" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="47" Canvas.Left="519" Canvas.Top="27" Width="69"/>
+                Opacity="0.45" Height="100" Canvas.Left="520" Canvas.Top="-1" Width="68" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_31" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="32" Canvas.Left="519" Canvas.Top="29" Width="69" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="head_green_32" Stroke="Black" StrokeThickness="1" Fill="LimeGreen" Panel.ZIndex="1" Height="27" Canvas.Left="455" Canvas.Top="-1" Width="65"  />
+            <Rectangle x:Name="head_green_32" Stroke="Black" StrokeThickness="1" Fill="LimeGreen" Panel.ZIndex="1" Height="27" Canvas.Left="455" Canvas.Top="7" Width="65" RenderTransformOrigin="0.5,0.5"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_32" Fill="DarkSeaGreen" Stroke="Black" StrokeThickness="1" 
-                Opacity="0.45" Height="100" Canvas.Left="455" Canvas.Top="-1" Width="65"/>
-            <TextBlock x:Name="cell_32" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="48" Canvas.Left="455" Canvas.Top="28" Width="65" />
+                Opacity="0.45" Height="100" Canvas.Left="455" Canvas.Top="-1" Width="65" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_32" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="30" Canvas.Left="455" Canvas.Top="30" Width="65" RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
             <Rectangle x:Name="content_33" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                VerticalAlignment="Center" Opacity="0.45" Canvas.Left="389" Canvas.Top="-1" Width="67"/>
-            <Rectangle x:Name="content33_2" Height="50" Canvas.Left="400" Canvas.Top="38" Width="50">
+                VerticalAlignment="Center" Opacity="0.45" Canvas.Left="389" Canvas.Top="-1" Width="67" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content33_2" Height="50" Canvas.Left="400" Canvas.Top="38" Width="50" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/cardpick1.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock x:Name="cell_33" FontFamily="Calibri" FontWeight="Bold" Text="Card Pick" TextWrapping="Wrap" TextAlignment="Center" Height="28" Canvas.Left="390" Canvas.Top="5" Width="65"/>
+            <TextBlock x:Name="cell_33" FontFamily="Calibri" FontWeight="Bold" Text="Card Pick" TextWrapping="Wrap" TextAlignment="Center" Height="28" Canvas.Left="390" Canvas.Top="7" Width="65" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
-            <Rectangle x:Name="head_green_34" Stroke="Black" StrokeThickness="1" Fill="LimeGreen" Panel.ZIndex="1"  Height="27" Canvas.Left="325" Width="65"  />
+            <Rectangle x:Name="head_green_34" Stroke="Black" StrokeThickness="1" Fill="LimeGreen" Panel.ZIndex="1"  Height="27" Canvas.Left="324" Width="65" RenderTransformOrigin="0.5,0.5" Canvas.Top="7"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_34" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                VerticalAlignment="Center" Opacity="0.45" Canvas.Left="325" Canvas.Top="-1" Width="65"/>
-            <TextBlock x:Name="cell_34" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Canvas.Left="324" Canvas.Top="27" Width="65"/>
+                VerticalAlignment="Center" Opacity="0.45" Canvas.Left="325" Canvas.Top="-1" Width="65" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_34" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="29" Canvas.Left="324" Canvas.Top="31" Width="65" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
             <Rectangle x:Name="content_35" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                VerticalAlignment="Center" Opacity="0.45" Canvas.Left="259" Canvas.Top="-1" Width="66"/>
-            <Rectangle x:Name="content35_2" Height="50" Canvas.Left="268" Canvas.Top="40" Width="52">
+                VerticalAlignment="Center" Opacity="0.45" Canvas.Left="259" Canvas.Top="-1" Width="66" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content35_2" Height="50" Canvas.Left="268" Canvas.Top="40" Width="52" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/railway.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock x:Name="cell_35" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Railway1" TextAlignment="Center" TextWrapping="Wrap" Height="39" Canvas.Left="260" Canvas.Top="5" Width="65"/>
+            <TextBlock x:Name="cell_35" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Railway1" TextAlignment="Center" TextWrapping="Wrap" Height="39" Canvas.Left="259" Canvas.Top="6" Width="65" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
             <Rectangle x:Name="content_36" Fill="DarkSeaGreen" Stroke="Black" StrokeThickness="1" 
-                Opacity="0.45" Height="100" Canvas.Left="195" Canvas.Top="-1" Width="65"/>
-            <Rectangle x:Name="content36_2" Height="60" Canvas.Left="205" Canvas.Top="30" Width="50">
+                Opacity="0.45" Height="100" Canvas.Left="195" Canvas.Top="-1" Width="65" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content36_2" Height="60" Canvas.Left="205" Canvas.Top="30" Width="50" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/chance.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <Label x:Name="cell_36" FontFamily="Calibri" FontWeight="Bold" FontSize="16" Content="Chance" HorizontalContentAlignment="Center" Height="30" Canvas.Left="195" Width="65"/>
+            <Label x:Name="cell_36" FontFamily="Calibri" FontWeight="Bold" FontSize="16" Content="Chance" HorizontalContentAlignment="Center" Height="30" Canvas.Left="195" Width="65" RenderTransformOrigin="0.5,0.5" Canvas.Top="7">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
 
-            <Rectangle x:Name="head_darkblue_37" Stroke="Black" StrokeThickness="1" Fill="RoyalBlue" Panel.ZIndex="1" Height="27" Canvas.Left="130" Width="65"  />
+            <Rectangle x:Name="head_darkblue_37" Stroke="Black" StrokeThickness="1" Fill="RoyalBlue" Panel.ZIndex="1" Height="27" Canvas.Left="129" Width="65" RenderTransformOrigin="0.5,0.5" Canvas.Top="7"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_37" Fill="DarkSeaGreen" Stroke="Black" StrokeThickness="1" 
-                Opacity="0.45" Height="100" Canvas.Left="130" Canvas.Top="-1" Width="65"/>
-            <TextBlock x:Name="cell_37" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="46" Canvas.Left="130" Canvas.Top="28" Width="65"/>
+                Opacity="0.45" Height="100" Canvas.Left="130" Canvas.Top="-1" Width="65" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_37" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="26" Canvas.Left="130" Canvas.Top="30" Width="65" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
 
             <Rectangle x:Name="content_38" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                VerticalAlignment="Center" Opacity="0.45" Canvas.Left="65" Canvas.Top="-1" Width="65"/>
-            <Rectangle x:Name="content38_2" Height="50" Canvas.Left="75" Canvas.Top="37" Width="50">
+                VerticalAlignment="Center" Opacity="0.45" Canvas.Left="65" Canvas.Top="-1" Width="65" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="content38_2" Height="50" Canvas.Left="75" Canvas.Top="37" Width="50" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Images/tax_ring.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <Label x:Name="cell_38" FontFamily="Calibri" FontWeight="Bold" FontSize="18" Content="Tax" HorizontalContentAlignment="Center" Height="37" Canvas.Left="65" Width="65"/>
+            <Label x:Name="cell_38" FontFamily="Calibri" FontWeight="Bold" FontSize="18" Content="Tax" HorizontalContentAlignment="Center" Height="37" Canvas.Left="65" Width="65" RenderTransformOrigin="0.5,0.5" Canvas.Top="6">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
 
-            <Rectangle x:Name="head_darkblue_39" Stroke="Black" StrokeThickness="1" Fill="RoyalBlue" Panel.ZIndex="1" Height="27" Canvas.Top="-1" Width="65"  />
+            <Rectangle x:Name="head_darkblue_39" Stroke="Black" StrokeThickness="1" Fill="RoyalBlue" Panel.ZIndex="1" Height="27" Canvas.Top="7" Width="65" RenderTransformOrigin="0.5,0.5"  >
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <Rectangle x:Name="content_39" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
-                VerticalAlignment="Center" Opacity="0.45" Canvas.Top="-1" Width="65"/>
-            <TextBlock x:Name="cell_39" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="47" Canvas.Left="-1" Canvas.Top="28" Width="65"/>
+                VerticalAlignment="Center" Opacity="0.45" Canvas.Top="-1" Width="65" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock x:Name="cell_39" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="27" Canvas.Left="-1" Canvas.Top="30" Width="65" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
         </Canvas>
 
     </Grid>
