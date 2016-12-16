@@ -161,7 +161,7 @@
             <Rectangle x:Name="head_purple_14" Stroke="Black" StrokeThickness="1" Fill="Fuchsia" Height="27" Panel.ZIndex="1" Opacity="0.7"  Canvas.Left="426" Width="65"  />
             <Rectangle x:Name="content_14" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
             VerticalAlignment="Center" Opacity="0.45" Width="65" Canvas.Left="426"/>
-            <TextBlock x:Name="cell_14" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="426" Canvas.Top="27"/>
+            <TextBlock x:Name="cell_14" Text="{Binding Position}" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="46" Width="62" Canvas.Left="426" Canvas.Top="27"/>
 
             <Rectangle x:Name="content_15" Fill="DarkSeaGreen" Height="100" Stroke="Black" StrokeThickness="1" 
                 VerticalAlignment="Center" Width="65" Opacity="0.45" Canvas.Left="361"/>
@@ -379,6 +379,7 @@
                 VerticalAlignment="Center" Opacity="0.45" Canvas.Top="-1" Width="65"/>
             <TextBlock x:Name="cell_39" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="47" Canvas.Left="-1" Canvas.Top="28" Width="65"/>
         </Canvas>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="977,442,0,0" VerticalAlignment="Top" Width="148" Height="54" Command="{Binding TestCommand}"/>
 
     </Grid>
 </Window>

@@ -46,7 +46,9 @@ namespace Logic.DataProcess
         {
             Engine.NewMove(user);
         }
-
-
+        public void TestMove(User user)
+        {
+            Engine.TestMove(user);
+        }
     }
 }

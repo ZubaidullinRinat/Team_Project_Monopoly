@@ -241,5 +241,9 @@ namespace Logic.DataProcess
             }
             while (dices[0] == dices[1] && !user.IsInPrison);
         }
+        public void TestMove(User user)
+        {
+            user.Position = 9;
+        }
     }
 }
