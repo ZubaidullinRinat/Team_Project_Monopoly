@@ -163,18 +163,18 @@ namespace Logic.DataProcess
                         case Models.Cells.Type.CommunityChest:
                             r = random.Next(1, CommunityChest.Count);
                             chanceCard = Chances.Find(c => c.Id == random.Next(1, Chances.Count));
-                            if(chanceCard != null)
-                            Console.WriteLine($"{user.Name} попал на клетку общественной казны '{chanceCard.Name}'");                            
+                            //if(chanceCard != null)
+                            //Console.WriteLine($"{user.Name} попал на клетку общественной казны '{chanceCard.Name}'");                            
                             break;
                         default:
                             r = random.Next(1, Chances.Count);
                             chanceCard = Chances.Find(c => c.Id == r);
-                            if (chanceCard != null)
-                            Console.WriteLine($"{user.Name} попал на клетку общественной казны '{chanceCard.Name}'");
+                            //if (chanceCard != null)
+                            //Console.WriteLine($"{user.Name} попал на клетку Шанс'{chanceCard.Name}'");
                             break;                        
                     }
                     if (chanceCard != null)
-                        Console.WriteLine($"{user.Name} попал на клетку шанс '{chanceCard.Name}'");
+                        Console.WriteLine($"{user.Name} попал на клетку {CardPickCard.Type} '{chanceCard.Name}'");
                     if (chanceCard is Motion)
                     {
                         var motion = chanceCard as Motion;
