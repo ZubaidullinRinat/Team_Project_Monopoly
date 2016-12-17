@@ -3,6 +3,8 @@ using GalaSoft.MvvmLight.Command;
 using Logic.DataProcess;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using UI_TestConsole.Models;
 
@@ -61,24 +63,23 @@ namespace Logic.UI.ViewModel
             PositionAnimation();
             //Position = user.Name;
         }
-        public string BluePosition { get; set; }
+        public string BluePosition { get; set; } 
         public string Position { get; set; }
 
         public RelayCommand TestCommand { get; set; }
 
-        void PositionAnimation()
+        async void PositionAnimation()
         {
-            var test = BluePosition.Split(',');
-            int hor = Int32.Parse(test[0]);
-            int vert = Int32.Parse(test[1]);
-            MessageBox.Show(hor.ToString());
-            while(hor != 776)
+            var Positions = BluePosition.Split(',');
+            int hor = Int32.Parse(Positions[0]);
+            int vert = Int32.Parse(Positions[1]);
+            while(hor > 776)
             {
-                hor--;
-                BluePosition = string.Format($"{hor.ToString()},{test[1]},{test[2]},{test[3]}");
+                hor--;                
+                BluePosition = string.Format($"{hor.ToString()},{Positions[1]},0,0");
+                await Task.Delay(TimeSpan.FromMilliseconds(10));
             }
         }
-
         // объ€вить все лейблы и тектблоки из UI -------  FIX ME//
         // пол€ OWNER дл€ ёзарей, кто купил эти улицы //
     }

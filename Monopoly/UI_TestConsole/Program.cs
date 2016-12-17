@@ -45,11 +45,13 @@ namespace UI_TestConsole
                 UserSeeder("Bob"),
                 UserSeeder("Max")
             };
-
-            foreach (var item in r.Session.Users)
+            int count = 0;
+            while (true)
             {
-                r.NewMove(item);
-            }   
+                if (count == 4)
+                    count = 0;
+                r.NewMove(r.Session.Users[count]);
+            }  
         }
 
         void postionHadler(User user)
