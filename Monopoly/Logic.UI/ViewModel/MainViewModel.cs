@@ -57,6 +57,10 @@ namespace Logic.UI.ViewModel
                 UserSeeder("Max")
             };
             BluePosition = "660,602,0,0";
+            Player1_Name = r.Session.Users[0].Name.ToString();
+            Player2_Name = r.Session.Users[1].Name.ToString();
+            Player3_Name = r.Session.Users[2].Name.ToString();
+            Player4_Name = r.Session.Users[3].Name.ToString();
         }
         void postionHadler(User user)
         {
@@ -65,21 +69,32 @@ namespace Logic.UI.ViewModel
         }
         public string BluePosition { get; set; } 
         public string Position { get; set; }
-        public bool Player1 { get; set; }
-        public bool Player2 { get; set; }
-        public bool Player3 { get; set; }
-        public bool Player4 { get; set; }
+        public double Player1 { get; set; } = 1;
+        public double Player2 { get; set; } = 1;
+        public double Player3 { get; set; } = 1;
+        public double Player4 { get; set; } = 1;
+        public string Player1_Name { get; set; }
+        public string Player2_Name { get; set; }
+        public string Player3_Name { get; set; }
+        public string Player4_Name { get; set; }
 
         public RelayCommand TestCommand { get; set; }
 
         async void PositionAnimation()
         {
+            while (Player2 > 0.1)
+            {
+                Player2 -= 0.05;
+                Player3 -= 0.05;
+                Player4 -= 0.05;
+                await Task.Delay(TimeSpan.FromMilliseconds(10));
+            }
             var Positions = BluePosition.Split(',');
             int hor = Int32.Parse(Positions[0]);
             int vert = Int32.Parse(Positions[1]);
-            while(hor > 570)
+            while (hor > 570)
             {
-                hor--;                
+                hor--;
                 BluePosition = string.Format($"{hor.ToString()},{Positions[1]},0,0");
                 await Task.Delay(TimeSpan.FromMilliseconds(10));
             }
