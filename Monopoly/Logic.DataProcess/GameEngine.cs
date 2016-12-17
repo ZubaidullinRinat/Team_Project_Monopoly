@@ -238,7 +238,56 @@ namespace Logic.DataProcess
                 if(Cell is Railway)
                 {
                     var RailwayStation = Cell as Railway;
-                    if (RailwayStation.Owner == null) ; 
+                    if (RailwayStation.Owner == null)
+                    {
+                        if (Buy?.Invoke(user) == true)
+                        {
+                            if (user.Money < RailwayStation.Cost)
+                            {
+                                Console.WriteLine("Нет денег");
+                                return;
+                            }
+                            user.Money -= RailwayStation.Cost;
+                            RailwayStation.Owner = user;
+                        }
+                    }
+                    else
+                    {
+                        List<Railway> ownerOfRailways;
+                        ownerOfRailways = Cells.Select(a =>
+                        {
+                            if (a is Railway)
+                                return a as Railway;
+                            return null as Railway;
+                        }).Where(a => a.Owner == RailwayStation.Owner).ToList();
+                        int cost;
+                        switch (ownerOfRailways.Count)
+                        {
+                            case 1:
+                                cost = 25;
+                                break;
+                            case 2:
+                                cost = 50;
+                                break;
+                            case 3:
+                                cost = 100;
+                                break;
+                            case 4:
+                                cost = 200;
+                                break;
+                            default:
+                                cost = 0;
+                                break;
+                        }
+                        if(user.Money < cost)
+                        {
+                            Console.WriteLine("Вам нехватает денег");
+                            return;
+                        }
+                        user.Money -= cost;
+                        RailwayStation.Owner.Money += cost;                        
+                    }
+                     
                 }
 
                 //Попадания на клетку недвижимости 
