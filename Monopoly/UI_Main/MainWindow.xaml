@@ -30,7 +30,7 @@
         <Grid.Background>
             <SolidColorBrush Color="DarkSeaGreen" Opacity="0.45"/>
         </Grid.Background>
-        <Canvas HorizontalAlignment="Left" Height="100" Margin="79,547,0,0" VerticalAlignment="Top" Width="781" RenderTransformOrigin="0.5,0.5">
+        <Canvas HorizontalAlignment="Left" Height="100" Margin="-24,552,0,0" VerticalAlignment="Top" Width="781" RenderTransformOrigin="0.5,0.5">
             <Canvas.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -400,7 +400,7 @@
             </Label>
         </Canvas>
 
-        <Canvas HorizontalAlignment="Left" Height="100" Margin="-148,238,0,0" VerticalAlignment="Top" Width="688" RenderTransformOrigin="0.5,0.5">
+        <Canvas HorizontalAlignment="Left" Height="100" Margin="-251,244,0,0" VerticalAlignment="Top" Width="688" RenderTransformOrigin="0.5,0.5">
             <Canvas.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -409,7 +409,7 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </Canvas.RenderTransform>
-            <Rectangle x:Name="head_purple_11" Stroke="Black" StrokeThickness="1" Fill="Fuchsia" Height="27" Panel.ZIndex="1"  Canvas.Left="620" Opacity="0.7"  Width="63" RenderTransformOrigin="0.5,0.5" Canvas.Top="7"  >
+            <Rectangle x:Name="head_purple_11" Stroke="Black" StrokeThickness="1" Fill="Fuchsia" Height="27" Panel.ZIndex="1"  Canvas.Left="620" Opacity="0.7"  Width="65" RenderTransformOrigin="0.5,0.5" Canvas.Top="7"  >
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -430,7 +430,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_11" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="28" Canvas.Left="62" Canvas.Top="29" Width="62" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_11" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="28" Canvas.Left="620" Canvas.Top="29" Width="62" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -720,7 +720,7 @@
                 </Rectangle.Fill>
             </Rectangle>
         </Canvas>
-        <Canvas HorizontalAlignment="Left" Height="578" Margin="174,41,0,0" VerticalAlignment="Top" Width="589" RenderTransformOrigin="0.5,0.5">
+        <Canvas HorizontalAlignment="Left" Height="578" Margin="71,46,0,0" VerticalAlignment="Top" Width="589" RenderTransformOrigin="0.5,0.5">
             <Canvas.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -764,7 +764,7 @@
                 </Rectangle.RenderTransform>
             </Rectangle>
         </Canvas>
-        <Canvas HorizontalAlignment="Left" Height="100" Margin="167,1,0,0" VerticalAlignment="Top" Width="681" RenderTransformOrigin="0.5,0.5">
+        <Canvas HorizontalAlignment="Left" Height="100" Margin="64,6,0,0" VerticalAlignment="Top" Width="681" RenderTransformOrigin="0.5,0.5">
             <Canvas.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1103,7 +1103,7 @@
                 </Label.RenderTransform>
             </Label>
         </Canvas>
-        <Canvas HorizontalAlignment="Left" Height="99" Margin="451,279,0,0" VerticalAlignment="Top" Width="584" RenderTransformOrigin="0.5,0.5">
+        <Canvas HorizontalAlignment="Left" Height="100" Margin="348,284,0,0" VerticalAlignment="Top" Width="584" RenderTransformOrigin="0.5,0.5">
             <Canvas.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1413,7 +1413,7 @@
                 </TextBlock.RenderTransform>
             </TextBlock>
         </Canvas>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="918,641,0,0" VerticalAlignment="Top" Width="75" Command="{Binding TestCommand}">
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="778,655,0,0" VerticalAlignment="Top" Width="75" Command="{Binding TestCommand}">
             <Button.Triggers>
                 <EventTrigger RoutedEvent="Button.Click">
                     <BeginStoryboard>
@@ -1429,7 +1429,7 @@
             </Button.Triggers>
         </Button>
         <Rectangle VerticalAlignment="Top" Margin="{Binding BluePosition}" x:Name="firtPlayer" Fill="Blue"  StrokeThickness="0,1" Height="7" Width="7" HorizontalAlignment="Left"/>
-        <Separator HorizontalAlignment="Left" Height="100" Margin="436,358,0,0" VerticalAlignment="Top" Width="820" RenderTransformOrigin="0.5,0.5">
+        <Separator HorizontalAlignment="Left" Height="66" Margin="329,377,0,0" VerticalAlignment="Top" Width="820" RenderTransformOrigin="0.5,0.5">
             <Separator.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -1441,7 +1441,7 @@
             </Separator.RenderTransform>
         </Separator>
 
-        <Canvas HorizontalAlignment="Left" Height="190" Margin="881,10,0,0" VerticalAlignment="Top" Width="612" Background="MintCream" ClipToBounds="True">
+        <Canvas HorizontalAlignment="Left" Height="190" Margin="778,16,0,0" VerticalAlignment="Top" Width="612" Background="MintCream" ClipToBounds="True">
 
             <Rectangle x:Name="head_player_1" Fill="Crimson" Stroke="Black" StrokeThickness="1"  Panel.ZIndex="1" RenderTransformOrigin="0.5,0.5" Height="53" Canvas.Left="10" Canvas.Top="9" Width="140"  >
                 <Rectangle.RenderTransform>
@@ -1568,7 +1568,7 @@
                 </TextBlock.RenderTransform>
             </TextBlock>
         </Canvas>
-        <Canvas HorizontalAlignment="Left" Height="390" Margin="881,232,0,0" VerticalAlignment="Top" Background="MintCream" Width="612">
+        <Canvas HorizontalAlignment="Left" Height="390" Margin="778,240,0,0" VerticalAlignment="Top" Background="MintCream" Width="612">
             <ListBox x:Name="listBox" Height="370" Canvas.Left="10" Canvas.Top="10" Width="297"/>
         </Canvas>
 

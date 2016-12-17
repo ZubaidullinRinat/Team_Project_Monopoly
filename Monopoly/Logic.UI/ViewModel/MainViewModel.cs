@@ -56,7 +56,7 @@ namespace Logic.UI.ViewModel
                 UserSeeder("Bob"),
                 UserSeeder("Max")
             };
-            BluePosition = "836,602,0,0";
+            BluePosition = "660,602,0,0";
         }
         void postionHadler(User user)
         {
@@ -65,6 +65,10 @@ namespace Logic.UI.ViewModel
         }
         public string BluePosition { get; set; } 
         public string Position { get; set; }
+        public bool Player1 { get; set; }
+        public bool Player2 { get; set; }
+        public bool Player3 { get; set; }
+        public bool Player4 { get; set; }
 
         public RelayCommand TestCommand { get; set; }
 
@@ -73,7 +77,7 @@ namespace Logic.UI.ViewModel
             var Positions = BluePosition.Split(',');
             int hor = Int32.Parse(Positions[0]);
             int vert = Int32.Parse(Positions[1]);
-            while(hor > 776)
+            while(hor > 570)
             {
                 hor--;                
                 BluePosition = string.Format($"{hor.ToString()},{Positions[1]},0,0");
