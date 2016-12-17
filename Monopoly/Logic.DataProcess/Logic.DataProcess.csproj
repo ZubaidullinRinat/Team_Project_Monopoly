@@ -53,6 +53,7 @@
     <Compile Include="Models\Cells\Property.cs" />
     <Compile Include="Models\Cells\Railway.cs" />
     <Compile Include="Models\Cells\Tax.cs" />
+    <Compile Include="Models\Cells\Utilities.cs" />
     <Compile Include="Models\Seeder\ChanceSeeder.cs" />
     <Compile Include="Models\Seeder\CommunityChestSeeder.cs" />
     <Compile Include="Models\User.cs" />

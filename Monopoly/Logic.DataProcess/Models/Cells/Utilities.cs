@@ -7,14 +7,11 @@ using UI_TestConsole.Models;
 
 namespace Logic.DataProcess.Models.Cells
 {
-    public class Railway : Cell
+    public class Utilities : Cell
     {
-        public bool IsMortaged { get; private set; }
-
-        public User Owner { get; set; }
-
         public int Cost { get; private set; }
-        public Railway(string _name, int _ID, int Cost) : base(_name, _ID)
+        public User Owner { get; set; }
+        public Utilities(string _name, int _ID, int Cost) : base(_name, _ID)
         {
             this.Cost = Cost;
         }

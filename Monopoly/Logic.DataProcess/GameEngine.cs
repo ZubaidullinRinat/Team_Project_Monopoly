@@ -101,7 +101,7 @@ namespace Logic.DataProcess
 
 
                 Console.WriteLine("Вы находитесь на {0}", Cell.Name);
-
+                
 
                 Console.WriteLine(Cell.GetType().Name);
 
@@ -191,6 +191,11 @@ namespace Logic.DataProcess
                         if (transaction != null)
                             Console.WriteLine($"{transaction.Name}");
                         Console.WriteLine($"{user.Name} старое количество денег - {user.Money}");
+                        if(user.Money < transaction.Cost)
+                        {
+                            Console.WriteLine("У вас недостаточно денег!");
+                            return;
+                        }
                         user.Money += transaction.Cost;
 
                     }
@@ -215,8 +220,27 @@ namespace Logic.DataProcess
                         user.Position = first_postion + move.MoveOn;
                         return;
                     }
-
                 }
+
+                //Клетка налога
+                if(Cell is Tax)
+                {
+                    var Tax = Cell as Tax;
+                    if(user.Money < Tax.Amount)
+                    {
+                        Console.WriteLine("У вас недостаточно денег");
+                        return;
+                    }
+                    user.Money -= Tax.Amount;
+                }
+
+                //Клетка Railway
+                if(Cell is Railway)
+                {
+                    var RailwayStation = Cell as Railway;
+                    if (RailwayStation.Owner == null) ; 
+                }
+
                 //Попадания на клетку недвижимости 
                 if (Cell is Property)
                 {
