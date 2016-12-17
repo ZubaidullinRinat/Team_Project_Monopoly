@@ -398,12 +398,6 @@
                     </TransformGroup>
                 </Label.RenderTransform>
             </Label>
-            <Rectangle x:Name="place_1_1" HorizontalAlignment="Left" Fill="Green" Height="7" VerticalAlignment="Top" Width="7" Canvas.Left="643" Canvas.Top="73" Visibility="Hidden">
-                
-            </Rectangle>
-            <Rectangle x:Name="place_1_2" HorizontalAlignment="Left"  StrokeThickness="0,1" Height="7" VerticalAlignment="Top" Width="7" Canvas.Left="650" Canvas.Top="73"/>
-            <Rectangle x:Name="place_1_4" HorizontalAlignment="Left"  Height="7" VerticalAlignment="Top" Width="7" Canvas.Left="664" Canvas.Top="73"/>
-            <Rectangle x:Name="place_1_3" HorizontalAlignment="Left"  Height="7" VerticalAlignment="Top" Width="7" Canvas.Left="657" Canvas.Top="73"/>
         </Canvas>
 
         <Canvas HorizontalAlignment="Left" Height="100" Margin="-43,233,0,0" VerticalAlignment="Top" Width="688" RenderTransformOrigin="0.5,0.5">
@@ -1419,7 +1413,7 @@
                 </TextBlock.RenderTransform>
             </TextBlock>
         </Canvas>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="1035,523,0,0" VerticalAlignment="Top" Width="75">
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="1035,523,0,0" VerticalAlignment="Top" Width="75" Command="{Binding TestCommand}">
             <Button.Triggers>
                 <EventTrigger RoutedEvent="Button.Click">
                     <BeginStoryboard>
@@ -1434,6 +1428,6 @@
                 </EventTrigger>
             </Button.Triggers>
         </Button>
-
+        <Rectangle VerticalAlignment="Top" Margin="{Binding BluePosition}" x:Name="firtPlayer" Fill="Blue"  StrokeThickness="0,1" Height="7" Width="7" HorizontalAlignment="Left"/>
     </Grid>
 </Window>

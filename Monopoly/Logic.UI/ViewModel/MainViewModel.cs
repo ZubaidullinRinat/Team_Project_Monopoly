@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Logic.DataProcess;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using UI_TestConsole.Models;
@@ -53,14 +54,31 @@ namespace Logic.UI.ViewModel
                 UserSeeder("Bob"),
                 UserSeeder("Max")
             };
+            BluePosition = "836,602,0,0";
         }
         void postionHadler(User user)
         {
-            Position = user.Name;
+            PositionAnimation();
+            //Position = user.Name;
         }
+        public string BluePosition { get; set; }
         public string Position { get; set; }
 
         public RelayCommand TestCommand { get; set; }
+
+        void PositionAnimation()
+        {
+            var test = BluePosition.Split(',');
+            int hor = Int32.Parse(test[0]);
+            int vert = Int32.Parse(test[1]);
+            MessageBox.Show(hor.ToString());
+            while(hor != 776)
+            {
+                hor--;
+                BluePosition = string.Format($"{hor.ToString()},{test[1]},{test[2]},{test[3]}");
+            }
+        }
+
         // объ€вить все лейблы и тектблоки из UI -------  FIX ME//
         // пол€ OWNER дл€ ёзарей, кто купил эти улицы //
     }
