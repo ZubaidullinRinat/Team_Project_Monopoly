@@ -54,7 +54,7 @@ namespace Logic.UI.ViewModel
                 UserSeeder("Bob"),
                 UserSeeder("Max")
             };
-            BluePosition = "836,602,0,0";
+            BluePosition = "765,602,0,0";
         }
         void postionHadler(User user)
         {
@@ -72,7 +72,7 @@ namespace Logic.UI.ViewModel
             int hor = Int32.Parse(test[0]);
             int vert = Int32.Parse(test[1]);
             MessageBox.Show(hor.ToString());
-            while(hor != 776)
+            while(hor != 674)
             {
                 hor--;
                 BluePosition = string.Format($"{hor.ToString()},{test[1]},{test[2]},{test[3]}");
