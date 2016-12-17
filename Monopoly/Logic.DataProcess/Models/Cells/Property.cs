@@ -38,7 +38,7 @@ namespace Logic.DataProcess.Models.Cells
         //MONOPOLY 
 
         public Property(string _name, int _ID, int _price, int _propertyOnly, int _oneHouse, int _twoHouses, int _threeHouses, 
-                        int _fourHouses, int _hotel, int _houseCost, int _hotelCost, int _mortgage , Action<User> _test) 
+                        int _fourHouses, int _hotel, int _houseCost, int _hotelCost, int _mortgage ) 
                         : base(_name, _ID)
         {
             Price = _price;
@@ -49,10 +49,10 @@ namespace Logic.DataProcess.Models.Cells
             FourHouses = _fourHouses;
             Hotel = _hotel;
             HouseCost = _houseCost;
-            HotelCost = _houseCost;
+            HotelCost = _hotelCost;
             Mortgage = _mortgage;
 
-            Test = _test;         
+            //Test = _test;         
         }
     }
 }
