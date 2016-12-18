@@ -45,8 +45,27 @@ namespace Logic.UI.ViewModel
             var result = new User(_name);
             result.positionChanged += postionHadler;
             //result.isOnPrisonChanged += isInPriosnHandler;
-            //result.moneyChanged += MoneyChangedHandler;
+            result.moneyChanged += MoneyChangedHandler;
             return result;
+        }
+
+
+        void MakeOpacity()
+        {
+            Player1 = 1;
+            Player2 = 1;
+            if (Player3 != 0)
+                Player3 = 1;
+            if (Player4 != 0)
+                Player4 = 1;
+            if (Test != 0)
+                Player1 = 0.3;
+            if (Test != 1)
+                Player2 = 0.3;
+            if (Test != 2 && Player3 != 0)
+                Player3 = 0.3;
+            if (Test != 3 && Player4 != 0)
+                Player4 = 0.3;
         }
 
         /// <summary>
@@ -60,12 +79,14 @@ namespace Logic.UI.ViewModel
                 {
                     Test = 0;
                 }
+                MakeOpacity();
                 CurrentUser = null;
                 r.NewMove(r.Session.Users[Test]);
                 CurrentUser = ListUsers[Test];
                 Test++;
                 
             });
+
             //Новый репозиторий
             ListUsers = new ObservableCollection<List<Property>>();
             r = Repository.getInstance();
@@ -98,7 +119,6 @@ namespace Logic.UI.ViewModel
             r.CurrentCellRepo += CurrentCell;
             r.GetCardPickRepo += GetCardpick;
             r.NoEnoughMoneyRepo += NoEnoughtMoney;
-            r.TransactionRepo += Transaction;
             r.EndGame += (user) =>
             {
                 MessageBox(0, $"Победил - {user.Name}", "Конец игры", 1);
@@ -145,10 +165,10 @@ namespace Logic.UI.ViewModel
         {
             MessageBox(0, $"У вас не хватает денег {user.Money}", user.Name, 1);
         }
-        void Transaction(User user, int before, int after)//логика транзакции
+        void MoneyChangedHandler(User user)//логика транзакции
         {
-            GetType().GetProperty("Position" + Test + "_Money")
-                               .SetValue(this, after, null);
+            GetType().GetProperty("Player" + (Test+1) + "_Money")
+                               .SetValue(this, user.Money, null);
         }
         void GetCardpick(User user, CardPick cp)
         {
@@ -161,9 +181,9 @@ namespace Logic.UI.ViewModel
         }
         public string Position { get; set; }
         public double Player1 { get; set; } = 1;
-        public double Player2 { get; set; } = 1;
-        public double Player3 { get; set; } = 1;
-        public double Player4 { get; set; } = 1;
+        public double Player2 { get; set; } = 0.3;
+        public double Player3 { get; set; } = 0.3;
+        public double Player4 { get; set; } = 0.3;
         public string Player1_Name { get; set; }
         public string Player2_Name { get; set; }
         public string Player3_Name { get; set; }

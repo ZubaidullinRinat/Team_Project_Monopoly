@@ -1575,7 +1575,7 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock x:Name="label_3_lower_" Text="{Binding PLayer3_Money}" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="35" Canvas.Left="307" Canvas.Top="86" Width="133">
+            <TextBlock x:Name="label_3_lower" Text="{Binding Player3_Money}" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="35" Canvas.Left="307" Canvas.Top="86" Width="133">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1598,7 +1598,7 @@
         </Canvas>
         <Canvas HorizontalAlignment="Left" Height="390" Margin="778,240,0,0" VerticalAlignment="Top" Background="MintCream" Width="612">
 
-            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="103" Command="{Binding TestCommand}" Height="44" Canvas.Left="-300" Canvas.Top="90">
+            <Button x:Name="button" Content="Следующий ход" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Command="{Binding TestCommand}" Height="44" Canvas.Left="437" Canvas.Top="328">
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="ButtonBase.Click">
                         <BeginStoryboard>

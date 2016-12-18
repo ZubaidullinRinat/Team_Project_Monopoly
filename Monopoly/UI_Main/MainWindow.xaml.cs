@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace UI_Main
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
