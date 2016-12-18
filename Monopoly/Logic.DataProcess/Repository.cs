@@ -114,5 +114,9 @@ namespace Logic.DataProcess
         {
             Engine.TestMove(user);
         }
+        public void BuyHouse(int ID)
+        {
+            Engine.BuyHouse(ID);
+        }
     }
 }

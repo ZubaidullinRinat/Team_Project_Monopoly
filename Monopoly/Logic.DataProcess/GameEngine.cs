@@ -527,14 +527,10 @@ namespace Logic.DataProcess
 
         public void BuyHouse(int id)
         {
-            var property = Cells.Where(a => a is Property).Select(a =>
-            {
-                if (a is Property)
-                    return a as Property;
-                return null as Property;
-            }).Where(a => a.ID == id).Last();
+            var cell = Cells.Where(c => c.ID == id).ToArray().Last();
+            var property = cell as Property;
             var user = property.Owner;
-            if (property.InMonopoly)
+            if (!property.InMonopoly)
             {
                 int n = property.Houses;
                 int cost = property.HouseCost;
@@ -550,7 +546,7 @@ namespace Logic.DataProcess
                 {
                     property.Houses++;                    
                     user.Money -= cost;
-                    Transaction?.Invoke(user, amount, user.Money);
+                    //Transaction?.Invoke(user, amount, user.Money);
                 }
                 else
                 {
