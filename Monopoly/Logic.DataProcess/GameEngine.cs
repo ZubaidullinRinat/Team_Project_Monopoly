@@ -78,7 +78,7 @@ namespace Logic.DataProcess
             {
                 random.Next(1,7),
                 random.Next(1,7)
-                //3,3
+                //15,15
             };
         }
 
@@ -150,16 +150,19 @@ namespace Logic.DataProcess
                 user.Position += move_count;
                 curr_position = user.Position;
                 if (curr_position > 39)
+                {
                     user.Position = curr_position - 39;
+                    user.Money += 200;
+                }
                 //Зацикливание 
 
 
-                //Test
-                //user.Position = 5;
-                //Заглушка для полей, которых еще нет
-                //if (user.Position > 10)
+                //test
+                //user.position = 5;
+                //заглушка для полей, которых еще нет
+                //if (user.position > 10)
                 //{
-                //    Console.WriteLine("Больше 10");
+                //    console.writeline("больше 10");
                 //    return;
                 //}
 
