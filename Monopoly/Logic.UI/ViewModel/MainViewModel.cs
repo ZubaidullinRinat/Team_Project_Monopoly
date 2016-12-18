@@ -56,7 +56,7 @@ namespace Logic.UI.ViewModel
                 UserSeeder("Bob"),
                 UserSeeder("Max")
             };
-            BluePosition = "660,602,0,0";
+            BluePosition = "620,610,0,0";
             Player1_Name = r.Session.Users[0].Name.ToString();
             Player2_Name = r.Session.Users[1].Name.ToString();
             Player3_Name = r.Session.Users[2].Name.ToString();
@@ -64,7 +64,8 @@ namespace Logic.UI.ViewModel
         }
         void postionHadler(User user)
         {
-            PositionAnimation();
+            BluePosition = "563,65,0,0";
+            PositionAnimation(29, 1);
             //Position = user.Name;
         }
         public string BluePosition { get; set; } 
@@ -80,26 +81,137 @@ namespace Logic.UI.ViewModel
 
         public RelayCommand TestCommand { get; set; }
 
-        async void PositionAnimation()
+        async void PositionAnimation(int current, int newPosition)
         {
-            while (Player2 > 0.1)
+            Movement Direction = InitialDirection(current);
+                       
+            if(newPosition < current)
             {
-                Player2 -= 0.05;
-                Player3 -= 0.05;
-                Player4 -= 0.05;
-                await Task.Delay(TimeSpan.FromMilliseconds(10));
+                newPosition += 40;
             }
-            var Positions = BluePosition.Split(',');
-            int hor = Int32.Parse(Positions[0]);
-            int vert = Int32.Parse(Positions[1]);
-            while (hor > 570)
+            int Iterations = newPosition - current;
+            for (int i = 0; i < newPosition - current; i++)
             {
-                hor--;
-                BluePosition = string.Format($"{hor.ToString()},{Positions[1]},0,0");
-                await Task.Delay(TimeSpan.FromMilliseconds(10));
+                string[] positions = BluePosition.Split(',');
+                int x = Int32.Parse(positions[0]);
+                int y = Int32.Parse(positions[1]);
+                if((current + i)%10 == 0)
+                {
+                    DirectionChanger(out Direction, current + i);
+                }
+                int pixels = 53;
+                switch (Direction)
+                {
+                    case Movement.Down:
+                        if((current+i) == 9)
+                        {
+                            pixels += 20;
+                        }
+                        while (x > Int32.Parse(positions[0]) - pixels)
+                        {
+                            x--;
+                            BluePosition = string.Format($"{x.ToString()},{y.ToString()},0,0");
+                            await Task.Delay(TimeSpan.FromMilliseconds(1));
+                        }
+                        break;
+                    case Movement.Left:
+                        pixels--;
+                        while (y > Int32.Parse(positions[1]) - pixels)
+                        {
+                            if ((current + i) == 10)
+                            {
+                                pixels = 81;
+                            }
+                            y--;
+                            BluePosition = string.Format($"{x.ToString()},{y.ToString()},0,0");
+                            await Task.Delay(TimeSpan.FromMilliseconds(5));
+                        }
+                        break;
+                    case Movement.Up:
+                        pixels --;
+                        if (current + i == 20)
+                        {
+                            pixels = 75;
+                        }
+                        if (current + i == 29)
+                        {
+                            pixels = 80;
+                        }
+                        while (x < Int32.Parse(positions[0]) + pixels)
+                        {                            
+                            x++;
+                            BluePosition = string.Format($"{x.ToString()},{y.ToString()},0,0");
+                            await Task.Delay(TimeSpan.FromMilliseconds(1));
+                        }
+                        break;
+                    case Movement.Right:
+                        if(current+i == 39)
+                        {
+                            pixels = 80;
+                        }
+                        pixels --;
+                        while (y < Int32.Parse(positions[1]) + pixels)
+                        {
+                            y++;
+                            BluePosition = string.Format($"{x.ToString()},{y.ToString()},0,0");
+                            await Task.Delay(TimeSpan.FromMilliseconds(1));
+                        }
+                        if (current + i == 39)
+                        {
+                            BluePosition = string.Format("620,610,0,0");
+                            current = 0;
+                            newPosition -= 40;
+                            i = -1;
+                        }                    
+                        break;
+                }
+                
+            }
+            
+        }
+        Movement InitialDirection (int position)
+        {             
+            if(position >= 10 && position < 20)
+            {
+                return Movement.Left;
+            }
+            else if (position >= 20 && position < 30)
+            {
+                return Movement.Up;
+            }
+            else if (position >= 30 && position <= 39)
+            {
+                return Movement.Right;
+            }
+            return Movement.Down;
+        }
+        void DirectionChanger(out Movement _direction, int position)
+        {
+            _direction = Movement.Down;
+            switch (position)
+            {
+                case 10:
+                    _direction = Movement.Left;
+                    break;
+                case 20:
+                    _direction = Movement.Up;
+                    break;
+                case 30:
+                    _direction = Movement.Right;
+                    break;
+                case 0:
+                    _direction = Movement.Down;
+                    break;
             }
         }
         // объ€вить все лейблы и тектблоки из UI -------  FIX ME//
         // пол€ OWNER дл€ ёзарей, кто купил эти улицы //
+    }
+    public enum Movement
+    {
+        Down, 
+        Left,
+        Up,
+        Right
     }
 }
