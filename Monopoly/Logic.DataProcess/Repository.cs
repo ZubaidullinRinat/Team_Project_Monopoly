@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logic.DataProcess.Models.Cells;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace Logic.DataProcess
 
         public event Func<User, bool> BuyRepo;
         public event Func<User, bool> BuybackFromPrisonRepo;
+        public event Action<User> GetUsersPropertiesRepo; 
         //Объекты сессии и движка
         public GameEngine Engine { get; set; }
         public Session Session { get; set; }
@@ -39,6 +41,10 @@ namespace Logic.DataProcess
             Engine.BuybackFromPrison += (user) =>
             {
                 return BuybackFromPrisonRepo?.Invoke(user);
+            };
+            Engine.GetUsersProperties += (user) =>
+            {
+                GetUsersPropertiesRepo?.Invoke(user);
             };
             Session = Session.getInstance();
         }

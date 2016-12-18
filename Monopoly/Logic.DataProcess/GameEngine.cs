@@ -39,6 +39,7 @@ namespace Logic.DataProcess
 
         public event Func<User, bool?> Buy;
         public event Func<User, bool?> BuybackFromPrison;
+        public event Action<User> GetUsersProperties; 
 
         public List<Cell> Cells { get; private set; }
         public List<Card> Chances { get; private set; }
@@ -379,6 +380,11 @@ namespace Logic.DataProcess
                                             .Where(m => m.PropertiesInMonopoly.Contains(Location.ID))
                                             .ToArray()[0].PropertiesInMonopoly;
                             var have = user.Properties.Select(s => s.ID).ToArray();
+
+
+
+                            GetUsersProperties?.Invoke(user);
+
                             if (!needed.Except(have).Any())
                             {
                                 Console.WriteLine("У вас монополия");

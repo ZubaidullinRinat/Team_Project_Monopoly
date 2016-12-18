@@ -59,6 +59,7 @@
     <Compile Include="Models\Seeder\CommunityChestSeeder.cs" />
     <Compile Include="Models\Seeder\MonopolySeeder.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Models\Seeder\CellsSeeder.cs" />
