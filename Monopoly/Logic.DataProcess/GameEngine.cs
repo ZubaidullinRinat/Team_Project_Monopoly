@@ -40,8 +40,9 @@ namespace Logic.DataProcess
         public event Func<User, bool?> BuybackFromPrison;
 
         public List<Cell> Cells { get; private set; }
-        public List<Card> Chances { get;  private set; }
+        public List<Card> Chances { get; private set; }
         public List<Card> CommunityChest { get; private set; }
+        public LinkedList<Cell> UsersCells { get; private set; }
         public GameEngine()
         {
             SeedRandom();
@@ -61,14 +62,8 @@ namespace Logic.DataProcess
             {
                 random.Next(1,7),
                 random.Next(1,7)
-                //1,1
+                //3,3
             };
-        }
-
-        private int getRandomCardId()
-        {
-            int cardId = random.Next(1, Chances.Count);        
-            return cardId;
         }
 
         /// <summary>
@@ -80,76 +75,92 @@ namespace Logic.DataProcess
             int[] dices;
 
             int prisonCounter = 0;
-            
+
             //Для дублей
             do
             {
-                Console.WriteLine("\n{0} бросает кубики", user.Name);
-                dices = DiceRoll();
-                Console.WriteLine("Первый кубик - {0}, второй - {1}", dices[0], dices[1]);              
-                user.Position += dices[0] + dices[1];
-                //Test
-                //user.Position = 7;
-                //Заглушка для полей, которых еще нет
-                if (user.Position > 10)
+                if (user.IsInPrison)
                 {
-                    Console.WriteLine("Больше 10");
-                    return;
+                    if (user.IdleCount == 0 || user.JailReleasePermisson)
+                    {
+                        if (user.JailReleasePermisson)
+                        {
+                            Console.WriteLine("Вы воспользовались освобождением из тюрьмы");
+                            user.JailReleasePermisson = false;
+                            return;
+                        }
+                        else
+                            Console.WriteLine("Вы особождены по истечению срока");
+                        user.IsInPrison = false;
+                        
+                        return;
+                    }
+                    if (BuybackFromPrison?.Invoke(user) == true)
+                    {
+                        if (user.Money < 50)
+                        {
+                            Console.WriteLine("Нет денег");
+                            return;
+                        }
+                        else
+                            Console.WriteLine("Вы освобождены");
+                        user.Money -= 50;
+                        user.IdleCount = 0;
+                        user.IsInPrison = false;
+                        return;
+                    }                    
+                    else
+                    {
+                        if (user.IdleCount > 0)
+                        {
+                            user.IdleCount--;
+                        }
+                        return;
+                    }
                 }
+                Console.WriteLine($"\n{user.Name} старая позиция {user.Position}");
+                Console.WriteLine("{0} бросает кубики", user.Name);
+                dices = DiceRoll();
+                Console.WriteLine("Первый кубик - {0}, второй - {1}", dices[0], dices[1]);
+                int move_count = dices[0] + dices[1];
+                int curr_position;
+
+                user.Position += move_count;
+                curr_position = user.Position;
+                if (curr_position > 39)
+                    user.Position = curr_position - 39;
+                //Зацикливание 
+
+
+                //Test
+                //user.Position = 5;
+                //Заглушка для полей, которых еще нет
+                //if (user.Position > 10)
+                //{
+                //    Console.WriteLine("Больше 10");
+                //    return;
+                //}
 
                 var Cell = Cells.Find(c => c.ID == user.Position);
 
 
                 Console.WriteLine("Вы находитесь на {0}", Cell.Name);
-                
+
 
                 Console.WriteLine(Cell.GetType().Name);
 
                 //Клетку тюрьмы
                 prisonCounter++;
                 if (prisonCounter == 3)
-                {                    
+                {
                     if (!user.IsInPrison && !user.JailReleasePermisson)
                     {
                         var prison = Cell as Prison;
                         user.Position = Cells.Find(c => c.ID == 10).ID;
                         user.IsInPrison = true;
-                        user.IdleCount = 2;                        
-                    }
-                    else
-                    {
-                        if (user.IdleCount == 0 || user.JailReleasePermisson)
-                        {
-                            if (user.JailReleasePermisson)
-                            {
-                                Console.WriteLine("Вы воспользовались освобождением из тюрьмы");
-                                user.JailReleasePermisson = false;
-                                return;
-                            }
-                            user.IsInPrison = false;
-                        }
-                        else
-                        {
-                            if (BuybackFromPrison?.Invoke(user) == true)
-                            {
-                                if (user.Money < 500)
-                                {
-                                    Console.WriteLine("Нет денег");
-                                    return;
-                                }
-                                user.Money -= 500;
-                                user.IdleCount = 0;
-                            }
-                            else
-                            {
-                                if (user.IdleCount > 0)
-                                {
-                                    user.IdleCount--;
-                                }
-                            }
-                        }
-                                             
-                    }
+                        user.IdleCount = 2;
+                        Console.WriteLine("Вы в тюрьме");
+                    }                    
                     return;
                 }
                 //Попадание на клетку шанса\общественной казны
@@ -162,7 +173,7 @@ namespace Logic.DataProcess
                     {
                         case Models.Cells.Type.CommunityChest:
                             r = random.Next(1, CommunityChest.Count);
-                            chanceCard = Chances.Find(c => c.Id == random.Next(1, Chances.Count));
+                            chanceCard = CommunityChest.Find(c => c.Id == r);
                             //if(chanceCard != null)
                             //Console.WriteLine($"{user.Name} попал на клетку общественной казны '{chanceCard.Name}'");                            
                             break;
@@ -171,7 +182,7 @@ namespace Logic.DataProcess
                             chanceCard = Chances.Find(c => c.Id == r);
                             //if (chanceCard != null)
                             //Console.WriteLine($"{user.Name} попал на клетку Шанс'{chanceCard.Name}'");
-                            break;                        
+                            break;
                     }
                     if (chanceCard != null)
                         Console.WriteLine($"{user.Name} попал на клетку {CardPickCard.Type} '{chanceCard.Name}'");
@@ -191,7 +202,7 @@ namespace Logic.DataProcess
                         if (transaction != null)
                             Console.WriteLine($"{transaction.Name}");
                         Console.WriteLine($"{user.Name} старое количество денег - {user.Money}");
-                        if(user.Money < transaction.Cost)
+                        if (user.Money < transaction.Cost)
                         {
                             Console.WriteLine("У вас недостаточно денег!");
                             return;
@@ -221,12 +232,63 @@ namespace Logic.DataProcess
                         return;
                     }
                 }
+                //Клетка газопровод
+                if (Cell is Utilities)
+                {
+                    var utility = Cell as Utilities;
+                    if (utility.Owner == null)
+                    {
+                        if (Buy?.Invoke(user) == true)
+                        {
+                            if (user.Money < utility.Cost)
+                            {
+                                Console.WriteLine("Нет денег");
+                                return;
+                            }
+                            user.Money -= utility.Cost;
+                            utility.Owner = user;
+                        }
+                    }
+                    else
+                    {
+                        if (utility.Owner == user)
+                        {
+                            return;
+                        }
+                        List<Utilities> utilitiesOfOwner;
+                        int cost;
+                        utilitiesOfOwner = Cells.Where(a => a is Utilities).Select(a =>
+                        {
+                            if (a is Utilities)
+                                return a as Utilities;
+                            return null as Utilities;
+                        }).Where(a => a.Owner == utility.Owner).ToList();
+
+                        switch (utilitiesOfOwner.Count)
+                        {
+                            case 1:
+                                cost = 4 * move_count;
+                                break;
+                            case 2:
+                                cost = 10 * move_count;
+                                break;
+                            default:
+                                return;
+                        }
+                        if (user.Money < cost)
+                        {
+                            Console.WriteLine("Нет денег");
+                            return;
+                        }
+                        user.Money -= cost;
+                    }
+                }
 
                 //Клетка налога
-                if(Cell is Tax)
+                if (Cell is Tax)
                 {
                     var Tax = Cell as Tax;
-                    if(user.Money < Tax.Amount)
+                    if (user.Money < Tax.Amount)
                     {
                         Console.WriteLine("У вас недостаточно денег");
                         return;
@@ -235,7 +297,7 @@ namespace Logic.DataProcess
                 }
 
                 //Клетка Railway
-                if(Cell is Railway)
+                if (Cell is Railway)
                 {
                     var RailwayStation = Cell as Railway;
                     if (RailwayStation.Owner == null)
@@ -251,15 +313,18 @@ namespace Logic.DataProcess
                             RailwayStation.Owner = user;
                         }
                     }
+
                     else
                     {
+                        if (RailwayStation.Owner == user)
+                            return;
                         List<Railway> ownerOfRailways;
-                        ownerOfRailways = Cells.Select(a =>
-                        {
-                            if (a is Railway)
-                                return a as Railway;
-                            return null as Railway;
-                        }).Where(a => a.Owner == RailwayStation.Owner).ToList();
+                        ownerOfRailways = Cells.Where(a => a is Railway).Select(a =>
+                         {
+                             if (a is Railway)
+                                 return a as Railway;
+                             return null as Railway;
+                         }).Where(a => a.Owner == RailwayStation.Owner).ToList();
                         int cost;
                         switch (ownerOfRailways.Count)
                         {
@@ -276,18 +341,17 @@ namespace Logic.DataProcess
                                 cost = 200;
                                 break;
                             default:
-                                cost = 0;
-                                break;
+                                return;
                         }
-                        if(user.Money < cost)
+                        if (user.Money < cost)
                         {
                             Console.WriteLine("Вам нехватает денег");
                             return;
                         }
                         user.Money -= cost;
-                        RailwayStation.Owner.Money += cost;                        
+                        RailwayStation.Owner.Money += cost;
                     }
-                     
+
                 }
 
                 //Попадания на клетку недвижимости 
@@ -308,16 +372,49 @@ namespace Logic.DataProcess
                         }
                         //Логика торгов
                     }
+
                     else
                     {
+                        if (Location.Owner == user)
+                            return;
                         if (!Location.InMonopoly)
-                        {
+                        {   
+                            if(user.Money < Location.PropertyOnly)
+                            {
+                                Console.WriteLine("Недостаточно денег");
+                                return;
+                            }
                             user.Money -= Location.PropertyOnly;
                             Location.Owner.Money += Location.PropertyOnly;
                         }
                         else
                         {
-                            //логика в монополии
+                            int cost;
+                            switch (Location.Houses)
+                            {
+                                case 1:
+                                    cost = Location.OneHouse;
+                                    break;
+                                case 2:
+                                    cost = Location.TwoHouses;
+                                    break;
+                                case 3:
+                                    cost = Location.ThreeHouses;
+                                    break;
+                                case 4:
+                                    cost = Location.FourHouses;
+                                    break;
+                                default:
+                                    return;
+                            }
+                            if (Location.InMonopoly)
+                                cost = Location.Hotel;
+                            if (user.Money < cost)
+                            {
+                                Console.WriteLine("Недостаточно денег");
+                                return;
+                            }
+                            user.Money -= cost;
                         }
                     }
                 }
@@ -326,6 +423,8 @@ namespace Logic.DataProcess
             }
             while (dices[0] == dices[1] && !user.IsInPrison);
         }
+
+
         public void TestMove(User user)
         {
             user.Position = 9;

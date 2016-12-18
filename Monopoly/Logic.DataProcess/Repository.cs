@@ -22,7 +22,7 @@ namespace Logic.DataProcess
         #endregion
 
         public event Func<User, bool> BuyRepo;
-        public event Func<User, bool> BuyBackFromPrison;
+        public event Func<User, bool> BuybackFromPrisonRepo;
         //Объекты сессии и движка
         public GameEngine Engine { get; set; }
         public Session Session { get; set; }
@@ -37,9 +37,8 @@ namespace Logic.DataProcess
             };
             Engine.BuybackFromPrison += (user) =>
             {                   
-                return BuyBackFromPrison?.Invoke(user);
+                return BuybackFromPrisonRepo?.Invoke(user);
             };
-            
             Session = Session.getInstance();
         }
         public void NewMove(User user)

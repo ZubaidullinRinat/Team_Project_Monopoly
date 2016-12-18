@@ -35,7 +35,7 @@ namespace UI_TestConsole.Models
             set
             {
                 isInPrison = value;
-                isOnPrisonChanged?.Invoke(this);
+                //isOnPrisonChanged?.Invoke(this);
             }
         }
 
