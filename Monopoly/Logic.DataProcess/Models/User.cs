@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Logic.DataProcess.Models.Cells;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,13 +67,14 @@ namespace UI_TestConsole.Models
                 positionChanged?.Invoke(this);
             }
         }
-
+        public List<Property> Properties { get; set; }
         public User(string _name)
         {
             Money = 1500;
             Name = _name;
             position = 0;
             IsInPrison = false;
+            Properties = new List<Property>();
         }
     }
 }
