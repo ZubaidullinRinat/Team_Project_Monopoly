@@ -62,11 +62,10 @@ namespace Logic.UI.ViewModel
             r.Session.Users = new List<User>();
             foreach (var item in StartWindowModel.Users)
             {
-                r.Session.Users.Add(new User(item));
+                r.Session.Users.Add(UserSeeder(item));
             }
             for (int i = 0; i < r.Session.Users.Count; i++)
             {
-                MessageBox.Show(r.Session.Users[i].Name);
                 SeedPositions(i);
             }
             Test = 0;   
