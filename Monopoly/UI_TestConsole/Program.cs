@@ -22,7 +22,7 @@ namespace UI_TestConsole
         {
             var result = new User(_name);            
             result.positionChanged += postionHadler;
-            result.isOnPrisonChanged += isInPriosnHandler;
+            //result.isOnPrisonChanged += isInPriosnHandler;
             result.moneyChanged += MoneyChangedHandler;
             return result;
         }
@@ -35,7 +35,11 @@ namespace UI_TestConsole
             //Новый репозиторий
             r = Repository.getInstance();
             r.BuyRepo += BuyHandler;
-            //r.BuyRepo += BuyBackFromPrisonHandler;
+            //r.BuybackFromPrisonRepo += (user) =>
+            //{
+            //    return Boolean.Parse(Console.ReadLine());
+            //};
+            r.BuybackFromPrisonRepo += BuyBackFromPrisonHandler;
             //r.BuyRepo += BuyHandler;
             //Этот кусок будет вызывать новую viewModel для определения количества пользователей
             r.Session.Users = new List<User>
@@ -51,6 +55,7 @@ namespace UI_TestConsole
                 if (count == 4)
                     count = 0;
                 r.NewMove(r.Session.Users[count]);
+                count++;
             }  
         }
 
@@ -75,7 +80,7 @@ namespace UI_TestConsole
         }
         bool BuyBackFromPrisonHandler(User user)
         {
-            Console.WriteLine($"{user.Name}, купите выход из тюрьмы за 50000?");
+            Console.WriteLine($"{user.Name}, купите выход из тюрьмы за 50?");
             return Boolean.Parse(Console.ReadLine());
         }
         bool BuyHandler(User user)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace UI_Main
         public MainWindow()
         {
             InitializeComponent();
+            Messenger.Default.Register<NotificationMessage>(this, MessageReceived);
+        }
+        void MessageReceived(NotificationMessage msg)
+        {
+            if (msg.Notification == "ShowMainView")
+            {
+                var main = new MainWindow();
+                main.DataContext = new StartWindow();
+                main.ShowDialog();
+            }
         }
     }
 }
