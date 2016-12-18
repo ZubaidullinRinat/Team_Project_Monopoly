@@ -1503,8 +1503,8 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Rectangle x:Name="player_content_3" Style="{StaticResource HighlightRectangle}" Height="193" Stroke="Black" StrokeThickness="1" 
-            VerticalAlignment="Center" Opacity="0.45" RenderTransformOrigin="0.5,0.5" Canvas.Left="306" Canvas.Top="-1" Width="140">
+            <Rectangle x:Name="player_content_3" Style="{StaticResource HighlightRectangle}" Height="192" Stroke="Black" StrokeThickness="1" 
+            VerticalAlignment="Center" Opacity="0.45" RenderTransformOrigin="0.5,0.5" Canvas.Left="306" Canvas.Top="-2" Width="140">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1555,6 +1555,46 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
+            <TextBlock x:Name="label_1_lower" Text="{Binding Player1_Money}" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="35" Canvas.Left="13" Canvas.Top="91" Width="133">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock x:Name="label_2_lower" Text="{Binding Player2_Money}" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="35" Canvas.Left="161" Canvas.Top="91" Width="133">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock x:Name="label_3_lower_" Text="{Binding PLayer3_Money}" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="35" Canvas.Left="307" Canvas.Top="86" Width="133">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock x:Name="label_4_lowey" Text="{Binding Player4_Money}" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="35" Canvas.Left="460" Canvas.Top="90" Width="133">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
         </Canvas>
         <Canvas HorizontalAlignment="Left" Height="390" Margin="778,240,0,0" VerticalAlignment="Top" Background="MintCream" Width="612">
 
@@ -1576,13 +1616,11 @@
             <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="47" Canvas.Left="312" Canvas.Top="221"/>
             <Button x:Name="button2" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="47" Canvas.Left="312" Canvas.Top="273"/>
             <Button x:Name="button3" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="88" Height="47" Canvas.Left="312" Canvas.Top="325"/>
-            <ListView x:Name="listView" Height="362" Canvas.Left="10" Canvas.Top="10" Width="297">
+            <ListView x:Name="listView" Height="362" Canvas.Left="10" Canvas.Top="10" Width="297" ItemsSource="{Binding CurrentUser}">
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
-                            <GridViewColumn Header="Street Name" DisplayMemberBinding="{Binding Path=Streets}"></GridViewColumn>
-                            <GridViewColumn Header="Houses" DisplayMemberBinding="{Binding Path=Houses}"></GridViewColumn>
-                            <GridViewColumn Header="Hotels" DisplayMemberBinding="{Binding Path=Hotels}"></GridViewColumn>
+                            <GridViewColumn Header="Street Name" DisplayMemberBinding="{Binding Name}" ></GridViewColumn>
                         </GridView.Columns>
                     </GridView>
                 </ListView.View>

@@ -5,12 +5,14 @@ using Logic.DataProcess;
 using Logic.DataProcess.Models.Cells;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using UI_TestConsole.Models;
+using System.Runtime.CompilerServices;
 
 namespace Logic.UI.ViewModel
 {
@@ -26,12 +28,13 @@ namespace Logic.UI.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase, System.ComponentModel.INotifyPropertyChanged
     {
         [DllImport("User32")]
         public static extern int MessageBox(int Hwnd, string text, string caption, int type);
 
         Repository r;
+        public List<Property> CurrentUser { get; set; }
         public string Position_0 { get; set; }
         public string Position_1 { get; set; } 
         public string Position_2 { get; set; }
@@ -53,14 +56,18 @@ namespace Logic.UI.ViewModel
         {
             TestCommand = new RelayCommand(() =>
             {
-                if(Test == r.Session.Users.Count)
+                if (Test == r.Session.Users.Count)
                 {
                     Test = 0;
                 }
+                CurrentUser = null;
                 r.NewMove(r.Session.Users[Test]);
+                CurrentUser = ListUsers[Test];
                 Test++;
+                
             });
             //Новый репозиторий
+            ListUsers = new ObservableCollection<List<Property>>();
             r = Repository.getInstance();
             SeedSubscriptions();
             //r.BuyRepo += BuyHandler;
@@ -75,10 +82,11 @@ namespace Logic.UI.ViewModel
             for (int i = 0; i < r.Session.Users.Count; i++)
             {
                 SeedPositions(i);
+                ListUsers.Add(new List<Property>());
             }
-            Test = 0;
+
             RightSectionSeeder();
-        }
+        } 
         void SeedSubscriptions()
         {
             r.BuyRepo += BuyHandler;
@@ -113,7 +121,7 @@ namespace Logic.UI.ViewModel
         }
         void GetUserProperties(User user)//логика по отображению
         {
-            
+            ListUsers[Test] = user.Properties;
         }
         void JailRelease(User user)
         {
@@ -135,7 +143,8 @@ namespace Logic.UI.ViewModel
         }
         void Transaction(User user, int before, int after)//логика транзакции
         {
-
+            GetType().GetProperty("Position" + Test + "_Money")
+                               .SetValue(this, after, null);
         }
         void GetCardpick(User user, CardPick cp)
         {
@@ -143,7 +152,6 @@ namespace Logic.UI.ViewModel
         }
         void postionHadler(User user)
         {
-           //GetType().GetProperty("Position_" + Current).SetValue(this, "100,100,0,0", null);
            PositionAnimation(user.PreviousPosition, user.Position);
 
         }
@@ -156,6 +164,25 @@ namespace Logic.UI.ViewModel
         public string Player2_Name { get; set; }
         public string Player3_Name { get; set; }
         public string Player4_Name { get; set; }
+        public int Player1_Money { get; set; } 
+        public int Player2_Money { get; set; }
+        public int Player3_Money { get; set; }
+        public int Player4_Money { get; set; }
+        private ObservableCollection<List<Property>> listUsers;
+
+        public ObservableCollection<List<Property>> ListUsers
+        {
+            get { return listUsers; }
+            set
+            {
+                listUsers = value;
+                RaisePropertyChanged("ListUsers");
+            }
+        }
+        public override void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.RaisePropertyChanged(propertyName);
+        }
 
         public RelayCommand TestCommand { get; set; }
 
@@ -165,6 +192,8 @@ namespace Logic.UI.ViewModel
             {
                 GetType().GetProperty("Player" + (i+1)+"_Name")
                                 .SetValue(this, r.Session.Users[i].Name, null);
+                GetType().GetProperty("Player" + (i + 1) + "_Money")
+                                .SetValue(this, r.Session.Users[i].Money, null);
             }
             for (int i = 4; i > r.Session.Users.Count; i--)
             {
