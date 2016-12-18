@@ -26,7 +26,11 @@ namespace Logic.UI.ViewModel
     public class MainViewModel : ViewModelBase
     {
         Repository r;
-
+        public string Position_0 { get; set; }
+        public string Position_1 { get; set; } 
+        public string Position_2 { get; set; }
+        public string Position_3 { get; set; }
+        public int Test { get; set; }
         public User UserSeeder(string _name)
         {
             var result = new User(_name);
@@ -43,7 +47,12 @@ namespace Logic.UI.ViewModel
         {
             TestCommand = new RelayCommand(()=> 
             {
-                r.TestMove(r.Session.Users[0]);
+                if(Test == 4)
+                {
+                    Test = 0;
+                }
+                r.TestMove(r.Session.Users[Test]);
+                Test++;
             });
             //Новый репозиторий
             r = Repository.getInstance();
@@ -57,7 +66,11 @@ namespace Logic.UI.ViewModel
                 UserSeeder("Bob"),
                 UserSeeder("Max")
             };
-            BluePosition = "620,610,0,0";
+            for (int i = 0; i < r.Session.Users.Count; i++)
+            {
+                SeedPositions(i);
+            }
+            Test = 0;   
             Player1_Name = r.Session.Users[0].Name.ToString();
             Player2_Name = r.Session.Users[1].Name.ToString();
             Player3_Name = r.Session.Users[2].Name.ToString();
@@ -65,11 +78,9 @@ namespace Logic.UI.ViewModel
         }
         void postionHadler(User user)
         {
-            BluePosition = "563,65,0,0";
-            PositionAnimation(29, 1);
-            //Position = user.Name;
+           //GetType().GetProperty("Position_" + Current).SetValue(this, "100,100,0,0", null);
+           PositionAnimation(0, 9);
         }
-        public string BluePosition { get; set; } 
         public string Position { get; set; }
         public double Player1 { get; set; } = 1;
         public double Player2 { get; set; } = 1;
@@ -82,7 +93,7 @@ namespace Logic.UI.ViewModel
 
         public RelayCommand TestCommand { get; set; }
 
-        async void PositionAnimation(int current, int newPosition)
+        void PositionAnimation(int current, int newPosition)
         {
             Movement Direction = InitialDirection(current);
                        
@@ -93,8 +104,11 @@ namespace Logic.UI.ViewModel
             int Iterations = newPosition - current;
             for (int i = 0; i < newPosition - current; i++)
             {
-                string[] positions = BluePosition.Split(',');
+                var str = (string)GetType().GetProperty("Position_" + Test)
+                    .GetValue(this, null);
+                string[] positions = str.Split(',');
                 int x = Int32.Parse(positions[0]);
+                
                 int y = Int32.Parse(positions[1]);
                 if((current + i)%10 == 0)
                 {
@@ -108,11 +122,12 @@ namespace Logic.UI.ViewModel
                         {
                             pixels += 20;
                         }
-                        while (x > Int32.Parse(positions[0]) - pixels)
+                        for (int l = 0; l < pixels; l++)
                         {
                             x--;
-                            BluePosition = string.Format($"{x.ToString()},{y.ToString()},0,0");
-                            await Task.Delay(TimeSpan.FromMilliseconds(1));
+                            GetType().GetProperty("Position_" + Test)
+                                .SetValue(this, string.Format($"{x.ToString()},{y.ToString()},0,0"), null);
+                            //await Task.Delay(TimeSpan.FromMilliseconds(1));
                         }
                         break;
                     case Movement.Left:
@@ -124,8 +139,9 @@ namespace Logic.UI.ViewModel
                                 pixels = 81;
                             }
                             y--;
-                            BluePosition = string.Format($"{x.ToString()},{y.ToString()},0,0");
-                            await Task.Delay(TimeSpan.FromMilliseconds(5));
+                            GetType().GetProperty("Position_" + Test)
+                                .SetValue(this, string.Format($"{x.ToString()},{y.ToString()},0,0"), null);
+                            //await Task.Delay(TimeSpan.FromMilliseconds(5));
                         }
                         break;
                     case Movement.Up:
@@ -141,8 +157,9 @@ namespace Logic.UI.ViewModel
                         while (x < Int32.Parse(positions[0]) + pixels)
                         {                            
                             x++;
-                            BluePosition = string.Format($"{x.ToString()},{y.ToString()},0,0");
-                            await Task.Delay(TimeSpan.FromMilliseconds(1));
+                            GetType().GetProperty("Position_" + Test)
+                                .SetValue(this, string.Format($"{x.ToString()},{y.ToString()},0,0"), null);
+                            //await Task.Delay(TimeSpan.FromMilliseconds(1));
                         }
                         break;
                     case Movement.Right:
@@ -154,12 +171,13 @@ namespace Logic.UI.ViewModel
                         while (y < Int32.Parse(positions[1]) + pixels)
                         {
                             y++;
-                            BluePosition = string.Format($"{x.ToString()},{y.ToString()},0,0");
-                            await Task.Delay(TimeSpan.FromMilliseconds(1));
+                            GetType().GetProperty("Position_" + Test)
+                                 .SetValue(this, string.Format($"{x.ToString()},{y.ToString()},0,0"), null);
+                            //await Task.Delay(TimeSpan.FromMilliseconds(1));
                         }
                         if (current + i == 39)
                         {
-                            BluePosition = string.Format("620,610,0,0");
+                            SeedPositions(Test);
                             current = 0;
                             newPosition -= 40;
                             i = -1;
@@ -169,6 +187,26 @@ namespace Logic.UI.ViewModel
                 
             }
             
+        }
+        void SeedPositions(int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    Position_0 = "620,610,0,0";
+                    break;
+                case 1:
+                    Position_1 = "629,610,0,0";
+                    break;
+                case 2:
+                    Position_2 = "620,618,0,0";
+                    break;
+                case 3:
+                    Position_3 = "629,618,0,0";
+                    break;
+                default:
+                    break;
+            }
         }
         Movement InitialDirection (int position)
         {             

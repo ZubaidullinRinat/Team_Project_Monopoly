@@ -1413,7 +1413,10 @@
                 </TextBlock.RenderTransform>
             </TextBlock>
         </Canvas>
-        <Rectangle VerticalAlignment="Top" Margin="{Binding BluePosition}" x:Name="firtPlayer" Fill="Blue"  StrokeThickness="0,1" Height="7" Width="7" HorizontalAlignment="Left"/>
+        <Rectangle VerticalAlignment="Top" Margin="{Binding Position_0}" Fill="Crimson"  StrokeThickness="0,1" Height="7" Width="7" HorizontalAlignment="Left"/>
+        <Rectangle VerticalAlignment="Top" Margin="{Binding Position_1}" Fill="BlueViolet"  StrokeThickness="0,1" Height="7" Width="7" HorizontalAlignment="Left"/>
+        <Rectangle VerticalAlignment="Top" Margin="{Binding Position_2}" Fill="LimeGreen"  StrokeThickness="0,1" Height="7" Width="7" HorizontalAlignment="Left"/>
+        <Rectangle VerticalAlignment="Top" Margin="{Binding Position_3}" Fill="DarkOrange"  StrokeThickness="0,1" Height="7" Width="7" HorizontalAlignment="Left"/>
         <Separator HorizontalAlignment="Left" Height="66" Margin="403,303,0,0" VerticalAlignment="Top" Width="672" RenderTransformOrigin="0.5,0.5">
             <Separator.RenderTransform>
                 <TransformGroup>
