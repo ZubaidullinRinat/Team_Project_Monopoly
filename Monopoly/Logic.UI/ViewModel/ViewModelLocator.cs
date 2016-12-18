@@ -43,6 +43,7 @@ namespace Logic.UI.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<StartWindowModel>();
         }
 
         public MainViewModel Main
@@ -52,7 +53,15 @@ namespace Logic.UI.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public StartWindowModel Start
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<StartWindowModel>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
