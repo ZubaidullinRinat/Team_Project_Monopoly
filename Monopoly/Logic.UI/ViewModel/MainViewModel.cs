@@ -2,6 +2,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Logic.DataProcess;
+using Logic.DataProcess.Models.Cells;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -61,6 +62,7 @@ namespace Logic.UI.ViewModel
             });
             //Новый репозиторий
             r = Repository.getInstance();
+            SeedSubscriptions();
             //r.BuyRepo += BuyHandler;
             //r.BuyRepo += BuyBackFromPrisonHandler;
             //r.BuyRepo += BuyHandler;
@@ -77,19 +79,67 @@ namespace Logic.UI.ViewModel
             Test = 0;
             RightSectionSeeder();
         }
+        void SeedSubscriptions()
+        {
+            r.BuyRepo += BuyHandler;
+            r.BuybackFromPrisonRepo += BuyBackFromPrison;
+            r.GetUsersPropertiesRepo += GetUserProperties;
+            r.JailReleaseRepo += JailRelease;
+            r.SetPrisonRepo += SetPrison;
+            r.DiceRepo += Dice;
+            r.CurrentCellRepo += CurrentCell;
+            r.GetCardPickRepo += GetCardpick;
+            r.NoEnoughMoneyRepo += NoEnoughtMoney;
+            r.TransactionRepo += Transaction;
+            
+        }
         bool BuyHandler(User user)
         {
-            var test = MessageBox(0, "Желаешь купить, пидрила?", "Покупка", 4);
+            var test = MessageBox(0, "Будуте покупать?", user.Name, 4);
             if (test.ToString() == "6")
             {
-                Player1_Name = "true";
-
-                return true;
-
+                   return true;            
             }
-            Player1_Name = "false";
-
             return false;
+        }
+        bool BuyBackFromPrison(User user)
+        {
+            var test = MessageBox(0, "Хотите выкпиться за 50? Если вы откажетесь, будут кинты кубики, и, в сучае дубля, вас освободят", user.Name, 4);
+            if (test.ToString() == "6")
+            {
+                return true;
+            }
+            return false;
+        }
+        void GetUserProperties(User user)//логика по отображению
+        {
+            
+        }
+        void JailRelease(User user)
+        {
+            MessageBox(0, "Вас освободили", user.Name, 4);
+        }
+        void SetPrison(User user)
+        {
+            MessageBox(0, "Вы попали в тюрьму", user.Name, 4);
+        }
+        void Dice(User user, int dice1, int dice2)
+        {
+            MessageBox(0, $"Вы бросили кубики. На первом - {dice1}, на втором - {dice2}", user.Name, 1);
+        }
+        void CurrentCell(User user, Cell cell)//логика отображения клетки
+        { }
+        void NoEnoughtMoney(User user)
+        {
+            MessageBox(0, "У вас не хватает денег", user.Name, 1);
+        }
+        void Transaction(User user, int before, int after)//логика транзакции
+        {
+
+        }
+        void GetCardpick(User user, CardPick cp)
+        {
+            MessageBox(0, cp.Name, user.Name, 1);
         }
         void postionHadler(User user)
         {
@@ -134,11 +184,11 @@ namespace Logic.UI.ViewModel
             for (int i = 0; i < Iterations; i++)
             {
                 var next = current + i;
-                MessageBox(0, (next).ToString(), "test", 0);
+                
                 if (next == 40)
                 {
                     SeedPositions(Test);
-                    MessageBox(0, "fix", "", 1);
+                   
                     current = 0;
                     Iterations -= i;
                     i = 0;
