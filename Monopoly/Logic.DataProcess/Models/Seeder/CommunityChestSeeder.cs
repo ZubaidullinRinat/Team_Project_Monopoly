@@ -25,7 +25,7 @@ namespace Logic.DataProcess.Models.Seeder
             cards.Add(new Transaction("Заплатите в казну ", 11, -100));
             cards.Add(new PrisonCard("Идите в тюрьму", 12));          
             cards.Add(new JailRelease("Вы получили освобождение из тюрьмы", 13));
-            cards.Add(new Motion("Вернитесь на житную",14,12));
+            cards.Add(new Motion("Вернитесь на житную",14,1));
             return cards;
         }
     }
