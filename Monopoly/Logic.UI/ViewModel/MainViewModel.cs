@@ -61,7 +61,7 @@ namespace Logic.UI.ViewModel
             });
             //Ќовый репозиторий
             r = Repository.getInstance();
-            r.BuyRepo += BuyHandler;
+            //r.BuyRepo += BuyHandler;
             //r.BuyRepo += BuyBackFromPrisonHandler;
             //r.BuyRepo += BuyHandler;
             //Ётот кусок будет вызывать новую viewModel дл€ определени€ количества пользователей
@@ -133,15 +133,30 @@ namespace Logic.UI.ViewModel
             }
             for (int i = 0; i < Iterations; i++)
             {
+                var next = current + i;
+                MessageBox(0, (next).ToString(), "test", 0);
+                if (next == 40)
+                {
+                    SeedPositions(Test);
+                    MessageBox(0, "fix", "", 1);
+                    current = 0;
+                    Iterations -= i;
+                    i = 0;
+                    next = current + i;
+                }
+                if(next > 40)
+                {
+                    next -= 40;
+                }
                 var str = (string)GetType().GetProperty("Position_" + Test)
                     .GetValue(this, null);
                 string[] positions = str.Split(',');
                 int x = Int32.Parse(positions[0]);
                 
                 int y = Int32.Parse(positions[1]);
-                if((current + i)%10 == 0)
+                if((next)%10 == 0)
                 {
-                    DirectionChanger(out Direction, current + i);
+                    DirectionChanger(out Direction, next);
                 }
                 int pixels = 53;
                 switch (Direction)
@@ -151,16 +166,7 @@ namespace Logic.UI.ViewModel
                         {
                             pixels += 20;
                         }
-                        if(current+i == 0)
-                        {
-                            SeedPositions(Test);
-                            str = (string)GetType().GetProperty("Position_" + Test)
-                                    .GetValue(this, null);
-                            positions = str.Split(',');
-                            x = Int32.Parse(positions[0]);
-
-                            y = Int32.Parse(positions[1]);
-                        }
+                        
                         for (int l = 0; l < pixels; l++)
                         {
                             x--;
@@ -173,7 +179,7 @@ namespace Logic.UI.ViewModel
                         pixels--;
                         while (y > Int32.Parse(positions[1]) - pixels)
                         {
-                            if ((current + i) == 10)
+                            if ((next) == 10)
                             {
                                 pixels = 81;
                             }
@@ -185,11 +191,11 @@ namespace Logic.UI.ViewModel
                         break;
                     case Movement.Up:
                         pixels --;
-                        if (current + i == 20)
+                        if (next == 20)
                         {
                             pixels = 75;
                         }
-                        if (current + i == 29)
+                        if (next == 29)
                         {
                             pixels = 80;
                         }
@@ -202,7 +208,7 @@ namespace Logic.UI.ViewModel
                         }
                         break;
                     case Movement.Right:
-                        if(current+i == 39)
+                        if(next == 39)
                         {
                             pixels = 80;
                         }
@@ -214,7 +220,7 @@ namespace Logic.UI.ViewModel
                                  .SetValue(this, string.Format($"{x.ToString()},{y.ToString()},0,0"), null);
                             //await Task.Delay(TimeSpan.FromMilliseconds(1));
                         }
-                        if (current + i == 40)
+                        if (next == 40)
                         {
                             SeedPositions(Test);
                             current = 0;
