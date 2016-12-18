@@ -48,8 +48,6 @@ namespace Logic.UI.ViewModel
             result.moneyChanged += MoneyChangedHandler;
             return result;
         }
-
-
         void MakeOpacity()
         {
             Player1 = 1;
@@ -67,13 +65,23 @@ namespace Logic.UI.ViewModel
             if (Test != 3 && Player4 != 0)
                 Player4 = 0.3;
         }
+        private Property selected;
+
+        public Property Selected
+        {
+            get { return selected; }
+            set
+            {
+                selected = value;
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel()
         {
-            TestCommand = new RelayCommand(() =>
+            NewMove = new RelayCommand(() =>
             {
                 if (Test == r.Session.Users.Count)
                 {
@@ -86,7 +94,12 @@ namespace Logic.UI.ViewModel
                 Test++;
                 
             });
-
+            TestCommand = new RelayCommand(() => 
+            {
+            if (Selected == null) { return; }
+                r.BuyHouse(Selected.ID);        
+                MessageBox(0, Selected.Houses.ToString(), "", 1);
+            });
             //Новый репозиторий
             ListUsers = new ObservableCollection<List<Property>>();
             r = Repository.getInstance();
@@ -167,7 +180,8 @@ namespace Logic.UI.ViewModel
         }
         void MoneyChangedHandler(User user)//логика транзакции
         {
-            GetType().GetProperty("Player" + (Test+1) + "_Money")
+
+            GetType().GetProperty("Player" + (Test) + "_Money")
                                .SetValue(this, user.Money, null);
         }
         void GetCardpick(User user, CardPick cp)
@@ -188,10 +202,10 @@ namespace Logic.UI.ViewModel
         public string Player2_Name { get; set; }
         public string Player3_Name { get; set; }
         public string Player4_Name { get; set; }
-        public int Player1_Money { get; set; } 
+        public int Player0_Money { get; set; } 
+        public int Player1_Money { get; set; }
         public int Player2_Money { get; set; }
         public int Player3_Money { get; set; }
-        public int Player4_Money { get; set; }
         private ObservableCollection<List<Property>> listUsers;
 
         public ObservableCollection<List<Property>> ListUsers
@@ -208,7 +222,7 @@ namespace Logic.UI.ViewModel
             base.RaisePropertyChanged(propertyName);
         }
 
-        public RelayCommand TestCommand { get; set; }
+        public RelayCommand NewMove { get; set; }
 
         void RightSectionSeeder()
         {
@@ -216,7 +230,7 @@ namespace Logic.UI.ViewModel
             {
                 GetType().GetProperty("Player" + (i+1)+"_Name")
                                 .SetValue(this, r.Session.Users[i].Name, null);
-                GetType().GetProperty("Player" + (i + 1) + "_Money")
+                GetType().GetProperty("Player" + (i) + "_Money")
                                 .SetValue(this, r.Session.Users[i].Money, null);
             }
             for (int i = 4; i > r.Session.Users.Count; i--)
@@ -389,6 +403,7 @@ namespace Logic.UI.ViewModel
                     break;
             }
         }
+        public RelayCommand TestCommand { get; set; }
         // объявить все лейблы и тектблоки из UI -------  FIX ME//
         // поля OWNER для Юзарей, кто купил эти улицы //
     }
