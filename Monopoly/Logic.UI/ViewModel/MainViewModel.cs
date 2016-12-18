@@ -4,6 +4,8 @@ using GalaSoft.MvvmLight.Messaging;
 using Logic.DataProcess;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,6 +27,9 @@ namespace Logic.UI.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        [DllImport("User32")]
+        public static extern int MessageBox(int Hwnd, string text, string caption, int type);
+
         Repository r;
         public string Position_0 { get; set; }
         public string Position_1 { get; set; } 
@@ -45,17 +50,18 @@ namespace Logic.UI.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            TestCommand = new RelayCommand(()=> 
+            TestCommand = new RelayCommand(() =>
             {
                 if(Test == r.Session.Users.Count)
                 {
                     Test = 0;
                 }
-                r.TestMove(r.Session.Users[Test]);
+                r.NewMove(r.Session.Users[Test]);
                 Test++;
             });
             //Новый репозиторий
             r = Repository.getInstance();
+            r.BuyRepo += BuyHandler;
             //r.BuyRepo += BuyBackFromPrisonHandler;
             //r.BuyRepo += BuyHandler;
             //Этот кусок будет вызывать новую viewModel для определения количества пользователей
@@ -70,6 +76,20 @@ namespace Logic.UI.ViewModel
             }
             Test = 0;
             RightSectionSeeder();
+        }
+        bool BuyHandler(User user)
+        {
+            var test = MessageBox(0, "Желаешь купить, пидрила?", "Покупка", 4);
+            if (test.ToString() == "6")
+            {
+                Player1_Name = "true";
+
+                return true;
+
+            }
+            Player1_Name = "false";
+
+            return false;
         }
         void postionHadler(User user)
         {
