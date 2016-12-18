@@ -25,17 +25,23 @@ namespace Logic.UI.ViewModel
     /// </summary>
     public class StartWindowModel : ViewModelBase
     {
-        List<string> _source = new List<string> { "2", "3", "4"};
-        public List<string> Source
+        List<int> _source = new List<int> { 2, 3, 4 };
+        public List<int> Source
         {
             get { return _source; }
         }
+        public string Active3 { get; set; } = "False";
+        public string Active4 { get; set; } = "False";
+        public string Name1 { get; set; } = "Donald Trump";
+        public string Name2 { get; set; } = "Bill Gates";
+        public string Name3 { get; set; } = "...";
+        public string Name4 { get; set; } = "...";
         string _theSelectedItem = null;
         public string TheSelectedItem
         {
             get { return _theSelectedItem; }
             set {
-                if(value.ToString() == "2")
+                if (value.ToString() == "2")
                 {
                     Active3 = "False";
                     Active4 = "False";
@@ -45,26 +51,37 @@ namespace Logic.UI.ViewModel
                     Active3 = "True";
                     Active4 = "False";
                 }
-                if(value.ToString() == "4")
+                if (value.ToString() == "4")
                 {
                     Active3 = "True";
                     Active4 = "True";
                 }
                 _theSelectedItem = value; } // NotifyPropertyChanged
         }
-        public string Active3 { get; set; } = "False";
-        public string Active4 { get; set; } = "False";
+
 
         public StartWindowModel()
         {
-            LaunchMain = new RelayCommand(() => 
+            LaunchMain = new RelayCommand(() =>
             {
-                Messenger.Default.Send(new NotificationMessage("StartMain"));
+                try
+                {
+
+                    if (Name1 == String.Empty || Name2 == String.Empty || Name3 == String.Empty || Name4 == String.Empty)
+                    {
+                        throw new ArgumentException("Name can't be empty!");
+                    }
+                    Messenger.Default.Send(new NotificationMessage("StartMain"));
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             });
-            
-           
+
         }
         public RelayCommand LaunchMain { get; set; }
         public RelayCommand OpenTextBoxes { get; private set; }
+
     }
 }
