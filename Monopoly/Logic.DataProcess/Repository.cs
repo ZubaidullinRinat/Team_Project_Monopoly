@@ -29,6 +29,7 @@ namespace Logic.DataProcess
 
         public Repository()
         {
+            
             //Сингтоны движка и сессии
             Engine = GameEngine.getInstance();
             Engine.Buy += (user) =>

@@ -25,6 +25,7 @@ namespace Logic.UI.ViewModel
     /// </summary>
     public class StartWindowModel : ViewModelBase
     {
+        public static List<string> Users;
         List<int> _source = new List<int> { 2, 3, 4 };
         public List<int> Source
         {
@@ -63,7 +64,7 @@ namespace Logic.UI.ViewModel
         public StartWindowModel()
         {
             Repository r = new Repository();
-
+            Users = new List<string>();
             LaunchMain = new RelayCommand(() =>
             {
                 try
@@ -73,16 +74,15 @@ namespace Logic.UI.ViewModel
                     {
                         throw new ArgumentException("Name can't be empty!");
                     }
-                    //for (int i = 1; i < 5; i++)
-                    //{
+                    for (int i = 1; i < 5; i++)
+                    {
 
-                    //    string str = (string)GetType().GetProperty("Name" + i).GetValue(this, null);
-                    //    if (!String.IsNullOrWhiteSpace(str))
-                    //    {
-                    //        r.Session.Users.Add(new User(str));
-                    //    }
-                    //}
-                    r.Session.Users.Add(new User(Name1));
+                        string str = (string)GetType().GetProperty("Name" + i).GetValue(this, null);
+                        if (!String.IsNullOrWhiteSpace(str) && str !="...")
+                        {
+                            Users.Add(str);
+                        }
+                    }
                     Messenger.Default.Send(new NotificationMessage("StartMain"));
                 }
                 catch(Exception ex)

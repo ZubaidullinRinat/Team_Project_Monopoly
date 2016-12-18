@@ -47,7 +47,7 @@ namespace Logic.UI.ViewModel
         {
             TestCommand = new RelayCommand(()=> 
             {
-                if(Test == 4)
+                if(Test == r.Session.Users.Count)
                 {
                     Test = 0;
                 }
@@ -59,19 +59,21 @@ namespace Logic.UI.ViewModel
             //r.BuyRepo += BuyBackFromPrisonHandler;
             //r.BuyRepo += BuyHandler;
             //Этот кусок будет вызывать новую viewModel для определения количества пользователей
-            foreach (var item in r.Session.Users)
+            r.Session.Users = new List<User>();
+            foreach (var item in StartWindowModel.Users)
             {
-                MessageBox.Show(item.Name);
+                r.Session.Users.Add(new User(item));
             }
             for (int i = 0; i < r.Session.Users.Count; i++)
             {
+                MessageBox.Show(r.Session.Users[i].Name);
                 SeedPositions(i);
             }
             Test = 0;   
-            Player1_Name = r.Session.Users[0].Name.ToString();
-            Player2_Name = r.Session.Users[1].Name.ToString();
-            Player3_Name = r.Session.Users[2].Name.ToString();
-            Player4_Name = r.Session.Users[3].Name.ToString();
+            //Player1_Name = r.Session.Users[0].Name.ToString();
+            //Player2_Name = r.Session.Users[1].Name.ToString();
+            //Player3_Name = r.Session.Users[2].Name.ToString();
+            //Player4_Name = r.Session.Users[3].Name.ToString();
         }
         void postionHadler(User user)
         {
