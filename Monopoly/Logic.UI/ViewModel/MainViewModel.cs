@@ -68,11 +68,8 @@ namespace Logic.UI.ViewModel
             {
                 SeedPositions(i);
             }
-            Test = 0;   
-            //Player1_Name = r.Session.Users[0].Name.ToString();
-            //Player2_Name = r.Session.Users[1].Name.ToString();
-            //Player3_Name = r.Session.Users[2].Name.ToString();
-            //Player4_Name = r.Session.Users[3].Name.ToString();
+            Test = 0;
+            RightSectionSeeder();
         }
         void postionHadler(User user)
         {
@@ -90,6 +87,20 @@ namespace Logic.UI.ViewModel
         public string Player4_Name { get; set; }
 
         public RelayCommand TestCommand { get; set; }
+
+        void RightSectionSeeder()
+        {
+            for (int i = 0; i < r.Session.Users.Count; i++)
+            {
+                GetType().GetProperty("Player" + (i+1)+"_Name")
+                                .SetValue(this, r.Session.Users[i].Name, null);
+            }
+            for (int i = 4; i > r.Session.Users.Count; i--)
+            {
+                GetType().GetProperty("Player" + (i))
+                                .SetValue(this, 0, null);
+            }
+        }
 
         void PositionAnimation(int current, int newPosition)
         {

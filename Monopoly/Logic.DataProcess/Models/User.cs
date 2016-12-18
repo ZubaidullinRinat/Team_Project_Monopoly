@@ -63,10 +63,12 @@ namespace UI_TestConsole.Models
             get { return position; }
             set
             {
+                PreviousPosition = position;
                 position = value;
                 positionChanged?.Invoke(this);
             }
         }
+        public int PreviousPosition { get; set; }
         public List<Property> Properties { get; set; }
         public User(string _name)
         {
