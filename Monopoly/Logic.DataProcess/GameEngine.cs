@@ -36,7 +36,7 @@ namespace Logic.DataProcess
             random = new Random();
         }
         #endregion
-
+        
         public event Func<User, bool?> Buy;
         public event Func<User, bool?> BuybackFromPrison;
         public event Action<User> GetUsersProperties;
@@ -51,7 +51,8 @@ namespace Logic.DataProcess
 
         public event Action<User> NoEnoughMoney;
         public event Action<User, int, int> Transaction;
-                
+
+        public event Action<User> RemoveFromGame;
 
         public List<Cell> Cells { get; private set; }
         public List<Card> Chances { get; private set; }
@@ -137,6 +138,7 @@ namespace Logic.DataProcess
                         return;
                     }
                 }
+                
                 Console.WriteLine($"\n{user.Name} старая позиция {user.Position}");
                 Console.WriteLine("{0} бросает кубики", user.Name);
                 dices = DiceRoll();
@@ -162,7 +164,6 @@ namespace Logic.DataProcess
                 //}
 
                 var Cell = Cells.Find(c => c.ID == user.Position);
-
 
                 Console.WriteLine("Вы находитесь на {0}", Cell.Name);
                 CurrentCell?.Invoke(user, Cell);
@@ -232,6 +233,7 @@ namespace Logic.DataProcess
                         if (user.Money < transaction.Cost)
                         {
                             NoEnoughMoney?.Invoke(user);
+                            RemoveFromGame?.Invoke(user);
                             Console.WriteLine("У вас недостаточно денег!");
                             return;
                         }
@@ -313,7 +315,9 @@ namespace Logic.DataProcess
                         }
                         if (user.Money < cost)
                         {
+
                             NoEnoughMoney?.Invoke(user);
+                            RemoveFromGame?.Invoke(user);
                             Console.WriteLine("Нет денег");
                             return;
                         }
@@ -330,6 +334,7 @@ namespace Logic.DataProcess
                     if (user.Money < Tax.Amount)
                     {
                         NoEnoughMoney?.Invoke(user);
+                        RemoveFromGame?.Invoke(user);
                         Console.WriteLine("У вас недостаточно денег");
                         return;
                     }
@@ -389,6 +394,7 @@ namespace Logic.DataProcess
                         if (user.Money < cost)
                         {
                             NoEnoughMoney?.Invoke(user);
+                            RemoveFromGame?.Invoke(user);
                             Console.WriteLine("Вам нехватает денег");
                             return;
                         }
@@ -453,6 +459,7 @@ namespace Logic.DataProcess
                             if(user.Money < Location.PropertyOnly)
                             {
                                 NoEnoughMoney?.Invoke(user);
+                                RemoveFromGame?.Invoke(user);
                                 Console.WriteLine("Недостаточно денег");
                                 return;
                             }
@@ -490,6 +497,7 @@ namespace Logic.DataProcess
                             if (user.Money < cost)
                             {
                                 NoEnoughMoney?.Invoke(user);
+                                RemoveFromGame?.Invoke(user);
                                 Console.WriteLine("Недостаточно денег");
                                 return;
                             }
