@@ -39,7 +39,19 @@ namespace Logic.DataProcess
 
         public event Func<User, bool?> Buy;
         public event Func<User, bool?> BuybackFromPrison;
-        public event Action<User> GetUsersProperties; 
+        public event Action<User> GetUsersProperties;
+        //Add
+        public event Action<User> JailRelease; //Вы освобождены
+        public event Action<User> SetPrison; //Вы сели в тюрьму
+
+        public event Action<User, int, int> Dice; //Вы бросили кубики 
+        public event Action<User, Cell> CurrentCell;
+
+        public event Action<User, CardPick> GetCardPick;
+
+        public event Action<User> NoEnoughMoney;
+        public event Action<User, int, int> Transaction;
+                
 
         public List<Cell> Cells { get; private set; }
         public List<Card> Chances { get; private set; }
@@ -87,6 +99,7 @@ namespace Logic.DataProcess
                 {
                     if (user.IdleCount == 0 || user.JailReleasePermisson)
                     {
+                        JailRelease?.Invoke(user);
                         if (user.JailReleasePermisson)
                         {
                             Console.WriteLine("Вы воспользовались освобождением из тюрьмы");
@@ -103,6 +116,7 @@ namespace Logic.DataProcess
                     {
                         if (user.Money < 50)
                         {
+                            NoEnoughMoney?.Invoke(user);
                             Console.WriteLine("Нет денег");
                             return;
                         }
@@ -111,6 +125,7 @@ namespace Logic.DataProcess
                         user.Money -= 50;
                         user.IdleCount = 0;
                         user.IsInPrison = false;
+                        JailRelease?.Invoke(user);
                         return;
                     }                    
                     else
@@ -127,6 +142,7 @@ namespace Logic.DataProcess
                 dices = DiceRoll();
                 Console.WriteLine("Первый кубик - {0}, второй - {1}", dices[0], dices[1]);
                 int move_count = dices[0] + dices[1];
+                Dice?.Invoke(user, dices[0], dices[1]);
                 int curr_position;
 
                 user.Position += move_count;
@@ -149,7 +165,7 @@ namespace Logic.DataProcess
 
 
                 Console.WriteLine("Вы находитесь на {0}", Cell.Name);
-
+                CurrentCell?.Invoke(user, Cell);
 
                 Console.WriteLine(Cell.GetType().Name);
 
@@ -163,6 +179,7 @@ namespace Logic.DataProcess
                         user.Position = Cells.Find(c => c.ID == 10).ID;
                         user.IsInPrison = true;
                         user.IdleCount = 2;
+                        SetPrison?.Invoke(user);
                         Console.WriteLine("Вы в тюрьме");
                     }                    
                     return;
@@ -171,6 +188,7 @@ namespace Logic.DataProcess
                 if (Cell is CardPick)
                 {
                     var CardPickCard = Cell as CardPick;
+                    GetCardPick?.Invoke(user, CardPickCard);
                     int r;
                     Card chanceCard;
                     switch (CardPickCard.Type)
@@ -192,10 +210,13 @@ namespace Logic.DataProcess
                         Console.WriteLine($"{user.Name} попал на клетку {CardPickCard.Type} '{chanceCard.Name}'");
                     if (chanceCard is Motion)
                     {
+                        
                         var motion = chanceCard as Motion;
                         Console.WriteLine($"{motion.Name}");
                         user.Position = motion.Position;
+                        
                         var newPosition = Cells.Find(c => c.ID == user.Position);
+                        CurrentCell?.Invoke(user, newPosition);
                         if (Cells.Find(c => c.ID == user.Position) != null)
                             Console.WriteLine($"{user.Name} перемещается на клетку {newPosition.Name}");
                         return;
@@ -205,13 +226,17 @@ namespace Logic.DataProcess
                         var transaction = chanceCard as Transaction;
                         if (transaction != null)
                             Console.WriteLine($"{transaction.Name}");
-                        Console.WriteLine($"{user.Name} старое количество денег - {user.Money}");
+                        int previousAmount = user.Money;
+                        Console.WriteLine($"{user.Name} старое количество денег - {previousAmount}");
                         if (user.Money < transaction.Cost)
                         {
+                            NoEnoughMoney?.Invoke(user);
                             Console.WriteLine("У вас недостаточно денег!");
                             return;
                         }
+                        
                         user.Money += transaction.Cost;
+                        Transaction?.Invoke(user, previousAmount, user.Money);
 
                     }
                     if (chanceCard is PrisonCard)
@@ -221,6 +246,7 @@ namespace Logic.DataProcess
                             user.Position = Cells.Find(c => c == prison).ID;
                         user.IsInPrison = true;
                         user.IdleCount = 2;
+                        SetPrison?.Invoke(user);
                         return;
                     }
                     if (chanceCard is JailRelease)
@@ -233,6 +259,10 @@ namespace Logic.DataProcess
                         var first_postion = user.Position;
                         var move = chanceCard as MoveCard;
                         user.Position = first_postion + move.MoveOn;
+                        var newPosition = Cells.Find(c => c.ID == user.Position);
+                        CurrentCell?.Invoke(user, newPosition);
+                        if (Cells.Find(c => c.ID == user.Position) != null)
+                            Console.WriteLine($"{user.Name} перемещается на клетку {newPosition.Name}");
                         return;
                     }
                 }
@@ -246,6 +276,7 @@ namespace Logic.DataProcess
                         {
                             if (user.Money < utility.Cost)
                             {
+                                NoEnoughMoney?.Invoke(user);
                                 Console.WriteLine("Нет денег");
                                 return;
                             }
@@ -281,10 +312,13 @@ namespace Logic.DataProcess
                         }
                         if (user.Money < cost)
                         {
+                            NoEnoughMoney?.Invoke(user);
                             Console.WriteLine("Нет денег");
                             return;
                         }
+                        int previousAmount = user.Money;
                         user.Money -= cost;
+                        Transaction?.Invoke(user, previousAmount, user.Money);
                     }
                 }
 
@@ -294,10 +328,13 @@ namespace Logic.DataProcess
                     var Tax = Cell as Tax;
                     if (user.Money < Tax.Amount)
                     {
+                        NoEnoughMoney?.Invoke(user);
                         Console.WriteLine("У вас недостаточно денег");
                         return;
                     }
+                    int previousAmount = user.Money;
                     user.Money -= Tax.Amount;
+                    Transaction?.Invoke(user, previousAmount, user.Money);
                 }
 
                 //Клетка Railway
@@ -310,6 +347,7 @@ namespace Logic.DataProcess
                         {
                             if (user.Money < RailwayStation.Cost)
                             {
+                                NoEnoughMoney?.Invoke(user);
                                 Console.WriteLine("Нет денег");
                                 return;
                             }
@@ -349,11 +387,16 @@ namespace Logic.DataProcess
                         }
                         if (user.Money < cost)
                         {
+                            NoEnoughMoney?.Invoke(user);
                             Console.WriteLine("Вам нехватает денег");
                             return;
                         }
+                        int previousUserMoney = user.Money;
                         user.Money -= cost;
+                        Transaction?.Invoke(user, previousUserMoney, user.Money);
+                        int previousOwnerMoney = user.Money;
                         RailwayStation.Owner.Money += cost;
+                        Transaction?.Invoke(user, previousOwnerMoney, user.Money);
                     }
 
                 }
@@ -368,6 +411,7 @@ namespace Logic.DataProcess
                         {
                             if (user.Money < Location.Price)
                             {
+                                NoEnoughMoney?.Invoke(user);
                                 Console.WriteLine("Нет денег");
                                 return;
                             }
@@ -407,11 +451,18 @@ namespace Logic.DataProcess
                         {   
                             if(user.Money < Location.PropertyOnly)
                             {
+                                NoEnoughMoney?.Invoke(user);
                                 Console.WriteLine("Недостаточно денег");
                                 return;
                             }
+                            //user.Money -= Location.PropertyOnly;
+                            //Location.Owner.Money += Location.PropertyOnly;
+                            int previousUserMoney = user.Money;
                             user.Money -= Location.PropertyOnly;
+                            Transaction?.Invoke(user, previousUserMoney, user.Money);
+                            int previousOwnerMoney = user.Money;
                             Location.Owner.Money += Location.PropertyOnly;
+                            Transaction?.Invoke(user, previousOwnerMoney, user.Money);
                         }
                         else
                         {
@@ -437,10 +488,17 @@ namespace Logic.DataProcess
                                 cost = Location.Hotel;
                             if (user.Money < cost)
                             {
+                                NoEnoughMoney?.Invoke(user);
                                 Console.WriteLine("Недостаточно денег");
                                 return;
                             }
+
+                            int previousUserMoney = user.Money;
                             user.Money -= cost;
+                            Transaction?.Invoke(user, previousUserMoney, user.Money);
+                            int previousOwnerMoney = user.Money;
+                            Location.Owner.Money += cost;
+                            Transaction?.Invoke(user, previousOwnerMoney, user.Money);
                         }
                     }
                 }
