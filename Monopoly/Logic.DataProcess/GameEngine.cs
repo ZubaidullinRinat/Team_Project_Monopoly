@@ -51,9 +51,10 @@ namespace Logic.DataProcess
 
         public event Action<User> NoEnoughMoney;
         public event Action<User, int, int> Transaction;
-
+        
         public event Action<User> RemoveFromGame;
-
+        public event Func<User, Property> SetHouse;
+        
         public List<Cell> Cells { get; private set; }
         public List<Card> Chances { get; private set; }
         public List<Card> CommunityChest { get; private set; }
@@ -92,7 +93,7 @@ namespace Logic.DataProcess
             int[] dices;
 
             int prisonCounter = 0;
-
+            
             //Для дублей
             do
             {
@@ -149,11 +150,13 @@ namespace Logic.DataProcess
 
                 user.Position += move_count;
                 curr_position = user.Position;
+                
                 if (curr_position > 39)
                 {
                     user.Position = curr_position - 39;
                     user.Money += 200;
                 }
+                
                 //Зацикливание 
 
 
@@ -233,7 +236,7 @@ namespace Logic.DataProcess
                             Console.WriteLine($"{transaction.Name}");
                         int previousAmount = user.Money;
                         Console.WriteLine($"{user.Name} старое количество денег - {previousAmount}");
-                        if (user.Money < transaction.Cost)
+                        if (user.Money < Math.Abs(transaction.Cost))
                         {
                             NoEnoughMoney?.Invoke(user);
                             RemoveFromGame?.Invoke(user);
@@ -318,7 +321,6 @@ namespace Logic.DataProcess
                         }
                         if (user.Money < cost)
                         {
-
                             NoEnoughMoney?.Invoke(user);
                             RemoveFromGame?.Invoke(user);
                             Console.WriteLine("Нет денег");
@@ -327,6 +329,9 @@ namespace Logic.DataProcess
                         int previousAmount = user.Money;
                         user.Money -= cost;
                         Transaction?.Invoke(user, previousAmount, user.Money);
+                        int previousOwnersAmount = utility.Owner.Money;
+                        utility.Owner.Money += cost;
+                        Transaction?.Invoke(utility.Owner, previousOwnersAmount, utility.Owner.Money);
                     }
                 }
 
@@ -404,9 +409,9 @@ namespace Logic.DataProcess
                         int previousUserMoney = user.Money;
                         user.Money -= cost;
                         Transaction?.Invoke(user, previousUserMoney, user.Money);
-                        int previousOwnerMoney = user.Money;
+                        int previousOwnerMoney = RailwayStation.Owner.Money;
                         RailwayStation.Owner.Money += cost;
-                        Transaction?.Invoke(user, previousOwnerMoney, user.Money);
+                        Transaction?.Invoke(RailwayStation.Owner, previousOwnerMoney, RailwayStation.Owner.Money);
                     }
 
                 }
@@ -471,9 +476,9 @@ namespace Logic.DataProcess
                             int previousUserMoney = user.Money;
                             user.Money -= Location.PropertyOnly;
                             Transaction?.Invoke(user, previousUserMoney, user.Money);
-                            int previousOwnerMoney = user.Money;
+                            int previousOwnerMoney = Location.Owner.Money;
                             Location.Owner.Money += Location.PropertyOnly;
-                            Transaction?.Invoke(user, previousOwnerMoney, user.Money);
+                            Transaction?.Invoke(Location.Owner, previousOwnerMoney, Location.Owner.Money);
                         }
                         else
                         {
@@ -508,19 +513,77 @@ namespace Logic.DataProcess
                             int previousUserMoney = user.Money;
                             user.Money -= cost;
                             Transaction?.Invoke(user, previousUserMoney, user.Money);
-                            int previousOwnerMoney = user.Money;
+                            int previousOwnerMoney = Location.Owner.Money;
                             Location.Owner.Money += cost;
-                            Transaction?.Invoke(user, previousOwnerMoney, user.Money);
+                            Transaction?.Invoke(Location.Owner, previousOwnerMoney, Location.Owner.Money);
                         }
                     }
                 }
-                var PropertyMonopoly = Cell as Property;                               
-
+                
             }
             while (dices[0] == dices[1] && !user.IsInPrison);
+            
         }
 
+        public void BuyHouse(int id)
+        {
+            var property = Cells.Where(a => a is Property).Select(a =>
+            {
+                if (a is Property)
+                    return a as Property;
+                return null as Property;
+            }).Where(a => a.ID == id).Last();
+            var user = property.Owner;
+            if (property.InMonopoly)
+            {
+                int n = property.Houses;
+                int cost = property.HouseCost;
+                int amount = user.Money;
+                if (property.Owner == user)
+                    if(user.Money<cost)
+                    {
+                        Console.WriteLine("Недостаточно средств");
+                        NoEnoughMoney?.Invoke(user);
+                        return;
+                    }
+                if (n < 4)
+                {
+                    property.Houses++;                    
+                    user.Money -= cost;
+                    Transaction?.Invoke(user, amount, user.Money);
+                }
+                else
+                {
+                    property.Houses = 0;
+                    property.IsHotel = true;
+                    user.Money -= cost;
+                    Transaction?.Invoke(user, amount, user.Money);
+                }
+            }
+        }
 
+        private void BuyCellFromUser(User customer, Property property, int Gonorar)
+        {
+
+            if (customer.Money < Gonorar)
+            {
+                Console.WriteLine("Недостаточно средств для покупки");
+                NoEnoughMoney?.Invoke(customer);
+                return;
+            }
+            int previousUserMoney = customer.Money;
+            var supplier = property.Owner;
+            customer.Money -= Gonorar;
+            Transaction?.Invoke(customer, previousUserMoney, customer.Money);
+            int previousOwnerMoney = supplier.Money;
+            supplier.Money += Gonorar;
+            Transaction?.Invoke(property.Owner, previousOwnerMoney, supplier.Money);
+            supplier.Properties.Remove(property);
+            property.Owner = customer;
+            customer.Properties.Add(property);
+
+
+        }
         public void TestMove(User user)
         {
             var boof = user.Position;

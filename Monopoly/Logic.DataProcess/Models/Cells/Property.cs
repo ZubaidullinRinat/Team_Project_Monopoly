@@ -29,8 +29,8 @@ namespace Logic.DataProcess.Models.Cells
 
         public User Owner { get; set; }
 
-        public int Houses { get; private set; }
-        public bool IsHotel { get; private set; }
+        public int Houses { get;  set; }
+        public bool IsHotel { get; set; }
 
         public bool InMonopoly { get; set; }
 

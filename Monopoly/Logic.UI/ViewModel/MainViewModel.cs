@@ -91,7 +91,11 @@ namespace Logic.UI.ViewModel
             r.GetCardPickRepo += GetCardpick;
             r.NoEnoughMoneyRepo += NoEnoughtMoney;
             r.TransactionRepo += Transaction;
-            
+            r.EndGame += (user) =>
+            {
+                MessageBox(0, $"Победил - {user.Name}", "Конец игры", 1);
+            };
+
         }
         bool BuyHandler(User user)
         {
@@ -131,7 +135,7 @@ namespace Logic.UI.ViewModel
         { }
         void NoEnoughtMoney(User user)
         {
-            MessageBox(0, "У вас не хватает денег", user.Name, 1);
+            MessageBox(0, $"У вас не хватает денег {user.Money}", user.Name, 1);
         }
         void Transaction(User user, int before, int after)//логика транзакции
         {
