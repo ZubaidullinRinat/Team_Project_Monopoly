@@ -74,7 +74,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_1" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="31" Canvas.Left="619" Canvas.Top="30" Width="62" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_1" Text="Житная ул." FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="31" Canvas.Left="619" Canvas.Top="30" Width="62" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -141,7 +141,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_3" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Width="66" Height="30" Canvas.Left="487" Canvas.Top="29" RenderTransformOrigin="0.5,0.5" >
+            <TextBlock x:Name="cell_3" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Нагатинская ул." TextAlignment="Center" TextWrapping="Wrap" Width="66" Height="30" Canvas.Left="487" Canvas.Top="29" RenderTransformOrigin="0.5,0.5" >
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -211,7 +211,7 @@
                     <ImageBrush ImageSource="Images/railway.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock x:Name="cell_5" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Railway1" TextAlignment="Center" TextWrapping="Wrap" Height="25" Width="65" Canvas.Left="358" Canvas.Top="14" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_5" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Рижская жд" TextAlignment="Center" TextWrapping="Wrap" Height="25" Width="65" Canvas.Left="358" Canvas.Top="14" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -244,7 +244,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_6" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="28" Canvas.Left="292" Canvas.Top="34" Width="65" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_6" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Варшавская ул." TextAlignment="Center" TextWrapping="Wrap" Height="28" Canvas.Left="292" Canvas.Top="34" Width="65" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -312,7 +312,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_8" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="27" Canvas.Left="164" Canvas.Top="30" Width="62" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_8" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Ул. Огарева" TextAlignment="Center" TextWrapping="Wrap" Height="27" Canvas.Left="164" Canvas.Top="30" Width="62" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -344,7 +344,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_9" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="28" Canvas.Left="96" Canvas.Top="30" Width="65" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_9" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Первая Парковая ул" TextAlignment="Center" TextWrapping="Wrap" Height="28" Canvas.Left="96" Canvas.Top="30" Width="65" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -430,7 +430,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_11" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="28" Canvas.Left="620" Canvas.Top="29" Width="62" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_11" Text="Полянка" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="28" Canvas.Left="620" Canvas.Top="29" Width="62" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -497,7 +497,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_13" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="30" Width="62" Canvas.Left="492" Canvas.Top="34" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_13" Text="Сретенка" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="30" Width="62" Canvas.Left="492" Canvas.Top="34" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -529,7 +529,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_14" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="30" Width="62" Canvas.Left="426" Canvas.Top="33" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_14" Text="Ростовская набережная" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="30" Width="62" Canvas.Left="426" Canvas.Top="29" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -564,7 +564,7 @@
                     <ImageBrush ImageSource="Images/railway.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock x:Name="cell_15" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Railway2" TextAlignment="Center" TextWrapping="Wrap" Height="22" Width="65" Canvas.Left="360" Canvas.Top="12" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_15" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Курская жд" TextAlignment="Center" TextWrapping="Wrap" Height="22" Width="65" Canvas.Left="360" Canvas.Top="12" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -596,7 +596,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_16" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="30" Width="62" Canvas.Left="297" Canvas.Top="36" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_16" Text="Рязанский пр." FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="30" Width="62" Canvas.Left="297" Canvas.Top="29" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -663,7 +663,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_18" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="27" Width="62" Canvas.Left="167" Canvas.Top="32" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_18" Text="Ул. Вавилова" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="27" Width="62" Canvas.Left="167" Canvas.Top="32" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -695,7 +695,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_19" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="31" Width="62" Canvas.Left="101" Canvas.Top="30" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_19" Text="Рублёвское шоссе" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="31" Width="62" Canvas.Left="101" Canvas.Top="30" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -794,7 +794,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_21" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="28" Width="62" Canvas.Left="-1" Canvas.Top="30" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_21" Text="Тверская ул." FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="28" Width="62" Canvas.Left="-1" Canvas.Top="30" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -861,7 +861,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_23" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="20" Width="62" Canvas.Left="128" Canvas.Top="32" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_23" Text="Пушкинская ул." FontFamily="Calibri" FontWeight="Bold" FontSize="11" TextWrapping="Wrap" TextAlignment="Center" Height="32" Width="65" Canvas.Left="128" Canvas.Top="31" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -893,7 +893,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_24" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="23" Canvas.Left="193" Canvas.Top="31" Width="65" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_24" Text="Площадь Маяковского" FontFamily="Calibri" FontWeight="Bold" FontSize="10" TextWrapping="Wrap" TextAlignment="Center" Height="23" Canvas.Left="193" Canvas.Top="31" Width="65" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -928,7 +928,7 @@
                     <ImageBrush ImageSource="Images/railway.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock x:Name="cell_25" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Railway3" TextAlignment="Center" TextWrapping="Wrap" Height="21" Width="65" Canvas.Left="258" Canvas.Top="11" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_25" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Казанская жд" TextAlignment="Center" TextWrapping="Wrap" Height="30" Width="65" Canvas.Left="258" Canvas.Top="10" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -960,7 +960,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_26" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="20" Canvas.Left="325" Canvas.Top="32" Width="63" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_26" Text="Ул. Грузинский вал" FontFamily="Calibri" FontWeight="Bold" FontSize="10" TextWrapping="Wrap" TextAlignment="Center" Height="36" Canvas.Left="325" Canvas.Top="27" Width="63" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -992,7 +992,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_27" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="33" Canvas.Left="388" Canvas.Top="30" Width="65" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_27" Text="Ул. Чайковского" FontFamily="Calibri" FontWeight="Bold" FontSize="11" TextWrapping="Wrap" TextAlignment="Center" Height="33" Canvas.Left="388" Canvas.Top="30" Width="65" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1059,7 +1059,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_29" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="18" Canvas.Left="518" Canvas.Top="32" Width="63" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_29" Text="Смоленская площадь" FontFamily="Calibri" FontWeight="Bold" FontSize="11" TextWrapping="Wrap" TextAlignment="Center" Height="29" Canvas.Left="518" Canvas.Top="31" Width="63" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1134,7 +1134,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_31" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="25" Canvas.Left="519" Canvas.Top="30" Width="69" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_31" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Ул. Щусева" TextAlignment="Center" TextWrapping="Wrap" Height="25" Canvas.Left="519" Canvas.Top="30" Width="69" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1166,7 +1166,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_32" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="22" Canvas.Left="455" Canvas.Top="31" Width="65" RenderTransformOrigin="0.5,0.5" >
+            <TextBlock x:Name="cell_32" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Гоголевский бульвар" TextAlignment="Center" TextWrapping="Wrap" Height="29" Canvas.Left="455" Canvas.Top="29" Width="65" RenderTransformOrigin="0.5,0.5" >
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1233,7 +1233,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_34" Text="Owner" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="29" Canvas.Left="324" Canvas.Top="31" Width="65" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_34" Text="Кутузовский проспект" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Height="29" Canvas.Left="326" Canvas.Top="31" Width="63" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1268,7 +1268,7 @@
                     <ImageBrush ImageSource="Images/railway.jpg"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock x:Name="cell_35" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Railway1" TextAlignment="Center" TextWrapping="Wrap" Height="25" Canvas.Left="260" Canvas.Top="10" Width="65" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_35" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Ленинградская жд" TextAlignment="Center" TextWrapping="Wrap" Height="36" Canvas.Left="260" Canvas.Top="9" Width="65" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1335,7 +1335,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_37" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="26" Canvas.Left="130" Canvas.Top="30" Width="65" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_37" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Малая Бронная" TextAlignment="Center" TextWrapping="Wrap" Height="29" Canvas.Left="130" Canvas.Top="30" Width="65" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1402,7 +1402,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <TextBlock x:Name="cell_39" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Owner" TextAlignment="Center" TextWrapping="Wrap" Height="27" Canvas.Left="-1" Canvas.Top="30" Width="65" RenderTransformOrigin="0.5,0.5">
+            <TextBlock x:Name="cell_39" FontFamily="Calibri" FontWeight="Bold" FontSize="12" Text="Арбат" TextAlignment="Center" TextWrapping="Wrap" Height="27" Canvas.Left="-1" Canvas.Top="30" Width="65" RenderTransformOrigin="0.5,0.5">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1555,7 +1555,7 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock x:Name="label_1_lower" Text="{Binding Player1_Money}" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="35" Canvas.Left="13" Canvas.Top="91" Width="133">
+            <TextBlock x:Name="label_1_lower" Text="{Binding Player1_Money}" FontFamily="Calibri" FontWeight="Bold" FontSize="20" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="35" Canvas.Left="13" Canvas.Top="91" Width="133">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1565,7 +1565,7 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock x:Name="label_2_lower" Text="{Binding Player2_Money}" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="35" Canvas.Left="161" Canvas.Top="91" Width="133">
+            <TextBlock x:Name="label_2_lower" Text="{Binding Player2_Money}" FontFamily="Calibri" FontWeight="Bold" FontSize="20" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="35" Canvas.Left="161" Canvas.Top="91" Width="133">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1575,7 +1575,7 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock x:Name="label_3_lower" Text="{Binding Player3_Money}" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="35" Canvas.Left="307" Canvas.Top="86" Width="133">
+            <TextBlock x:Name="label_3_lower" Text="{Binding Player3_Money}" FontFamily="Calibri" FontWeight="Bold" FontSize="20" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="35" Canvas.Left="310" Canvas.Top="86" Width="133">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
@@ -1585,7 +1585,7 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock x:Name="label_4_lowey" Text="{Binding Player4_Money}" FontFamily="Calibri" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="35" Canvas.Left="460" Canvas.Top="90" Width="133">
+            <TextBlock x:Name="label_4_lowey" Text="{Binding Player4_Money}" FontFamily="Calibri" FontWeight="Bold" FontSize="20" TextWrapping="Wrap" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" Height="35" Canvas.Left="460" Canvas.Top="90" Width="133">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
