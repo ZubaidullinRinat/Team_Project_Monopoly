@@ -171,7 +171,7 @@ namespace Logic.DataProcess
 
                 //Клетку тюрьмы
                 prisonCounter++;
-                if (prisonCounter == 3)
+                if (prisonCounter == 3 || Cell is Prison)
                 {
                     if (!user.IsInPrison && !user.JailReleasePermisson)
                     {
@@ -184,6 +184,7 @@ namespace Logic.DataProcess
                     }                    
                     return;
                 }
+                
                 //Попадание на клетку шанса\общественной казны
                 if (Cell is CardPick)
                 {
