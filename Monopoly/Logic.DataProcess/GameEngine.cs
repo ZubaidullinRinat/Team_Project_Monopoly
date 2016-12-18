@@ -1,4 +1,5 @@
-﻿using Logic.DataProcess.Models.Cards;
+﻿using Logic.DataProcess.Models;
+using Logic.DataProcess.Models.Cards;
 using Logic.DataProcess.Models.Cells;
 using Logic.DataProcess.Models.Seeder;
 using Logic.DataProcess.Seeder;
@@ -42,7 +43,7 @@ namespace Logic.DataProcess
         public List<Cell> Cells { get; private set; }
         public List<Card> Chances { get; private set; }
         public List<Card> CommunityChest { get; private set; }
-        public LinkedList<Cell> UsersCells { get; private set; }
+        public List<Monopoly> Monopolies { get; private set; }
         public GameEngine()
         {
             SeedRandom();
@@ -50,6 +51,7 @@ namespace Logic.DataProcess
             Cells = CellsSeeder.SeedCells();
             Chances = ChanceSeeder.SeedCards();
             CommunityChest = CommunityChestSeeder.SeedCards();
+            Monopolies = MonopolySeeder.SeederMonopoly();
         }
 
         /// <summary>
@@ -72,6 +74,7 @@ namespace Logic.DataProcess
         /// <param name="user"></param>
         public void NewMove(User user)
         {
+
             int[] dices;
 
             int prisonCounter = 0;
@@ -369,6 +372,23 @@ namespace Logic.DataProcess
                             }
                             user.Money -= Location.Price;
                             Location.Owner = user;
+                                                        
+                            user.Properties.Add(Location);
+
+                            var needed = Monopolies
+                                            .Where(m => m.PropertiesInMonopoly.Contains(Location.ID))
+                                            .ToArray()[0].PropertiesInMonopoly;
+                            var have = user.Properties.Select(s => s.ID).ToArray();
+                            if (!needed.Except(have).Any())
+                            {
+                                Console.WriteLine("У вас монополия");
+                                user.Properties.ForEach(i => 
+                                {
+                                    i.InMonopoly = true;
+                                });
+                            }
+                        
+                        
                         }
                         //Логика торгов
                     }
@@ -418,7 +438,7 @@ namespace Logic.DataProcess
                         }
                     }
                 }
-
+                var PropertyMonopoly = Cell as Property;                               
 
             }
             while (dices[0] == dices[1] && !user.IsInPrison);
