@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Logic.DataProcess;
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,11 @@ namespace Logic.UI.ViewModel
     {
         public StartWindowModel()
         {
-            title = "test";
+            LaunchMain = new RelayCommand(() => 
+            {
+                Messenger.Default.Send(new NotificationMessage("StartMain"));
+            });
         }
-        public string title { get; set; }
+        public RelayCommand LaunchMain { get; set; }
     }
 }

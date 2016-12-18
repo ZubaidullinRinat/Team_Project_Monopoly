@@ -21,19 +21,10 @@ namespace UI_Main
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(StartWindow test)
         {
+            test.Close();
             InitializeComponent();
-            Messenger.Default.Register<NotificationMessage>(this, MessageReceived);
-        }
-        void MessageReceived(NotificationMessage msg)
-        {
-            if (msg.Notification == "ShowMainView")
-            {
-                var main = new MainWindow();
-                main.DataContext = new StartWindow();
-                main.ShowDialog();
-            }
         }
     }
 }
