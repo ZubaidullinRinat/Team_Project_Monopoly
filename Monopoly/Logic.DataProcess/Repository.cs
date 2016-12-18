@@ -36,6 +36,10 @@ namespace Logic.DataProcess
 
         public event Action<User> NoEnoughMoneyRepo;
         public event Action<User, int, int> TransactionRepo;
+
+        public event Func<User, Property> ByeHouseRepo;
+
+        public event Action<User> EndGame;
         //Объекты сессии и движка
         public GameEngine Engine { get; set; }
         public Session Session { get; set; }
@@ -85,7 +89,22 @@ namespace Logic.DataProcess
             {
                 TransactionRepo?.Invoke(user, priviouse_m, current_m);
             };
+            Engine.SetHouse += (user) =>
+            {                
+                return ByeHouseRepo?.Invoke(user);
+            };
+            Engine.RemoveFromGame += (user) =>
+            {
+                Session.Users.Remove(user);
+                if (Session.Users.Count == 1)
+                    {
+                        if (Session.Users.Last() != null)
+                            EndGame?.Invoke(Session.Users.Last());
+                    }                
+            };
+            
             Session = Session.getInstance();
+            
         }
         public void NewMove(User user)
         {

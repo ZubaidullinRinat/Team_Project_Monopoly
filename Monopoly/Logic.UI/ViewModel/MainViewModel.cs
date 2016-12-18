@@ -99,7 +99,11 @@ namespace Logic.UI.ViewModel
             r.GetCardPickRepo += GetCardpick;
             r.NoEnoughMoneyRepo += NoEnoughtMoney;
             r.TransactionRepo += Transaction;
-            
+            r.EndGame += (user) =>
+            {
+                MessageBox(0, $"Победил - {user.Name}", "Конец игры", 1);
+            };
+
         }
         bool BuyHandler(User user)
         {
@@ -112,7 +116,7 @@ namespace Logic.UI.ViewModel
         }
         bool BuyBackFromPrison(User user)
         {
-            var test = MessageBox(0, "Хотите выкпиться за 50? Если вы откажетесь, будут кинты кубики, и, в сучае дубля, вас освободят", user.Name, 4);
+            var test = MessageBox(0, "Хотите выкупиться за 50? Если вы откажетесь, будут кинты кубики, и, в сучае дубля, вас освободят", user.Name, 4);
             if (test.ToString() == "6")
             {
                 return true;
@@ -139,7 +143,7 @@ namespace Logic.UI.ViewModel
         { }
         void NoEnoughtMoney(User user)
         {
-            MessageBox(0, "У вас не хватает денег", user.Name, 1);
+            MessageBox(0, $"У вас не хватает денег {user.Money}", user.Name, 1);
         }
         void Transaction(User user, int before, int after)//логика транзакции
         {
