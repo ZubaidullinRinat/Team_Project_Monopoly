@@ -74,7 +74,8 @@ namespace Logic.UI.ViewModel
         void postionHadler(User user)
         {
            //GetType().GetProperty("Position_" + Current).SetValue(this, "100,100,0,0", null);
-           PositionAnimation(0, 9);
+           PositionAnimation(user.PreviousPosition, user.Position);
+
         }
         public string Position { get; set; }
         public double Player1 { get; set; } = 1;
@@ -104,14 +105,13 @@ namespace Logic.UI.ViewModel
 
         void PositionAnimation(int current, int newPosition)
         {
-            Movement Direction = InitialDirection(current);
-                       
-            if(newPosition < current)
+            Movement Direction = InitialDirection(current);    
+            int Iterations = Math.Abs(newPosition - current);
+            if(current > newPosition)
             {
-                newPosition += 40;
+                Iterations = 40 + newPosition - current;
             }
-            int Iterations = newPosition - current;
-            for (int i = 0; i < newPosition - current; i++)
+            for (int i = 0; i < Iterations; i++)
             {
                 var str = (string)GetType().GetProperty("Position_" + Test)
                     .GetValue(this, null);
@@ -130,6 +130,16 @@ namespace Logic.UI.ViewModel
                         if((current+i) == 9)
                         {
                             pixels += 20;
+                        }
+                        if(current+i == 0)
+                        {
+                            SeedPositions(Test);
+                            str = (string)GetType().GetProperty("Position_" + Test)
+                                    .GetValue(this, null);
+                            positions = str.Split(',');
+                            x = Int32.Parse(positions[0]);
+
+                            y = Int32.Parse(positions[1]);
                         }
                         for (int l = 0; l < pixels; l++)
                         {
@@ -184,12 +194,10 @@ namespace Logic.UI.ViewModel
                                  .SetValue(this, string.Format($"{x.ToString()},{y.ToString()},0,0"), null);
                             //await Task.Delay(TimeSpan.FromMilliseconds(1));
                         }
-                        if (current + i == 39)
+                        if (current + i == 40)
                         {
                             SeedPositions(Test);
                             current = 0;
-                            newPosition -= 40;
-                            i = -1;
                         }                    
                         break;
                 }

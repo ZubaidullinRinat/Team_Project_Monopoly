@@ -447,7 +447,16 @@ namespace Logic.DataProcess
 
         public void TestMove(User user)
         {
-            user.Position = 9;
+            var boof = user.Position;
+            boof += 5;
+            if(boof > 39)
+            {
+                user.Position = boof - 40;
+            }
+            else
+            {
+                user.Position = boof;
+            }
         }
     }
 }
