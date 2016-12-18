@@ -104,7 +104,7 @@ namespace Logic.UI.ViewModel
         }
         bool BuyBackFromPrison(User user)
         {
-            var test = MessageBox(0, "Хотите выкпиться за 50? Если вы откажетесь, будут кинты кубики, и, в сучае дубля, вас освободят", user.Name, 4);
+            var test = MessageBox(0, "Хотите выкупиться за 50? Если вы откажетесь, будут кинты кубики, и, в сучае дубля, вас освободят", user.Name, 4);
             if (test.ToString() == "6")
             {
                 return true;
