@@ -36,7 +36,7 @@ namespace Logic.DataProcess
                 return BuyRepo?.Invoke(user); //Надеюсь, меня не исключат за это говно;
             };
             Engine.BuybackFromPrison += (user) =>
-            {                   
+            {
                 return BuybackFromPrisonRepo?.Invoke(user);
             };
             Session = Session.getInstance();

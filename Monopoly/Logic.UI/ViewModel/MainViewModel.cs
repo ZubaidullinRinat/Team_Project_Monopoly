@@ -59,13 +59,10 @@ namespace Logic.UI.ViewModel
             //r.BuyRepo += BuyBackFromPrisonHandler;
             //r.BuyRepo += BuyHandler;
             //Этот кусок будет вызывать новую viewModel для определения количества пользователей
-            r.Session.Users = new List<User>
+            foreach (var item in r.Session.Users)
             {
-                UserSeeder("John"),
-                UserSeeder("Andrew"),
-                UserSeeder("Bob"),
-                UserSeeder("Max")
-            };
+                MessageBox.Show(item.Name);
+            }
             for (int i = 0; i < r.Session.Users.Count; i++)
             {
                 SeedPositions(i);
