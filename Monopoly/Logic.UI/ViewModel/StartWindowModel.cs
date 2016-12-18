@@ -25,13 +25,46 @@ namespace Logic.UI.ViewModel
     /// </summary>
     public class StartWindowModel : ViewModelBase
     {
+        List<string> _source = new List<string> { "2", "3", "4"};
+        public List<string> Source
+        {
+            get { return _source; }
+        }
+        string _theSelectedItem = null;
+        public string TheSelectedItem
+        {
+            get { return _theSelectedItem; }
+            set {
+                if(value.ToString() == "2")
+                {
+                    Active3 = "False";
+                    Active4 = "False";
+                }
+                if (value.ToString() == "3")
+                {
+                    Active3 = "True";
+                    Active4 = "False";
+                }
+                if(value.ToString() == "4")
+                {
+                    Active3 = "True";
+                    Active4 = "True";
+                }
+                _theSelectedItem = value; } // NotifyPropertyChanged
+        }
+        public string Active3 { get; set; } = "False";
+        public string Active4 { get; set; } = "False";
+
         public StartWindowModel()
         {
             LaunchMain = new RelayCommand(() => 
             {
                 Messenger.Default.Send(new NotificationMessage("StartMain"));
             });
+            
+           
         }
         public RelayCommand LaunchMain { get; set; }
+        public RelayCommand OpenTextBoxes { get; private set; }
     }
 }
